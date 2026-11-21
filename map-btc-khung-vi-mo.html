@@ -1,0 +1,763 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>Map yếu tố tác động BTC</title>
+    <meta name="description" content="Bản đồ các lực vĩ mô đang kéo Bitcoin, dựng từ khung phân tích rút ra từ 85 video kinh tế công khai: 8 kênh truyền dẫn, 4 kịch bản và các công tắc đảo chiều cần theo dõi." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
+    <style>
+:root {
+        --bg: #eceef0;
+        --surface: #ffffff;
+        --surface-2: #f4f5f6;
+        --ink: #16191d;
+        --ink-2: #3c434c;
+        --muted: #626b76;
+        --line: #d5d9de;
+        --line-strong: #b9bfc7;
+        --amber: #d97a06;
+        --amber-fill: #f7931a;
+        --amber-soft: #fdf0dd;
+        --pos: #14743f;
+        --pos-soft: #e2f2e7;
+        --neg: #c23333;
+        --neg-soft: #fae7e7;
+        --mix: #9a6a06;
+        --mix-soft: #f7ecd2;
+        --unk: #5d6672;
+        --unk-soft: #e8eaed;
+        --shadow: 0 1px 2px rgba(16, 20, 24, .06), 0 8px 24px rgba(16, 20, 24, .06);
+        color-scheme: light;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0d0f12;
+          --surface: #16191e;
+          --surface-2: #1c2026;
+          --ink: #e9edf1;
+          --ink-2: #c3cad2;
+          --muted: #98a1ac;
+          --line: #2b3038;
+          --line-strong: #3d434d;
+          --amber: #f5a83c;
+          --amber-fill: #f7931a;
+          --amber-soft: #2c2113;
+          --pos: #4cc07a;
+          --pos-soft: #152a1e;
+          --neg: #f07171;
+          --neg-soft: #2e1a1a;
+          --mix: #e0aa3e;
+          --mix-soft: #2b2312;
+          --unk: #a7b0bb;
+          --unk-soft: #23272d;
+          --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px rgba(0, 0, 0, .35);
+          color-scheme: dark;
+        }
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", sans-serif;
+        font-size: 16px;
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+      }
+      .mono { font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace; }
+      .wrap { max-width: 1280px; margin: 0 auto; padding: 0 16px 64px; }
+      a { color: var(--amber); }
+      a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+
+      /* ---------- Header ---------- */
+      header.page { padding: 28px 0 6px; }
+      .kicker {
+        font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+        color: var(--amber); margin: 0 0 8px;
+      }
+      h1 { font-size: clamp(26px, 4.6vw, 40px); line-height: 1.15; font-weight: 800; margin: 0 0 10px; letter-spacing: -.01em; }
+      .lede { color: var(--ink-2); max-width: 78ch; margin: 0 0 6px; font-size: 16.5px; }
+      .snapshot-note { color: var(--muted); font-size: 13.5px; margin: 4px 0 0; }
+
+      /* ---------- Stat strip ---------- */
+      .stats {
+        display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin: 20px 0 22px;
+      }
+      .stat {
+        background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+        padding: 12px 14px; box-shadow: var(--shadow);
+      }
+      .stat .lab { font-size: 11.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 0 0 4px; }
+      .stat .val { font-size: 20px; font-weight: 700; line-height: 1.2; margin: 0; }
+      .stat .sub { font-size: 12.5px; color: var(--muted); margin: 3px 0 0; }
+      .stat .val.down { color: var(--neg); }
+      .stat .val.hot { color: var(--amber); }
+      @media (max-width: 980px) { .stats { grid-template-columns: repeat(3, 1fr); } }
+      @media (max-width: 560px) { .stats { grid-template-columns: repeat(2, 1fr); } .stat .val { font-size: 17px; } }
+
+      /* ---------- Section scaffolding ---------- */
+      section.block { margin-top: 34px; }
+      h2.sec {
+        font-size: clamp(20px, 3vw, 26px); font-weight: 800; margin: 0 0 6px; letter-spacing: -.01em;
+        display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+      }
+      h2.sec .tag { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--amber); }
+      .sec-sub { color: var(--muted); margin: 0 0 14px; max-width: 82ch; font-size: 15px; }
+      .card {
+        background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+        box-shadow: var(--shadow);
+      }
+
+      /* ---------- Map ---------- */
+      .map-tools {
+        display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 12px;
+      }
+      .map-tools .lbl { font-size: 13px; font-weight: 600; color: var(--muted); margin-right: 2px; }
+      .fbtn {
+        min-height: 38px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line-strong);
+        background: var(--surface); color: var(--ink-2); font: inherit; font-size: 13.5px; font-weight: 600; cursor: pointer;
+      }
+      .fbtn[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+      .fbtn .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; vertical-align: 1px; }
+      .map-frame { padding: 10px 6px 4px; overflow: hidden; }
+      .map-frame svg { display: block; width: 100%; height: auto; }
+      .map-hint { color: var(--muted); font-size: 13px; margin: 10px 4px 2px; }
+      .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--ink-2); margin: 8px 4px 4px; }
+      .legend span { display: inline-flex; align-items: center; gap: 6px; }
+      .legend .sw { width: 22px; height: 0; border-top: 3px solid; display: inline-block; }
+      .legend .sw.dash { border-top-style: dashed; }
+
+      svg .cluster-card { fill: var(--surface); stroke: var(--line-strong); }
+      svg .cluster-card.unknown { stroke-dasharray: 6 5; }
+      svg .g-title { font: 700 14.5px "Be Vietnam Pro", sans-serif; fill: var(--ink); }
+      svg .g-net { font: 600 10.5px "Be Vietnam Pro", sans-serif; }
+      svg .pill { cursor: pointer; }
+      svg .pill rect { fill: var(--surface-2); stroke: var(--line); }
+      svg .pill:hover rect { stroke: var(--amber); }
+      svg .pill text { font: 500 12px "Be Vietnam Pro", sans-serif; fill: var(--ink-2); }
+      svg .pill.sel rect { stroke: var(--amber); stroke-width: 2; fill: var(--amber-soft); }
+      svg .pill.sel text { fill: var(--ink); font-weight: 700; }
+      svg .flow { fill: none; stroke-width: 3; opacity: .55; }
+      svg .center-price { font: 700 25px "IBM Plex Mono", monospace; fill: var(--ink); }
+      svg .center-sub { font: 500 11.5px "Be Vietnam Pro", sans-serif; fill: var(--muted); }
+      svg .btc-glyph { font: 800 44px "Be Vietnam Pro", sans-serif; fill: #fff; }
+      .dimmed { opacity: .14 !important; transition: opacity .25s; }
+      svg .pill, svg .cluster { transition: opacity .25s; }
+
+      /* ---------- Detail panel ---------- */
+      .detail { margin-top: 14px; padding: 20px 22px; border-left: 5px solid var(--amber); }
+      .detail .d-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 8px; }
+      .detail h3 { font-size: 20px; margin: 0; font-weight: 800; line-height: 1.3; }
+      .badge {
+        display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 700;
+        padding: 4px 10px; border-radius: 999px; white-space: nowrap;
+      }
+      .badge.pos { background: var(--pos-soft); color: var(--pos); }
+      .badge.neg { background: var(--neg-soft); color: var(--neg); }
+      .badge.mix { background: var(--mix-soft); color: var(--mix); }
+      .badge.unk { background: var(--unk-soft); color: var(--unk); }
+      .badge.plain { background: var(--surface-2); color: var(--ink-2); border: 1px solid var(--line); }
+      .detail p.desc { margin: 6px 0 10px; color: var(--ink-2); max-width: 95ch; }
+      .detail .src { font-size: 13px; color: var(--muted); margin: 0; }
+      .detail .src b { color: var(--ink-2); font-weight: 600; }
+
+      /* ---------- Chart ---------- */
+      .chart-frame { padding: 18px 18px 10px; }
+      .chart-frame svg { display: block; width: 100%; height: auto; }
+      svg .grid-line { stroke: var(--line); stroke-width: 1; }
+      svg .axis-lab { font: 500 11px "IBM Plex Mono", monospace; fill: var(--muted); }
+      svg .price-line { fill: none; stroke: var(--amber-fill); stroke-width: 2.4; stroke-linejoin: round; stroke-linecap: round; }
+      svg .price-area { fill: var(--amber-fill); opacity: .10; }
+      svg .anno { font: 600 11.5px "Be Vietnam Pro", sans-serif; fill: var(--ink-2); }
+      svg .anno-line { stroke: var(--line-strong); stroke-width: 1; stroke-dasharray: 3 3; }
+      .chart-note { font-size: 13px; color: var(--muted); margin: 8px 4px 4px; }
+
+      /* ---------- Factor index ---------- */
+      .index-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      @media (max-width: 860px) { .index-grid { grid-template-columns: 1fr; } }
+      .igroup { padding: 14px 16px 8px; }
+      .igroup.unknown { border-style: dashed; }
+      .igroup h3 { margin: 0 0 4px; font-size: 15.5px; font-weight: 700; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+      .igroup h3 .net { font-size: 12px; font-weight: 700; }
+      .irow {
+        display: flex; gap: 10px; align-items: flex-start; width: 100%; text-align: left;
+        background: none; border: 0; border-top: 1px solid var(--line); padding: 10px 2px;
+        font: inherit; cursor: pointer; color: var(--ink); min-height: 44px;
+      }
+      .irow:hover { background: var(--surface-2); }
+      .irow.sel { background: var(--amber-soft); }
+      .irow .glyph { flex: 0 0 auto; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 800; margin-top: 1px; }
+      .glyph.pos { background: var(--pos-soft); color: var(--pos); }
+      .glyph.neg { background: var(--neg-soft); color: var(--neg); }
+      .glyph.mix { background: var(--mix-soft); color: var(--mix); }
+      .glyph.unk { background: var(--unk-soft); color: var(--unk); }
+      .irow .t { font-size: 14.5px; font-weight: 600; line-height: 1.35; }
+      .irow .m { font-size: 12.5px; color: var(--muted); }
+
+      /* ---------- Unknown questions ---------- */
+      .unk-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+      @media (max-width: 980px) { .unk-grid { grid-template-columns: repeat(2, 1fr); } }
+      @media (max-width: 620px) { .unk-grid { grid-template-columns: 1fr; } }
+      .ucard { border: 1.5px dashed var(--line-strong); border-radius: 12px; padding: 16px 18px; background: var(--surface); }
+      .ucard .q { font-size: 32px; font-weight: 800; color: var(--unk); line-height: 1; margin: 0 0 8px; font-family: "IBM Plex Mono", monospace; }
+      .ucard h3 { margin: 0 0 6px; font-size: 16px; font-weight: 700; line-height: 1.35; }
+      .ucard p { margin: 0 0 8px; font-size: 14px; color: var(--ink-2); }
+      .ucard .when { font-size: 12.5px; color: var(--muted); margin: 0; }
+      .ucard .when b { color: var(--amber); font-weight: 700; }
+
+      /* ---------- Timeline ---------- */
+      .timeline { padding: 6px 20px; }
+      .trow { display: grid; grid-template-columns: 118px 1fr auto; gap: 14px; padding: 12px 0; border-top: 1px solid var(--line); align-items: baseline; }
+      .trow:first-child { border-top: 0; }
+      .trow .d { font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 14px; color: var(--amber); white-space: nowrap; }
+      .trow .e { font-size: 15px; color: var(--ink-2); }
+      .trow .e b { color: var(--ink); }
+      .trow .st { font-size: 11.5px; font-weight: 700; padding: 3px 9px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); color: var(--muted); white-space: nowrap; }
+      .trow .st.hot { background: var(--neg-soft); color: var(--neg); border-color: transparent; }
+      .trow .st.open { background: var(--unk-soft); color: var(--unk); border-color: transparent; }
+      @media (max-width: 620px) { .trow { grid-template-columns: 108px 1fr; } .trow .d { font-size: 13px; } .trow .st { grid-column: 2; justify-self: start; } }
+
+      /* ---------- Scenarios ---------- */
+      .scen-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+      @media (max-width: 900px) { .scen-grid { grid-template-columns: 1fr; } }
+      .scen { padding: 18px 20px; border-top: 5px solid var(--line-strong); }
+      .scen.good { border-top-color: var(--pos); }
+      .scen.mid { border-top-color: var(--mix); }
+      .scen.bad { border-top-color: var(--neg); }
+      .scen h3 { margin: 0 0 2px; font-size: 18px; font-weight: 800; }
+      .scen .zone { font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 15px; margin: 0 0 10px; }
+      .scen.good .zone { color: var(--pos); } .scen.mid .zone { color: var(--mix); } .scen.bad .zone { color: var(--neg); }
+      .scen p { margin: 0 0 8px; font-size: 14.5px; color: var(--ink-2); }
+      .scen p b { color: var(--ink); }
+      .scen .fine { font-size: 12.5px; color: var(--muted); }
+
+      /* ---------- Crash scenario -70% ---------- */
+      .crash { border: 1.5px solid var(--neg); padding: 0; overflow: hidden; }
+      .crash-head { background: var(--neg-soft); padding: 20px 22px 16px; border-bottom: 1px solid var(--line); }
+      .crash-head h3 { margin: 0 0 4px; font-size: 21px; font-weight: 800; line-height: 1.25; }
+      .crash-head h3 .pct { color: var(--neg); }
+      .crash-head p { margin: 0; color: var(--ink-2); font-size: 15px; max-width: 92ch; }
+      .crash-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-bottom: 1px solid var(--line); }
+      .crash-stat { padding: 14px 18px; border-left: 1px solid var(--line); }
+      .crash-stat:first-child { border-left: 0; }
+      .crash-stat .lab { font-size: 11.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 0 0 3px; }
+      .crash-stat .val { font-size: 19px; font-weight: 700; line-height: 1.2; margin: 0; color: var(--neg); }
+      .crash-stat .sub { font-size: 12.5px; color: var(--muted); margin: 3px 0 0; }
+      @media (max-width: 860px) { .crash-stats { grid-template-columns: repeat(2, 1fr); } .crash-stat:nth-child(3) { border-left: 0; } .crash-stat { border-top: 1px solid var(--line); } .crash-stat:nth-child(-n+2) { border-top: 0; } }
+      .crash-body { padding: 18px 22px 20px; }
+      .crash-body h4 { margin: 18px 0 8px; font-size: 15.5px; font-weight: 800; }
+      .crash-body h4:first-child { margin-top: 0; }
+      /* price ladder */
+      .ladder { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0; margin: 4px 0 6px; }
+      .rung { flex: 1 1 120px; border: 1px solid var(--line); background: var(--surface-2); padding: 10px 12px; position: relative; }
+      .rung + .rung { border-left: 0; }
+      .rung .p { font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 16px; margin: 0; }
+      .rung .t { font-size: 12px; color: var(--muted); margin: 2px 0 0; line-height: 1.4; }
+      .rung.now .p { color: var(--ink); }
+      .rung.warn .p { color: var(--mix); }
+      .rung.bad .p { color: var(--neg); }
+      .rung.target { background: var(--neg-soft); border-color: var(--neg); }
+      .rung.target .p { color: var(--neg); font-size: 18px; }
+      @media (max-width: 700px) { .rung { flex: 1 1 45%; } .rung + .rung { border-left: 1px solid var(--line); } }
+      /* chain */
+      .chain { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 4px 0 6px; }
+      .chain .step { background: var(--ink); color: var(--bg); font-size: 13px; font-weight: 700; padding: 7px 12px; border-radius: 999px; white-space: nowrap; }
+      .chain .step.hot { background: var(--neg); color: #fff; }
+      .chain .arr { color: var(--muted); font-weight: 700; }
+      /* role rows */
+      .roles { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      @media (max-width: 860px) { .roles { grid-template-columns: 1fr; } }
+      .role { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; background: var(--surface); }
+      .role .r-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; justify-content: space-between; margin-bottom: 5px; }
+      .role h5 { margin: 0; font-size: 15px; font-weight: 800; line-height: 1.3; }
+      .role .tagrole { font-size: 11.5px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: var(--neg); background: var(--neg-soft); padding: 3px 9px; border-radius: 999px; white-space: nowrap; }
+      .role .tagrole.neutral { color: var(--unk); background: var(--unk-soft); }
+      .role p { margin: 0; font-size: 14px; color: var(--ink-2); }
+      .role p b { color: var(--ink); }
+      .crash-gate { border: 1.5px dashed var(--line-strong); border-radius: 10px; padding: 14px 16px; margin-top: 14px; background: var(--surface-2); }
+      .crash-gate p { margin: 0 0 6px; font-size: 14.5px; color: var(--ink-2); }
+      .crash-gate p:last-child { margin-bottom: 0; }
+      .crash-gate b { color: var(--ink); }
+      .crash-fine { font-size: 12.5px; color: var(--muted); margin: 12px 0 0; }
+
+      /* ---------- Watchlist ---------- */
+      .watch { padding: 8px 22px 14px; counter-reset: w; }
+      .watch li { list-style: none; padding: 12px 0 12px 46px; position: relative; border-top: 1px solid var(--line); color: var(--ink-2); font-size: 15px; }
+      .watch li:first-child { border-top: 0; }
+      .watch li::before {
+        counter-increment: w; content: counter(w);
+        position: absolute; left: 0; top: 10px; width: 30px; height: 30px; border-radius: 50%;
+        background: var(--amber-soft); color: var(--amber); font-weight: 800; font-size: 14px;
+        display: grid; place-items: center;
+      }
+      .watch li b { color: var(--ink); }
+      ul.watch { margin: 0; }
+
+      /* ---------- Balance bar ---------- */
+      .balance { padding: 18px 22px; }
+      .balance .bar { display: flex; height: 16px; border-radius: 8px; overflow: hidden; margin: 10px 0 8px; }
+      .balance .bar i { display: block; height: 100%; }
+      .balance .bar .b-neg { background: var(--neg); }
+      .balance .bar .b-mix { background: var(--mix); }
+      .balance .bar .b-pos { background: var(--pos); }
+      .balance .bar .b-unk { background: var(--unk); opacity: .55; }
+      .balance p { margin: 0; color: var(--ink-2); font-size: 15px; }
+      .balance .cap { display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 12.5px; color: var(--muted); }
+
+      footer.page { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 18px; color: var(--muted); font-size: 13.5px; }
+      footer.page h2 { font-size: 15px; color: var(--ink); margin: 0 0 8px; }
+      footer.page ul { margin: 0 0 12px; padding-left: 18px; }
+      footer.page li { margin-bottom: 4px; overflow-wrap: anywhere; }
+      footer.page p { max-width: 90ch; }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        * { transition: none !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="page">
+        <p class="kicker">Cập nhật 20/11/2026</p>
+        <h1>Mọi lực đang kéo BTC — qua một khung đọc vĩ mô</h1>
+        <p class="lede">
+          BTC ở trung tâm. Xung quanh là <strong>8 kênh truyền dẫn vĩ mô</strong> rút từ 85 video kinh tế công khai trên YouTube — Fed &amp; thanh khoản USD, dầu – Hormuz, nhân sự Fed,
+          vàng &amp; chi phí cơ hội, bong bóng AI, nợ Mỹ, thuế quan và sốc phi kinh tế. Loạt video không bàn về crypto:
+          các ý vĩ mô là cách người biên soạn đọc ra từ loạt bài, <strong>phần nối sang BTC là suy luận của người biên soạn</strong>.
+          Tại thời điểm cập nhật, <strong>kịch bản A — “lãi cao lâu hơn” — đang thắng thế</strong>: 6 trong 8 kênh đang đè nặng lên BTC,
+          chưa kênh nào ở phía nâng đỡ.
+        </p>
+        <p class="snapshot-note">
+          Ảnh chụp trạng thái tại <strong>20/11/2026</strong>. Số liệu thị trường lấy từ báo chí tài chính cùng ngày;
+          khung phân tích và các ngưỡng theo dõi được rút ra từ loạt 85 video.
+          Đây là bản đồ phân tích, <strong>không phải khuyến nghị mua/bán</strong>.
+        </p>
+      </header>
+
+      <div class="stats" role="list" aria-label="Số liệu chính tại 20/11/2026">
+        <div class="stat" role="listitem">
+          <p class="lab">Lãi suất Fed</p>
+          <p class="val hot mono">3,75–4,00%</p>
+          <p class="sub">Đã tăng lại trong 2026 · thị trường định giá khả năng cao tăng tiếp</p>
+        </div>
+        <div class="stat" role="listitem">
+          <p class="lab">NVDA · đóng 20/11</p>
+          <p class="val down mono">125,53 <span style="font-size:13px">USD</span></p>
+          <p class="sub">−48% từ đỉnh 6/10 · riêng 20/11: −14% vì tin SEC điều tra kế toán</p>
+        </div>
+        <div class="stat" role="listitem">
+          <p class="lab">S&amp;P 500 · 20/11</p>
+          <p class="val down mono">−3,7%</p>
+          <p class="sub">Thủng mốc tâm lý 7.000 điểm trong đợt xả AI</p>
+        </div>
+        <div class="stat" role="listitem">
+          <p class="lab">Brent · đóng 20/11</p>
+          <p class="val mono">89,87 <span style="font-size:13px">USD</span></p>
+          <p class="sub">Dưới ngưỡng 100 USD được nêu trong loạt video · đã rơi ~20% trong tháng 11</p>
+        </div>
+        <div class="stat" role="listitem">
+          <p class="lab">Lạm phát lõi Mỹ</p>
+          <p class="val hot mono">3,4–3,7%</p>
+          <p class="sub">Kẹt trên mục tiêu 2% · PPI ~7% (theo các video 79–81)</p>
+        </div>
+        <div class="stat" role="listitem">
+          <p class="lab">Kịch bản đang thắng</p>
+          <p class="val hot mono">A</p>
+          <p class="sub">“Lãi cao lâu hơn, Mỹ vẫn là pháo đài” · khả năng cao nhất</p>
+        </div>
+      </div>
+
+      <!-- ================= MAP ================= -->
+      <section class="block" aria-labelledby="map-h">
+        <h2 class="sec" id="map-h"><span class="tag">Bản đồ</span> BTC ở trung tâm, 8 kênh truyền dẫn xung quanh</h2>
+        <p class="sec-sub">
+          Mỗi nút là một kênh truyền dẫn vĩ mô trong khung phân tích này, tô màu theo chiều tác động lên BTC
+          <strong>tại 20/11/2026</strong> (phần nối sang BTC do người biên soạn suy ra): đỏ = đè nặng, vàng = hai chiều / đang dịu.
+          Chưa có kênh nào ở phía nâng đỡ (xanh) tại thời điểm này. Nhấp vào một nút để xuống thẻ chi tiết của kênh đó.
+        </p>
+
+        <div class="card map-frame">
+          <svg viewBox="0 0 1244 1010" role="group" aria-label="Bản đồ 8 kênh truyền dẫn vĩ mô tác động vào Bitcoin" style="font-family:'Be Vietnam Pro',system-ui,sans-serif">
+            <!-- connecting lines -->
+            <g stroke-width="3" opacity="0.5">
+              <line x1="622" y1="505" x2="622" y2="108" stroke="var(--neg)" />
+              <line x1="622" y1="505" x2="1002" y2="222" stroke="var(--mix)" />
+              <line x1="622" y1="505" x2="1088" y2="505" stroke="var(--neg)" />
+              <line x1="622" y1="505" x2="1002" y2="788" stroke="var(--neg)" />
+              <line x1="622" y1="505" x2="622" y2="902" stroke="var(--neg)" />
+              <line x1="622" y1="505" x2="242" y2="788" stroke="var(--mix)" />
+              <line x1="622" y1="505" x2="156" y2="505" stroke="var(--neg)" />
+              <line x1="622" y1="505" x2="242" y2="222" stroke="var(--neg)" />
+            </g>
+
+            <!-- node 1: Fed -->
+            <a href="#k1">
+              <g>
+                <rect x="490" y="64" width="264" height="88" rx="14" fill="var(--surface)" stroke="var(--neg)" stroke-width="2.5" />
+                <text x="622" y="103" text-anchor="middle" font-size="17" font-weight="700" fill="var(--ink)">Fed &amp; thanh khoản USD</text>
+                <text x="622" y="128" text-anchor="middle" font-size="13" fill="var(--neg)">▼ Đè nặng · kênh chủ đạo</text>
+              </g>
+            </a>
+            <!-- node 2: Oil -->
+            <a href="#k2">
+              <g>
+                <rect x="870" y="178" width="264" height="88" rx="14" fill="var(--surface)" stroke="var(--mix)" stroke-width="2.5" />
+                <text x="1002" y="217" text-anchor="middle" font-size="17" font-weight="700" fill="var(--ink)">Dầu – Hormuz – lạm phát</text>
+                <text x="1002" y="242" text-anchor="middle" font-size="13" fill="var(--mix)">◆ Nghiêng thuận · dầu &lt; 100</text>
+              </g>
+            </a>
+            <!-- node 3: Tariffs -->
+            <a href="#k7">
+              <g>
+                <rect x="956" y="461" width="264" height="88" rx="14" fill="var(--surface)" stroke="var(--neg)" stroke-width="2.5" />
+                <text x="1088" y="500" text-anchor="middle" font-size="17" font-weight="700" fill="var(--ink)">Thuế quan đổi căn cứ luật</text>
+                <text x="1088" y="525" text-anchor="middle" font-size="13" fill="var(--neg)">▼ Đè nặng · cấu trúc dài hạn</text>
+              </g>
+            </a>
+            <!-- node 4: AI bubble -->
+            <a href="#k5">
+              <g>
+                <rect x="870" y="744" width="264" height="88" rx="14" fill="var(--surface)" stroke="var(--neg)" stroke-width="3.5" />
+                <text x="1002" y="776" text-anchor="middle" font-size="17" font-weight="700" fill="var(--ink)">Bong bóng AI</text>
+                <text x="1002" y="798" text-anchor="middle" font-size="17" font-weight="700" fill="var(--ink)">&amp; cạnh tranh vốn</text>
+                <text x="1002" y="820" text-anchor="middle" font-size="13" fill="var(--neg)">▼ Đè nặng mạnh · đang xả</text>
+              </g>
+            </a>
+            <!-- node 5: Non-economic shock -->
+            <a href="#k8">
+              <g>
+                <rect x="490" y="858" width="264" height="88" rx="14" fill="var(--surface)" stroke="var(--neg)" stroke-width="3.5" />
+                <text x="622" y="897" text-anchor="middle" font-size="17" font-weight="700" fill="var(--ink)">Sốc phi kinh tế</text>
+                <text x="622" y="922" text-anchor="middle" font-size="13" fill="var(--neg)">▼ Đang kích hoạt · vụ Nvidia</text>
+              </g>
+            </a>
+            <!-- node 6: US debt / Fed put -->
+            <a href="#k6">
+              <g>
+                <rect x="110" y="744" width="264" height="88" rx="14" fill="var(--surface)" stroke="var(--mix)" stroke-width="2.5" />
+                <text x="242" y="783" text-anchor="middle" font-size="17" font-weight="700" fill="var(--ink)">Nợ Mỹ &amp; “Fed put”</text>
+                <text x="242" y="808" text-anchor="middle" font-size="13" fill="var(--mix)">◆ Trung tính · đuôi 10–20 năm</text>
+              </g>
+            </a>
+            <!-- node 7: Gold / opportunity cost -->
+            <a href="#k4">
+              <g>
+                <rect x="24" y="461" width="264" height="88" rx="14" fill="var(--surface)" stroke="var(--neg)" stroke-width="2.5" />
+                <text x="156" y="500" text-anchor="middle" font-size="17" font-weight="700" fill="var(--ink)">Vàng &amp; chi phí cơ hội</text>
+                <text x="156" y="525" text-anchor="middle" font-size="13" fill="var(--neg)">▼ Đè nặng · T-Bill 4–5%</text>
+              </g>
+            </a>
+            <!-- node 8: Fed personnel / independence -->
+            <a href="#k3">
+              <g>
+                <rect x="110" y="178" width="264" height="88" rx="14" fill="var(--surface)" stroke="var(--neg)" stroke-width="2.5" />
+                <text x="242" y="217" text-anchor="middle" font-size="17" font-weight="700" fill="var(--ink)">Nhân sự &amp; độc lập Fed</text>
+                <text x="242" y="242" text-anchor="middle" font-size="13" fill="var(--neg)">▼ Đè nặng nhẹ · rủi ro treo</text>
+              </g>
+            </a>
+
+            <!-- center -->
+            <circle cx="622" cy="505" r="96" fill="var(--amber-fill)" />
+            <circle cx="622" cy="505" r="96" fill="none" stroke="var(--amber)" stroke-width="3" />
+            <text x="622" y="500" text-anchor="middle" font-size="46" font-weight="800" fill="#16191d">BTC</text>
+            <text x="622" y="528" text-anchor="middle" font-size="15" font-weight="600" fill="#16191d">Bitcoin</text>
+            <text x="622" y="552" text-anchor="middle" font-size="12" fill="#16191d" opacity="0.75">8 kênh vĩ mô · 20/11/2026</text>
+          </svg>
+          <p class="map-hint">Nhấp vào từng nút để xuống thẻ chi tiết: cơ chế truyền dẫn, dấu hiệu theo dõi và video nguồn trong loạt bài.</p>
+          <div class="legend" aria-hidden="true">
+            <span><i class="sw" style="border-color:var(--pos)"></i> Lực ròng nâng đỡ</span>
+            <span><i class="sw" style="border-color:var(--neg)"></i> Lực ròng đè nặng</span>
+            <span><i class="sw" style="border-color:var(--mix)"></i> Hai chiều / trung tính</span>
+            <span><i class="sw dash" style="border-color:var(--unk)"></i> Chưa xác định</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= BALANCE ================= -->
+      <section class="block" aria-labelledby="bal-h">
+        <h2 class="sec" id="bal-h"><span class="tag">Cán cân</span> Lực nào đang thắng thế?</h2>
+        <div class="card balance">
+          <p>
+            <strong>Phe đè nặng đang thắng rõ rệt — và đây là trạng thái của kịch bản A “lãi cao lâu hơn”.</strong>
+            Kênh chủ đạo (Fed &amp; thanh khoản USD) đang ngược: Fed đã tăng lãi lại lên 3,75–4% và thị trường định giá khả năng cao tăng tiếp,
+            trong khi lạm phát lõi kẹt 3,4–3,7% — hai “công tắc” đảo chiều được rút ra từ loạt video (thất nghiệp 4,5–5%, lạm phát về 2–2,5%) đều chưa bật.
+            Ngắn hạn, kênh AI đang gây sát thương lớn nhất: NVDA đóng cửa 20/11 ở 125,53 USD (−48% từ đỉnh 6/10, riêng phiên 20/11 −14%
+            khi Reuters đưa tin SEC điều tra kế toán), S&amp;P 500 −3,7% và thủng mốc 7.000 — tiền rút khỏi tài sản rủi ro về tiền mặt/T-Bill
+            chứ không xoay sang crypto. Điểm dịu duy nhất: Brent đóng 89,87 USD, đã dưới ngưỡng 100 USD — kênh dầu tạm nghiêng thuận.
+          </p>
+          <div class="bar" role="img" aria-label="Cán cân 8 kênh truyền dẫn: 6 kênh đè nặng, 2 kênh hai chiều, 0 kênh nâng đỡ">
+            <i class="b-neg" style="width:75%"></i><i class="b-mix" style="width:25%"></i>
+          </div>
+          <div class="cap">
+            <span>Đè nặng: 6 kênh</span><span>Hai chiều: 2 kênh</span><span>Nâng đỡ: 0 kênh</span><span>+ 6 ẩn số / công tắc đảo chiều chưa bật (mục bên dưới)</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= FED PATH ================= -->
+      <section class="block" aria-labelledby="chart-h">
+        <h2 class="sec" id="chart-h"><span class="tag">Bối cảnh</span> Đường lãi suất Fed qua các video: từ dự báo cắt đến tăng trở lại</h2>
+        <p class="sec-sub">
+          Đây là biến vĩ mô quan trọng nhất cho crypto trong toàn bộ 85 video. Cần đọc đúng tính chất từng mốc:
+          đoạn đầu là <strong>dự báo</strong>, đoạn giữa <strong>ghi nhận việc đã xảy ra</strong>, đoạn cuối dự báo chu kỳ tăng lãi trở lại.
+          Lộ trình “đích 3–3,5%” từng được nêu trong video 24 đã bị chính các video sau lật ngược khi lạm phát quay lại —
+          vì vậy bản đồ này neo theo <em>điều kiện đảo chiều</em>, không neo theo một lộ trình lãi suất cố định.
+        </p>
+        <div class="card timeline">
+          <div class="trow"><span class="d">Trước 9/2025 · v18</span><span class="e">Dự báo dứt khoát: Fed cắt cuối tháng 9, tối thiểu 0,25 điểm %; tổng cắt tới cuối năm ≥0,5 điểm %. <b>Điều kiện hủy: lạm phát vọt 3–3,2% thì Fed đứng yên.</b></span><span class="st">Dự báo</span></div>
+          <div class="trow"><span class="d">9/2025 · v24</span><span class="e">Fed <b>đã cắt 0,25%</b> sau 8 tháng đứng yên. Dự báo được nêu trong video 24: thêm +2 lần cuối 2025, +3 lần trong 2026, đích ~3–3,5%.</span><span class="st">Đã xảy ra</span></div>
+          <div class="trow"><span class="d">Cuối 2025 · v37</span><span class="e">Fed <b>đã cắt lần thứ 3</b> trong năm; lạm phát ~2,8%, thất nghiệp ~4,3% và đang tăng; Powell coi lạm phát thuế quan là tạm thời (3–9 tháng).</span><span class="st">Đã xảy ra</span></div>
+          <div class="trow"><span class="d">2026 · v54</span><span class="e">Kỳ vọng cắt lãi 2026 bị rút từ 2 lần xuống <b>0–1 lần</b> vì dầu và lạm phát (chiến tranh Iran, eo Hormuz).</span><span class="st">Điều chỉnh</span></div>
+          <div class="trow"><span class="d">2026 · v62</span><span class="e">Lạm phát Mỹ tháng 5 vọt <b>4,2%</b> → video 62 nêu khả năng Fed phải <b>tăng lãi trở lại</b>; USD mạnh lên.</span><span class="st">Đảo chiều</span></div>
+          <div class="trow"><span class="d">2026 · v76</span><span class="e">Fed <b>đã tăng lần đầu +0,25% lên 3,75–4%</b> sau 3 năm; dự báo đi kèm trong video 76 là tăng thêm ít nhất 2–3 lần, lãi cao kéo dài ít nhất 6–9 tháng. Mốc đảo chiều: thất nghiệp chạm 4,5–5%.</span><span class="st">Đã xảy ra</span></div>
+          <div class="trow"><span class="d">Hiện tại · v79–83</span><span class="e">Lạm phát kẹt <b>3,4–3,7%</b> (PPI ~7%); các video 79–83 dự báo tăng thêm tối thiểu 1–2 lần vì hai căn nguyên Fed không chữa được: dầu/Hormuz và cơn khát vốn AI. Điểm đảo chiều: lạm phát về 2–2,5%.</span><span class="st">Đang chạy</span></div>
+        </div>
+      </section>
+
+      <!-- ================= FACTOR INDEX ================= -->
+      <section class="block" aria-labelledby="idx-h">
+        <h2 class="sec" id="idx-h"><span class="tag">Mục lục</span> 8 kênh truyền dẫn trên bản đồ</h2>
+        <p class="sec-sub">Danh sách đầy đủ — nhấp vào một dòng để xuống thẻ chi tiết của kênh. Ký hiệu: ▼ đè nặng · ◆ hai chiều / trung tính.</p>
+        <div class="index-grid">
+          <div class="card igroup">
+            <h3><span>1 · Fed &amp; thanh khoản USD</span><span class="net" style="color:var(--neg)">▼ Đè nặng</span></h3>
+            <a class="irow" href="#k1" style="text-decoration:none"><span>Chu kỳ chủ toàn cầu: Fed tăng lãi → vốn rút về Mỹ (“hút máu”, v73). Kênh quyết định chu kỳ crypto.</span></a>
+          </div>
+          <div class="card igroup">
+            <h3><span>2 · Dầu – Hormuz – lạm phát</span><span class="net" style="color:var(--mix)">◆ Nghiêng thuận</span></h3>
+            <a class="irow" href="#k2" style="text-decoration:none"><span>Biến “gác cổng” của kịch bản nới lỏng: trên 100 USD thì chặn Fed; hiện Brent ~90 USD nên lực ép đang dịu.</span></a>
+          </div>
+          <div class="card igroup">
+            <h3><span>3 · Nhân sự &amp; độc lập Fed</span><span class="net" style="color:var(--neg)">▼ Đè nặng nhẹ</span></h3>
+            <a class="irow" href="#k3" style="text-decoration:none"><span>Chỉ tin bổ nhiệm Warsh đã làm vàng rơi ~500 USD/ounce trong 1–2 ngày (v44). Cửa vỡ số 1 của niềm tin USD.</span></a>
+          </div>
+          <div class="card igroup">
+            <h3><span>4 · Vàng &amp; chi phí cơ hội</span><span class="net" style="color:var(--neg)">▼ Đè nặng</span></h3>
+            <a class="irow" href="#k4" style="text-decoration:none"><span>T-Bill/big tech trả 4–5%, trái phiếu AI 8–9% — tài sản không sinh lãi như vàng và BTC phải cạnh tranh trực tiếp.</span></a>
+          </div>
+          <div class="card igroup">
+            <h3><span>5 · Bong bóng AI &amp; cạnh tranh vốn</span><span class="net" style="color:var(--neg)">▼ Đè nặng mạnh</span></h3>
+            <a class="irow" href="#k5" style="text-decoration:none"><span>IPO nghìn tỷ hút cùng dòng vốn rủi ro hữu hạn; khi AI bị định giá lại, crypto bị kéo theo chứ không được hưởng xoay vòng.</span></a>
+          </div>
+          <div class="card igroup">
+            <h3><span>6 · Nợ Mỹ &amp; “Fed put”</span><span class="net" style="color:var(--mix)">◆ Trung tính</span></h3>
+            <a class="irow" href="#k6" style="text-decoration:none"><span>Nợ ~40.000 tỷ USD; lãi dài hạn có thể tăng ngược chiều Fed. Điểm gãy niềm tin USD có chân trời 10–20 năm.</span></a>
+          </div>
+          <div class="card igroup">
+            <h3><span>7 · Thuế quan đổi căn cứ luật</span><span class="net" style="color:var(--neg)">▼ Đè nặng</span></h3>
+            <a class="irow" href="#k7" style="text-decoration:none"><span>Sau IEEPA là Section 122/301/232 — rủi ro cấu trúc thường trực, nuôi lạm phát dai dẳng và giữ Fed thắt lâu hơn.</span></a>
+          </div>
+          <div class="card igroup">
+            <h3><span>8 · Sốc phi kinh tế</span><span class="net" style="color:var(--neg)">▼ Đang kích hoạt</span></h3>
+            <a class="irow" href="#k8" style="text-decoration:none"><span>Bê bối nhân sự, bầu cử, kiểm soát xuất khẩu: cú sốc kép tháng 11/2026 quanh Nvidia/MegaSpeed là ví dụ đang chạy.</span></a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= CHANNEL DETAILS ================= -->
+      <section class="block" aria-labelledby="det-h">
+        <h2 class="sec" id="det-h"><span class="tag">Chi tiết</span> Từng kênh: cơ chế, dấu hiệu theo dõi, video nguồn</h2>
+        <p class="sec-sub">Phần “cơ chế” tóm lược khung phân tích về kinh tế/vàng/chứng khoán rút ra từ loạt video; chỗ nào nối sang BTC đều ghi rõ là phần người biên soạn suy ra.</p>
+
+        <article class="card detail" id="k1">
+          <div class="d-head"><h3>Kênh 1 · Fed &amp; thanh khoản USD</h3></div>
+          <div class="d-head"><span class="badge neg">▼ Đè nặng</span><span class="badge">Kênh chủ đạo</span></div>
+          <p class="desc"><b>Cơ chế:</b> Chu kỳ lãi suất Fed – USD – chứng khoán Mỹ là “chu kỳ chủ” của tài chính toàn cầu: chứng khoán toàn cầu ~160.000 tỷ USD, riêng Mỹ ~76.000 tỷ (~48–49%); trên 80% thương mại thế giới quy về USD. Fed tăng lãi → tài sản rủi ro toàn cầu giảm → nhà đầu tư bán tài sản nước nhà, mua tài sản Mỹ đang rẻ → tiền quay về Mỹ (cơ chế “hút máu”, video 73). <i>(Người biên soạn nối:)</i> đây là kênh quyết định chu kỳ crypto — pha tăng lãi + USD mạnh là môi trường bán tháo tài sản rủi ro; cửa sổ cắt lãi là bối cảnh thanh khoản thuận cho BTC.</p>
+          <p class="desc"><b>Dấu hiệu theo dõi:</b> quyết định FOMC và dot plot; CPI hằng tháng (ngưỡng hủy cắt lãi 3–3,2%); hai công tắc đảo chiều — thất nghiệp 4,5–5% và lạm phát về 2–2,5%.</p>
+          <p class="src"><b>Video nguồn:</b> 73 (chu kỳ chủ, hút máu), 21, 24 (cắt lãi), 76, 79–83 (tăng lãi trở lại).</p>
+        </article>
+
+        <article class="card detail" id="k2">
+          <div class="d-head"><h3>Kênh 2 · Dầu – Hormuz – lạm phát</h3></div>
+          <div class="d-head"><span class="badge mix">◆ Hai chiều · hiện nghiêng thuận</span><span class="badge">Biến gác cổng</span></div>
+          <p class="desc"><b>Cơ chế:</b> Eo Hormuz chở 25–30% năng lượng thế giới. Các ngưỡng dầu được nêu trong loạt video: ~72 USD (bền vững), ~92 USD (kiềm chế được), <b>100–110 USD kéo dài trên 6 tháng → lạm phát Mỹ cộng thêm ~0,2 đến ~1 điểm %</b>, nhiều nước đình trệ/suy thoái. Dầu trên 100 giữ nhiều tuần → lạm phát nhích 2,4% → 2,7–2,8% → Fed không cắt lãi cả năm, thậm chí tăng lại 0,25%, USD mạnh ngay trong khủng hoảng. <i>(Người biên soạn nối:)</i> chừng nào dầu còn trên 100, giả định risk-on phải xem lại; ngược lại chiến tranh kết thúc, dầu về 40–50 USD là tín hiệu mở đường cho Fed mềm đi — thuận cho dòng vốn vào crypto. Tại 20/11/2026, Brent ~89,87 USD nên kênh này đang dịu.</p>
+          <p class="desc"><b>Dấu hiệu theo dõi:</b> giá Brent theo ba ngưỡng 72 / 92 / 100; số tháng liên tục trên 100 USD (mốc 6 tháng); tin đàm phán Iran/Hormuz và “đồng hồ tháng 9” của chiến tranh.</p>
+          <p class="src"><b>Video nguồn:</b> 49, 50 (ngưỡng dầu), 51, 53 (chuỗi truyền dẫn), 76, 84 (dầu hạ → lạm phát về ~2,7%).</p>
+        </article>
+
+        <article class="card detail" id="k3">
+          <div class="d-head"><h3>Kênh 3 · Nhân sự &amp; độc lập Fed</h3></div>
+          <div class="d-head"><span class="badge neg">▼ Đè nặng nhẹ</span><span class="badge">Biến sự kiện</span></div>
+          <p class="desc"><b>Cơ chế:</b> Độc lập Fed là biến số 1 của niềm tin USD. Chỉ riêng tin bổ nhiệm <b>Kevin Warsh</b> (bị coi là hawkish) làm chủ tịch Fed đã khiến vàng rơi ~500 USD/ounce trong 1–2 ngày rồi bật lại (video 44). Kịch bản xấu: hành pháp sa thải Powell/thống đốc Lisa Cook để chiếm đa số 4/7 ghế rồi hạ lãi nhân tạo → lạm phát, USD mất vị thế, chi phí vay của Mỹ bùng lên (video 42). <i>(Người biên soạn nối:)</i> các mốc nhân sự Fed phải nằm trong lịch sự kiện của kế hoạch — thị trường định giá lại toàn bộ kỳ vọng lãi suất quanh chúng, và crypto thường phản ứng cùng chiều nhưng biên độ lớn hơn vàng.</p>
+          <p class="desc"><b>Dấu hiệu theo dõi:</b> bổ nhiệm chủ tịch Fed mới; diễn biến pháp lý vụ Powell/Cook; cán cân 4/7 ghế thống đốc.</p>
+          <p class="src"><b>Video nguồn:</b> 42 (độc lập Fed), 44 (tin Warsh, vàng −500), 45, 15 (hạ lãi ép buộc).</p>
+        </article>
+
+        <article class="card detail" id="k4">
+          <div class="d-head"><h3>Kênh 4 · Vàng &amp; chi phí cơ hội</h3></div>
+          <div class="d-head"><span class="badge neg">▼ Đè nặng</span><span class="badge">Thước đo trú ẩn</span></div>
+          <p class="desc"><b>Cơ chế:</b> Vàng lập đỉnh ~5.500–5.600 USD/ounce (tháng 1/2026) rồi sập gần 1.000 USD xuống ~4.100 khi lãi suất Mỹ tăng (video 79): Fed tăng lãi → USD và trái phiếu mạnh → <b>chi phí cơ hội của tài sản không trả lãi</b> trở nên quá đắt → bị bán. Sàn cứng của vàng được nêu trong loạt video là ~3.800 USD nhờ lực mua của ngân hàng trung ương (trên 500 tấn/năm; Trung Quốc/Nga gom để phòng phong tỏa kiểu SWIFT). <i>(Người biên soạn nối:)</i> cùng cơ chế chi phí cơ hội ép vàng cũng ép BTC — khi T-Bill/big tech trả 4–5% và trái phiếu AI trả 8–9% (video 81), tài sản không sinh lãi phải cạnh tranh trực tiếp với các mức đó; nhịp gom vàng của ngân hàng trung ương là chỉ báo đo được của dòng tiền “ngoài hệ thống USD”, song song với luận điểm trú ẩn của Bitcoin.</p>
+          <p class="desc"><b>Dấu hiệu theo dõi:</b> giá vàng quanh vùng 3.800–4.400; nhịp mua vàng của ngân hàng trung ương; lợi suất T-Bill ngắn hạn.</p>
+          <p class="src"><b>Video nguồn:</b> 79 (đỉnh và cú sập), 44 (vùng cao của vàng), 81 (cạnh tranh lợi suất), 9, 22 (NHTW gom).</p>
+        </article>
+
+        <article class="card detail" id="k5">
+          <div class="d-head"><h3>Kênh 5 · Bong bóng AI &amp; cạnh tranh vốn</h3></div>
+          <div class="d-head"><span class="badge neg">▼ Đè nặng mạnh hiện tại</span><span class="badge">Đối thủ hút thanh khoản</span></div>
+          <p class="desc"><b>Cơ chế:</b> Chứng khoán Mỹ gần như chỉ tăng nhờ Magnificent Seven + AI; nhu cầu vốn AI 5.000–10.000 tỷ USD (video 32), cơn khát vốn kéo dài ít nhất tới 2030; các IPO nghìn tỷ — SpaceX (~1.500–2.000 tỷ), Anthropic (~2.000 tỷ), OpenAI (~1.000–1.500 tỷ) — hút <b>cùng một dòng vốn rủi ro toàn cầu hữu hạn</b> (video 73, 81). Vòng xoáy nguy hiểm: capex AI → lạm phát → Fed tăng lãi → thắt chặt kéo dài hơn chu kỳ thường. <i>(Người biên soạn nối:)</i> đây là rủi ro tương quan lớn nhất của crypto: AI và crypto dùng chung người mua tới hạn và cùng chạy bằng thanh khoản + khẩu vị rủi ro, nên khi AI bị định giá lại, tiền rút về tiền mặt/T-Bill thay vì xoay sang crypto — đúng diễn biến tháng 11/2026: NVDA −48% từ đỉnh, IPO Anthropic không cứu được “AI trade”, BTC bị bán theo dù căn bản không đổi.</p>
+          <p class="desc"><b>Dấu hiệu theo dõi:</b> lịch IPO AI lớn và mùa phát hành trái phiếu AI; diễn biến NVDA/nhóm chip; vòng xoáy capex → lạm phát có tiếp diễn không.</p>
+          <p class="src"><b>Video nguồn:</b> 32 (vốn AI, nút thắt EUV), 67 (điện lực vs mining), 73, 77, 81 (cạnh tranh vốn), 85 (siết chip).</p>
+        </article>
+
+        <article class="card detail" id="k6">
+          <div class="d-head"><h3>Kênh 6 · Nợ Mỹ &amp; câu hỏi “Fed put”</h3></div>
+          <div class="d-head"><span class="badge mix">◆ Trung tính</span><span class="badge">Khung khủng hoảng dài hạn</span></div>
+          <p class="desc"><b>Cơ chế:</b> Nợ công Mỹ ~40.000 tỷ USD (~126% GDP), lãi trả ~1.200 tỷ USD/năm. Hai cơ chế được nêu trong loạt video: (1) nhà đầu tư tư nhân dùng tiền vay mua bù trái phiếu rồi bán tháo khi biến động → <b>lãi suất dài hạn tăng ngược chiều Fed</b> — kênh khiến “Fed giảm lãi mà tài sản rủi ro vẫn bị bán” (video 72); (2) cứ 8–12 năm Mỹ gặp một đại khủng hoảng phải in tiền cứu, nhưng lần tới Fed có thể không còn cứu được mà không phá hủy niềm tin USD — hoặc nếu vẫn in 5.000–7.000 tỷ thì là lạm phát phi mã/đình lạm (video 78). Điểm gãy duy nhất: thế giới mất niềm tin vào USD hoặc Fed mất độc lập — chân trời 10–20 năm. <i>(Người biên soạn nối:)</i> kế hoạch dài hạn cần cả hai nhánh đối nghịch quanh cùng một biến là lãi suất trái phiếu dài hạn Mỹ.</p>
+          <p class="desc"><b>Dấu hiệu theo dõi:</b> lợi suất trái phiếu 10 năm và các đợt phát hành của Bộ Tài chính Mỹ; nhịp gom vàng của ngân hàng trung ương.</p>
+          <p class="src"><b>Video nguồn:</b> 72 (lãi dài hạn đi ngược Fed), 78 (Fed put và chu kỳ 8–12 năm), 1 (“đường đỏ” trái phiếu).</p>
+        </article>
+
+        <article class="card detail" id="k7">
+          <div class="d-head"><h3>Kênh 7 · Thuế quan đổi căn cứ luật</h3></div>
+          <div class="d-head"><span class="badge neg">▼ Đè nặng</span><span class="badge">Rủi ro cấu trúc</span></div>
+          <p class="desc"><b>Cơ chế:</b> Thuế quan không biến mất khi bị tòa án bác: sau phán quyết IEEPA, nó quay lại bằng Section 122 (15% trong 150 ngày), 301/232 và mặt trận “lao động cưỡng bức” theo Section 301 (59 quốc gia bị kết luận vi phạm, cộng thêm 10–12,5% — video 47, 61). Thuế quan được xác nhận là chính sách dài hạn xuyên đảng phái (video 71) và mới truyền ~0,7% vào lạm phát, phần còn lại đến chậm qua tồn kho (video 69). <i>(Người biên soạn nối:)</i> với kế hoạch dài hạn, rủi ro thuế quan phải tính như <b>hằng số cấu trúc</b>, không phải biến cố một lần — nó nuôi lạm phát Mỹ dai dẳng, giữ Fed thắt lâu hơn (nối về Kênh 1).</p>
+          <p class="desc"><b>Dấu hiệu theo dõi:</b> kiện tụng IEEPA và hoàn thuế ~175 tỷ USD; cửa sổ 150 ngày của Section 122; các đợt điều tra Section 301 và siết trung chuyển qua 40 quốc gia.</p>
+          <p class="src"><b>Video nguồn:</b> 47 (đổi căn cứ luật), 61 (lao động cưỡng bức), 69 (truyền lạm phát chậm), 71 (xuyên đảng phái).</p>
+        </article>
+
+        <article class="card detail" id="k8">
+          <div class="d-head"><h3>Kênh 8 · Sốc phi kinh tế</h3></div>
+          <div class="d-head"><span class="badge neg">▼ Đang kích hoạt</span><span class="badge">Kênh bị đánh giá thấp</span></div>
+          <p class="desc"><b>Cơ chế:</b> Đầu tháng 11/2026, chứng khoán Mỹ mất trên 3.500 tỷ USD (video 84) vì “cú sốc kép” không đến từ kinh tế: Đảng Dân chủ thắng áp đảo bầu cử giữa kỳ, và bê bối quanh Jensen Huang/Nvidia cùng đường dây chip MegaSpeed, rồi luật BIS tháng 11/2026 khóa cả kênh thuê đám mây (video 85). Các chi tiết cốt lõi nay đã kiểm chứng được từ nguồn sơ cấp: Huang từ chức ngày 11–12/11 (hồ sơ 8-K nộp SEC), NVDA mất ~48% từ đỉnh tháng 10, và ngày 20/11 Reuters đưa tin SEC điều tra kế toán của Nvidia. Các video này cũng lưu ý các nghi vấn gián điệp/trung chuyển chip <b>chưa có bằng chứng kết án</b>. <i>(Người biên soạn nối:)</i> kế hoạch cần một nhánh kịch bản riêng cho sốc tin tức/nhân sự/chính sách, tách khỏi kịch bản Fed/vĩ mô — và tránh quyết định toàn bộ vị thế trong nhịp phản ứng đầu tiên sau sự kiện.</p>
+          <p class="desc"><b>Dấu hiệu theo dõi:</b> Nvidia công bố CEO chính thức; phạm vi điều tra của SEC (kế toán) và DOJ (MegaSpeed/trung chuyển chip); luật BIS về chip và kênh thuê đám mây.</p>
+          <p class="src"><b>Video nguồn:</b> 83 (giữa kỳ đảo chiều kỳ vọng trong 48 giờ), 84, 85 (cú sốc kép, MegaSpeed, luật BIS).</p>
+        </article>
+      </section>
+
+      <!-- ================= UNKNOWNS / SWITCHES ================= -->
+      <section class="block" aria-labelledby="unk-h">
+        <h2 class="sec" id="unk-h"><span class="tag">Ẩn số</span> 6 ẩn số &amp; công tắc đảo chiều: biết chắc sẽ tác động — chưa biết bật khi nào</h2>
+        <p class="sec-sub">
+          Đây là phần cố tình để mở của bản đồ: các biến mà khung phân tích này xác định là <strong>điểm đảo chiều thật sự</strong> của chu kỳ.
+          Chừng nào các công tắc này chưa bật, kịch bản A còn chạy; mỗi công tắc bật sẽ mở đường sang một kịch bản khác.
+        </p>
+        <div class="unk-grid">
+          <article class="ucard">
+            <p class="q">?</p>
+            <h3>Thất nghiệp Mỹ có chạm 4,5–5%?</h3>
+            <p>Công tắc thứ nhất trong khung phân tích này: thất nghiệp chạm vùng này thì Fed buộc phải dừng tăng, thậm chí giảm lãi (video 76). Hiện thất nghiệp còn thấp hơn nhiều và thị trường lao động vẫn mạnh — công tắc chưa gần bật.</p>
+            <p class="when"><b>Mốc sẽ rõ:</b> báo cáo việc làm Mỹ hằng tháng.</p>
+          </article>
+          <article class="ucard">
+            <p class="q">?</p>
+            <h3>Lạm phát có về 2–2,5%?</h3>
+            <p>Điểm đảo chiều thứ hai: lạm phát về vùng 2–2,5% thì Fed cắt lãi lại (video 79–81). Hiện lạm phát lõi kẹt 3,4–3,7%, PPI ~7% — còn xa ngưỡng, và ngưỡng hủy kịch bản cắt lãi là 3–3,2% (video 18).</p>
+            <p class="when"><b>Mốc sẽ rõ:</b> CPI/PCE hằng tháng; diễn biến giá dầu và lạm phát thuế quan truyền qua tồn kho.</p>
+          </article>
+          <article class="ucard">
+            <p class="q">?</p>
+            <h3>Dầu có giữ trên 100 USD liên tục 6 tháng?</h3>
+            <p>Ngưỡng đình lạm được nêu trong loạt video: dầu 100–110 USD kéo dài trên 6 tháng mới cộng 0,2–1 điểm % lạm phát (video 49–50). <b>Chưa từng đạt trong 2026</b>: đợt dài nhất ~3,5 tháng (tháng 3–6), sau đó dầu rơi về ~70 USD rồi lên lại tháng 9–10, và hiện đã dưới 100.</p>
+            <p class="when"><b>Mốc sẽ rõ:</b> giá Brent theo tháng; hạn chót 6 tháng tính từ mỗi đợt vượt 100.</p>
+          </article>
+          <article class="ucard">
+            <p class="q">?</p>
+            <h3>Fed có mất độc lập?</h3>
+            <p>Cửa vỡ số 1 của niềm tin USD trong khung phân tích này (video 42): hành pháp chiếm đa số ghế Fed và hạ lãi nhân tạo. Video 73 nhấn mạnh <b>hiện chưa có dấu hiệu nào</b>; chân trời rủi ro 10–20 năm (video 72).</p>
+            <p class="when"><b>Mốc sẽ rõ:</b> diễn biến pháp lý vụ Powell/Cook; cán cân 4/7 ghế thống đốc; lợi suất 10 năm vọt vì bán tháo.</p>
+          </article>
+          <article class="ucard">
+            <p class="q">?</p>
+            <h3>Nvidia: CEO chính thức là ai, SEC điều tra tới đâu?</h3>
+            <p>Biến số của cú sốc đang chạy: Huang đã từ chức (11–12/11/2026), CFO Colette Kress tạm quyền; SEC vừa mở mặt trận điều tra kế toán (20/11), DOJ điều tra MegaSpeed. Phạm vi và thời hạn của các cuộc điều tra này quyết định cú sốc AI kéo dài bao lâu.</p>
+            <p class="when"><b>Mốc sẽ rõ:</b> thông báo bổ nhiệm CEO chính thức của Nvidia; kết luận/phạm vi điều tra SEC và DOJ.</p>
+          </article>
+          <article class="ucard">
+            <p class="q">?</p>
+            <h3>Đàm phán Iran/Hormuz kết thúc thế nào?</h3>
+            <p>Nếu chiến tranh được đàm phán xong, dầu hướng về 40–50 USD và lạm phát có thể về ~2,7% trong 6–12 tháng (video 76, 84) — mở đường sang kịch bản B. Nếu leo thang trở lại trên 100 USD dài hạn, rủi ro trượt sang kịch bản C.</p>
+            <p class="when"><b>Mốc sẽ rõ:</b> thỏa thuận chính thức về Iran/Hormuz; giá dầu 2–3 tháng sau thỏa thuận.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ================= WATCH ================= -->
+      <section class="block" aria-labelledby="tl-h">
+        <h2 class="sec" id="tl-h"><span class="tag">Sắp tới</span> Các mốc sẽ làm rõ dần các ẩn số</h2>
+        <div class="card">
+          <ol class="watch">
+            <li><b>29/11/2026 — Họp OPEC+:</b> quyết định khung sản lượng 2027. Mốc tham chiếu ngắn hạn của Brent: 88 USD (dưới) / 96 USD (trên) — quyết định dầu giữ dưới hay quay lại vùng 100.</li>
+            <li><b>Tháng 12/2026 — Kỳ họp FOMC:</b> thị trường đang định giá khả năng cao Fed tăng lãi tiếp; kèm dot plot cho 2027. Đây là phép thử trực tiếp của kịch bản A.</li>
+            <li><b>Hằng tháng — CPI &amp; báo cáo việc làm Mỹ:</b> hai công tắc đảo chiều trong khung phân tích này nằm ở đây — lạm phát tiến về 2–2,5% hay kẹt trên 3%; thất nghiệp tiến về 4,5–5% hay còn mạnh.</li>
+            <li><b>Diễn biến Nvidia / MegaSpeed:</b> bổ nhiệm CEO chính thức; điều tra SEC về kế toán và điều tra DOJ về trung chuyển chip — biến số kéo dài hay kết thúc cú sốc AI.</li>
+            <li><b>Ngân sách &amp; hậu bầu cử giữa kỳ:</b> mùa ngân sách và cán cân quyền lực mới tại Quốc hội — chương trình AI/chip và thuế quan có bị chặn hay đảo chiều như video 84 mô tả hay không.</li>
+            <li><b>Thuế quan:</b> cửa sổ 150 ngày của Section 122; phán quyết và hoàn thuế IEEPA (~175 tỷ USD); các đợt điều tra Section 301 tiếp theo.</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ================= SCENARIOS ================= -->
+      <section class="block" aria-labelledby="sc-h">
+        <h2 class="sec" id="sc-h"><span class="tag">Kịch bản</span> Bốn kịch bản cho kế hoạch dài hạn</h2>
+        <p class="sec-sub">Bốn kịch bản do người biên soạn dựng từ khung và các điều kiện được nêu trong 85 video; phần “hàm ý cho BTC” là suy luận của người biên soạn, không phải lời trong loạt video.</p>
+        <div class="scen-grid">
+          <article class="card scen mid">
+            <h3>A · Cơ sở — “Lãi cao lâu hơn, Mỹ vẫn là pháo đài”</h3>
+            <p class="zone">Khả năng cao nhất · đang chạy</p>
+            <p><b>Điều kiện:</b> lạm phát lõi kẹt ~3,4–3,7%; Fed giữ 3,5–4% hoặc tăng thêm 1–2 lần rồi dừng; USD mạnh, vốn tiếp tục chảy về Mỹ; tăng trưởng chậm lại nhưng không suy thoái; Fed giữ độc lập.</p>
+            <p><b>Dấu hiệu:</b> CPI lõi còn trên 3%; PPI ~7%; lãi trái phiếu dài hạn neo cao; vàng bị ép quanh 4.000–4.400; IPO AI vẫn hút vốn.</p>
+            <p><b>Hàm ý cho BTC (người biên soạn):</b> môi trường cạnh tranh lợi suất khắc nghiệt (an toàn 4–5%, trái phiếu AI 8–9%): định cỡ vị thế thận trọng, tránh đòn bẩy, tích lũy chia đợt — chấp nhận đây là pha “đi ngang khó chịu”, không phải pha nới lỏng.</p>
+          </article>
+          <article class="card scen good">
+            <h3>B · Thuận thanh khoản — “Chiến tranh dứt, Fed cắt lãi lại”</h3>
+            <p class="zone">Cửa sổ risk-on chính của chu kỳ</p>
+            <p><b>Điều kiện:</b> Iran/Hormuz đàm phán xong, dầu rơi khỏi 100 hướng về 40–50 USD; lạm phát về 2–2,5% (hoặc ~2,7% trong 6–12 tháng); Fed quay lại cắt lãi; hoặc biến thể thư giãn sau thượng đỉnh Mỹ–Trung (video 58).</p>
+            <p><b>Dấu hiệu:</b> Brent và tin đàm phán Iran; lạm phát tiến về 2–2,5%; thất nghiệp nhích về 4,5% mà không phải suy thoái; vàng chững lại trong khi tài sản rủi ro tăng.</p>
+            <p><b>Hàm ý cho BTC (người biên soạn):</b> thanh khoản USD nới ra là gió thuận trực tiếp. Kỷ luật ngược cũng phải sẵn: khi kịch bản chạy được một đoạn, cảnh báo FOMO đu đỉnh được nêu trong loạt video cũng áp dụng — tăng vị thế theo lộ trình định sẵn, không đuổi giá.</p>
+          </article>
+          <article class="card scen bad">
+            <h3>C · Thắt chặt kéo dài / đình lạm nhẹ</h3>
+            <p class="zone">Xấu nhất cho tài sản rủi ro</p>
+            <p><b>Điều kiện:</b> lạm phát phía cung khiến lãi suất thành “thuốc không đúng bệnh” (video 76); dầu giữ 100–110 USD trên 6 tháng; vòng xoáy capex AI → lạm phát → Fed tăng lãi kéo dài; thuế quan theo luật tiếp tục nuôi lạm phát.</p>
+            <p><b>Dấu hiệu:</b> dầu trên 100 USD qua mốc 6 tháng; lạm phát vọt qua 4,2%; Fed tăng liên tiếp kèm GDP trượt về 1–1,5%; bán tháo trái phiếu dài hạn dù Fed đã dừng tăng.</p>
+            <p><b>Hàm ý cho BTC (người biên soạn):</b> thắt thanh khoản + tăng trưởng yếu cùng lúc, cơ chế thanh lý dây chuyền của nhà đầu tư đòn bẩy (video 62) dễ kích hoạt. Ưu tiên bảo toàn vốn, không dùng đòn bẩy, giữ thanh khoản chờ công tắc đảo chiều thay vì bắt đáy sớm.</p>
+          </article>
+          <article class="card scen bad">
+            <h3>D · Sốc đuôi — “Mất niềm tin USD / Fed mất độc lập”</h3>
+            <p class="zone">Rủi ro đuôi · chân trời 10–20 năm</p>
+            <p><b>Điều kiện:</b> một trong hai cửa vỡ mở ra — hành pháp chiếm được Fed (sa thải Powell/Cook, đa số 4/7 ghế, hạ lãi nhân tạo) hoặc thế giới ngừng tin trái phiếu/USD (lãi nợ Mỹ vọt từ ~15% lên 15–17% ngân sách). Khung phân tích này nhấn mạnh: <b>hiện chưa có dấu hiệu nào</b>.</p>
+            <p><b>Dấu hiệu:</b> pháp lý vụ Powell/Cook và cán cân ghế Fed; lợi suất 10 năm tăng vọt vì bán tháo (“đường đỏ”); NHTW gom vàng tăng tốc bất thường; USD giảm mạnh đồng thời lãi dài hạn tăng.</p>
+            <p><b>Hàm ý cho BTC (người biên soạn):</b> đây là kịch bản nền của luận điểm giữ Bitcoin dài hạn như tài sản ngoài hệ thống — nhưng theo khung phân tích này, nó là rủi ro đuôi dài hạn, không phải kỳ vọng sụp đổ gần. Định cỡ vị thế “trú ẩn” theo xác suất đuôi; lưu ý nhịp đầu của cú sốc vẫn có thể là bán tháo mọi tài sản rủi ro.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ================= CONCLUSION ================= -->
+      <section class="block" aria-labelledby="cc-h">
+        <h2 class="sec" id="cc-h"><span class="tag">Kết luận</span> 5 yếu tố quan trọng nhất cần theo dõi</h2>
+        <div class="card">
+          <ol class="watch">
+            <li><b>Đường lãi suất Fed và hai công tắc đảo chiều</b> — thất nghiệp 4,5–5% (buộc Fed dừng/giảm) và lạm phát về 2–2,5% (mở đường cắt lãi). Đây là kênh chủ đạo quyết định chu kỳ của mọi tài sản rủi ro, gồm BTC.</li>
+            <li><b>Giá dầu &amp; Hormuz theo ngưỡng 100 USD và mốc 6 tháng</b> — biến “gác cổng”: dầu dưới 100 thì kịch bản nới lỏng còn cửa; dầu trên 100 đủ lâu thì trượt sang đình lạm.</li>
+            <li><b>Độc lập và nhân sự Fed</b> — biến sự kiện nặng nhất: chỉ tin bổ nhiệm đã làm vàng rơi ~500 USD/ounce; chính trị hóa Fed là cửa vỡ số 1 của niềm tin USD.</li>
+            <li><b>Chu kỳ AI và cạnh tranh vốn</b> — IPO nghìn tỷ hút cùng dòng vốn rủi ro hữu hạn, vòng xoáy capex → lạm phát → tăng lãi, và rủi ro tương quan: khi AI bị định giá lại, crypto bị kéo theo.</li>
+            <li><b>Lợi suất trái phiếu 10 năm &amp; nhịp gom vàng của ngân hàng trung ương</b> — “đường đỏ” niềm tin vào USD và thước đo dòng tiền ngoài hệ thống; lãi dài hạn có thể bóp tài sản rủi ro ngay cả khi Fed cắt lãi ngắn hạn.</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ================= SOURCES & LIMITS ================= -->
+      <section class="block" aria-labelledby="src-h">
+        <h2 class="sec" id="src-h"><span class="tag">Nguồn &amp; giới hạn</span> Bản đồ này dựa trên gì — và không dựa trên gì</h2>
+        <div class="card detail">
+          <p class="desc"><b>Nguồn khung phân tích:</b> Trang này là cách đọc và hiểu chủ quan của người biên soạn, rút ra từ loạt 85 video kinh tế công khai trên YouTube; không phải quan điểm chính thức của tác giả loạt video và không dẫn lời trực tiếp. Mọi liên hệ tới BTC là suy luận của người biên soạn. Các video được đọc theo thứ tự cũ nhất → mới nhất để thấy sự thay đổi trong các dự báo theo thời gian (ví dụ lộ trình cắt lãi “đích 3–3,5%” ở video 24 bị các video 54, 62, 76 đảo ngược khi lạm phát quay lại).</p>
+          <p class="desc"><b>Loạt video không bàn về crypto.</b> Các video này không đề cập Bitcoin/crypto. Mọi liên hệ sang BTC trên trang này — gồm chiều tác động của 8 kênh, cán cân và hàm ý trong 4 kịch bản — đều là <b>suy luận của người biên soạn</b> từ khung vĩ mô rút ra từ loạt bài (Fed/USD/vàng/dòng vốn/AI), không phải quan điểm chính thức hay khuyến nghị của tác giả loạt video.</p>
+          <p class="desc"><b>Giới hạn của transcript:</b> phụ đề tự động tiếng Việt của YouTube sai chữ và sai số ở nhiều chỗ (tên riêng, thuật ngữ bị nghe sai hàng loạt); các bản tóm tắt đã khôi phục theo mạch nói và đánh dấu chỗ nhiễu, nhưng mọi con số định dùng để ra quyết định đều cần đối chiếu nguồn gốc. Số liệu đôi khi mâu thuẫn ngay trong cùng một video hoặc giữa các video (ví dụ lạm phát tháng 5 là 4,2% rồi 4,5% trong video 62; vốn hóa mất tháng 11/2026 là &gt;3.500 tỷ ở video 84 so với ~5.000 tỷ ở video 85) — trang này giữ cách trình bày của từng video, không tự hợp nhất.</p>
+          <p class="desc"><b>Số liệu thị trường 20/11/2026</b> (NVDA 125,53 USD, −14% phiên 20/11; S&amp;P 500 −3,7%; Brent 89,87 USD) lấy từ báo chí tài chính và dữ liệu thị trường cùng ngày; diễn biến vụ Nvidia/MegaSpeed đã đối chiếu hồ sơ 8-K của Nvidia nộp SEC (từ chức hiệu lực 11/11/2026) và thông cáo chính thức của công ty. Các nghi vấn gián điệp/trung chuyển chip vẫn là nghi vấn, chưa có bằng chứng kết án.</p>
+          <p class="src"><b>Không phải lời khuyên đầu tư.</b> Trang này là bản đồ phân tích vĩ mô phục vụ việc theo dõi và lập kế hoạch; khung được dùng ở đây là khung vĩ mô/thể chế, không phải phân tích kỹ thuật hay định giá crypto, và trang này không đưa ra mức giá hay thời điểm vào/ra cho bất kỳ tài sản nào.</p>
+        </div>
+      </section>
+
+      <footer class="page">
+        <h2>Map yếu tố tác động BTC</h2>
+        <p>Người biên soạn tổng hợp từ loạt 85 video kinh tế công khai và số liệu thị trường tại 20/11/2026. Cập nhật khi một công tắc đảo chiều bật hoặc khi có video mới làm thay đổi cách đọc khung.</p>
+      </footer>
+    </div>
+  </body>
+</html>

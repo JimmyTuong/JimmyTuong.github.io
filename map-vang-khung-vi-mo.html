@@ -1,0 +1,767 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>Map yếu tố tác động VÀNG</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #eceef0;
+        --surface: #ffffff;
+        --surface-2: #f4f5f6;
+        --ink: #16191d;
+        --ink-2: #3c434c;
+        --muted: #626b76;
+        --line: #d5d9de;
+        --line-strong: #b9bfc7;
+        --amber: #d97a06;
+        --amber-fill: #d4a017;
+        --amber-soft: #fdf0dd;
+        --pos: #14743f;
+        --pos-soft: #e2f2e7;
+        --neg: #c23333;
+        --neg-soft: #fae7e7;
+        --mix: #9a6a06;
+        --mix-soft: #f7ecd2;
+        --unk: #5d6672;
+        --unk-soft: #e8eaed;
+        --shadow: 0 1px 2px rgba(16, 20, 24, .06), 0 8px 24px rgba(16, 20, 24, .06);
+        color-scheme: light;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0d0f12;
+          --surface: #16191e;
+          --surface-2: #1c2026;
+          --ink: #e9edf1;
+          --ink-2: #c3cad2;
+          --muted: #98a1ac;
+          --line: #2b3038;
+          --line-strong: #3d434d;
+          --amber: #f5a83c;
+          --amber-fill: #d4a017;
+          --amber-soft: #2c2113;
+          --pos: #4cc07a;
+          --pos-soft: #152a1e;
+          --neg: #f07171;
+          --neg-soft: #2e1a1a;
+          --mix: #e0aa3e;
+          --mix-soft: #2b2312;
+          --unk: #a7b0bb;
+          --unk-soft: #23272d;
+          --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px rgba(0, 0, 0, .35);
+          color-scheme: dark;
+        }
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", sans-serif;
+        font-size: 16px;
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+      }
+      .mono { font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace; }
+      .wrap { max-width: 1280px; margin: 0 auto; padding: 0 16px 64px; }
+      a { color: var(--amber); }
+      a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+
+      /* ---------- Header ---------- */
+      header.page { padding: 28px 0 6px; }
+      .kicker {
+        font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+        color: var(--amber); margin: 0 0 8px;
+      }
+      h1 { font-size: clamp(26px, 4.6vw, 40px); line-height: 1.15; font-weight: 800; margin: 0 0 10px; letter-spacing: -.01em; }
+      .lede { color: var(--ink-2); max-width: 78ch; margin: 0 0 6px; font-size: 16.5px; }
+      .snapshot-note { color: var(--muted); font-size: 13.5px; margin: 4px 0 0; }
+
+      /* ---------- Stat strip ---------- */
+      .stats {
+        display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin: 20px 0 22px;
+      }
+      .stat {
+        background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+        padding: 12px 14px; box-shadow: var(--shadow);
+      }
+      .stat .lab { font-size: 11.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 0 0 4px; }
+      .stat .val { font-size: 20px; font-weight: 700; line-height: 1.2; margin: 0; }
+      .stat .sub { font-size: 12.5px; color: var(--muted); margin: 3px 0 0; }
+      .stat .val.down { color: var(--neg); }
+      .stat .val.hot { color: var(--amber); }
+      @media (max-width: 980px) { .stats { grid-template-columns: repeat(3, 1fr); } }
+      @media (max-width: 560px) { .stats { grid-template-columns: repeat(2, 1fr); } .stat .val { font-size: 17px; } }
+
+      /* ---------- Section scaffolding ---------- */
+      section.block { margin-top: 34px; }
+      h2.sec {
+        font-size: clamp(20px, 3vw, 26px); font-weight: 800; margin: 0 0 6px; letter-spacing: -.01em;
+        display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+      }
+      h2.sec .tag { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--amber); }
+      .sec-sub { color: var(--muted); margin: 0 0 14px; max-width: 82ch; font-size: 15px; }
+      .card {
+        background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+        box-shadow: var(--shadow);
+      }
+
+      /* ---------- Map ---------- */
+      .map-tools {
+        display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 12px;
+      }
+      .map-tools .lbl { font-size: 13px; font-weight: 600; color: var(--muted); margin-right: 2px; }
+      .fbtn {
+        min-height: 38px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line-strong);
+        background: var(--surface); color: var(--ink-2); font: inherit; font-size: 13.5px; font-weight: 600; cursor: pointer;
+      }
+      .fbtn[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+      .fbtn .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; vertical-align: 1px; }
+      .map-frame { padding: 10px 6px 4px; overflow: hidden; }
+      .map-frame svg { display: block; width: 100%; height: auto; }
+      .map-hint { color: var(--muted); font-size: 13px; margin: 10px 4px 2px; }
+      .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--ink-2); margin: 8px 4px 4px; }
+      .legend span { display: inline-flex; align-items: center; gap: 6px; }
+      .legend .sw { width: 22px; height: 0; border-top: 3px solid; display: inline-block; }
+      .legend .sw.dash { border-top-style: dashed; }
+
+      svg .cluster-card { fill: var(--surface); stroke: var(--line-strong); }
+      svg .cluster-card.unknown { stroke-dasharray: 6 5; }
+      svg .g-title { font: 700 14.5px "Be Vietnam Pro", sans-serif; fill: var(--ink); }
+      svg .g-net { font: 600 10.5px "Be Vietnam Pro", sans-serif; }
+      svg .pill { cursor: pointer; }
+      svg .pill rect { fill: var(--surface-2); stroke: var(--line); }
+      svg .pill:hover rect { stroke: var(--amber); }
+      svg .pill text { font: 500 12px "Be Vietnam Pro", sans-serif; fill: var(--ink-2); }
+      svg .pill.sel rect { stroke: var(--amber); stroke-width: 2; fill: var(--amber-soft); }
+      svg .pill.sel text { fill: var(--ink); font-weight: 700; }
+      svg .flow { fill: none; stroke-width: 3; opacity: .55; }
+      svg .center-price { font: 700 25px "IBM Plex Mono", monospace; fill: var(--ink); }
+      svg .center-sub { font: 500 11.5px "Be Vietnam Pro", sans-serif; fill: var(--muted); }
+      svg .btc-glyph { font: 800 44px "Be Vietnam Pro", sans-serif; fill: #fff; }
+      .dimmed { opacity: .14 !important; transition: opacity .25s; }
+      svg .pill, svg .cluster { transition: opacity .25s; }
+
+      /* ---------- Detail panel ---------- */
+      .detail { margin-top: 14px; padding: 20px 22px; border-left: 5px solid var(--amber); }
+      .detail .d-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 8px; }
+      .detail h3 { font-size: 20px; margin: 0; font-weight: 800; line-height: 1.3; }
+      .badge {
+        display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 700;
+        padding: 4px 10px; border-radius: 999px; white-space: nowrap;
+      }
+      .badge.pos { background: var(--pos-soft); color: var(--pos); }
+      .badge.neg { background: var(--neg-soft); color: var(--neg); }
+      .badge.mix { background: var(--mix-soft); color: var(--mix); }
+      .badge.unk { background: var(--unk-soft); color: var(--unk); }
+      .badge.plain { background: var(--surface-2); color: var(--ink-2); border: 1px solid var(--line); }
+      .detail p.desc { margin: 6px 0 10px; color: var(--ink-2); max-width: 95ch; }
+      .detail .src { font-size: 13px; color: var(--muted); margin: 0; }
+      .detail .src b { color: var(--ink-2); font-weight: 600; }
+
+      /* ---------- Chart ---------- */
+      .chart-frame { padding: 18px 18px 10px; }
+      .chart-frame svg { display: block; width: 100%; height: auto; }
+      svg .grid-line { stroke: var(--line); stroke-width: 1; }
+      svg .axis-lab { font: 500 11px "IBM Plex Mono", monospace; fill: var(--muted); }
+      svg .price-line { fill: none; stroke: var(--amber-fill); stroke-width: 2.4; stroke-linejoin: round; stroke-linecap: round; }
+      svg .price-area { fill: var(--amber-fill); opacity: .10; }
+      svg .anno { font: 600 11.5px "Be Vietnam Pro", sans-serif; fill: var(--ink-2); }
+      svg .anno-line { stroke: var(--line-strong); stroke-width: 1; stroke-dasharray: 3 3; }
+      .chart-note { font-size: 13px; color: var(--muted); margin: 8px 4px 4px; }
+
+      /* ---------- Factor index ---------- */
+      .index-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      @media (max-width: 860px) { .index-grid { grid-template-columns: 1fr; } }
+      .igroup { padding: 14px 16px 8px; }
+      .igroup.unknown { border-style: dashed; }
+      .igroup h3 { margin: 0 0 4px; font-size: 15.5px; font-weight: 700; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+      .igroup h3 .net { font-size: 12px; font-weight: 700; }
+      .irow {
+        display: flex; gap: 10px; align-items: flex-start; width: 100%; text-align: left;
+        background: none; border: 0; border-top: 1px solid var(--line); padding: 10px 2px;
+        font: inherit; cursor: pointer; color: var(--ink); min-height: 44px;
+      }
+      .irow:hover { background: var(--surface-2); }
+      .irow.sel { background: var(--amber-soft); }
+      .irow .glyph { flex: 0 0 auto; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 800; margin-top: 1px; }
+      .glyph.pos { background: var(--pos-soft); color: var(--pos); }
+      .glyph.neg { background: var(--neg-soft); color: var(--neg); }
+      .glyph.mix { background: var(--mix-soft); color: var(--mix); }
+      .glyph.unk { background: var(--unk-soft); color: var(--unk); }
+      .irow .t { font-size: 14.5px; font-weight: 600; line-height: 1.35; }
+      .irow .m { font-size: 12.5px; color: var(--muted); }
+
+      /* ---------- Unknown questions ---------- */
+      .unk-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+      @media (max-width: 980px) { .unk-grid { grid-template-columns: repeat(2, 1fr); } }
+      @media (max-width: 620px) { .unk-grid { grid-template-columns: 1fr; } }
+      .ucard { border: 1.5px dashed var(--line-strong); border-radius: 12px; padding: 16px 18px; background: var(--surface); }
+      .ucard .q { font-size: 32px; font-weight: 800; color: var(--unk); line-height: 1; margin: 0 0 8px; font-family: "IBM Plex Mono", monospace; }
+      .ucard h3 { margin: 0 0 6px; font-size: 16px; font-weight: 700; line-height: 1.35; }
+      .ucard p { margin: 0 0 8px; font-size: 14px; color: var(--ink-2); }
+      .ucard .when { font-size: 12.5px; color: var(--muted); margin: 0; }
+      .ucard .when b { color: var(--amber); font-weight: 700; }
+
+      /* ---------- Timeline ---------- */
+      .timeline { padding: 6px 20px; }
+      .trow { display: grid; grid-template-columns: 118px 1fr auto; gap: 14px; padding: 12px 0; border-top: 1px solid var(--line); align-items: baseline; }
+      .trow:first-child { border-top: 0; }
+      .trow .d { font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 14px; color: var(--amber); white-space: nowrap; }
+      .trow .e { font-size: 15px; color: var(--ink-2); }
+      .trow .e b { color: var(--ink); }
+      .trow .st { font-size: 11.5px; font-weight: 700; padding: 3px 9px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); color: var(--muted); white-space: nowrap; }
+      .trow .st.hot { background: var(--neg-soft); color: var(--neg); border-color: transparent; }
+      .trow .st.open { background: var(--unk-soft); color: var(--unk); border-color: transparent; }
+      @media (max-width: 620px) { .trow { grid-template-columns: 108px 1fr; } .trow .d { font-size: 13px; } .trow .st { grid-column: 2; justify-self: start; } }
+
+      /* ---------- Scenarios ---------- */
+      .scen-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+      @media (max-width: 900px) { .scen-grid { grid-template-columns: 1fr; } }
+      .scen { padding: 18px 20px; border-top: 5px solid var(--line-strong); }
+      .scen.good { border-top-color: var(--pos); }
+      .scen.mid { border-top-color: var(--mix); }
+      .scen.bad { border-top-color: var(--neg); }
+      .scen h3 { margin: 0 0 2px; font-size: 18px; font-weight: 800; }
+      .scen .zone { font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 15px; margin: 0 0 10px; }
+      .scen.good .zone { color: var(--pos); } .scen.mid .zone { color: var(--mix); } .scen.bad .zone { color: var(--neg); }
+      .scen p { margin: 0 0 8px; font-size: 14.5px; color: var(--ink-2); }
+      .scen p b { color: var(--ink); }
+      .scen .fine { font-size: 12.5px; color: var(--muted); }
+
+      /* ---------- Crash scenario -70% ---------- */
+      .crash { border: 1.5px solid var(--neg); padding: 0; overflow: hidden; }
+      .crash-head { background: var(--neg-soft); padding: 20px 22px 16px; border-bottom: 1px solid var(--line); }
+      .crash-head h3 { margin: 0 0 4px; font-size: 21px; font-weight: 800; line-height: 1.25; }
+      .crash-head h3 .pct { color: var(--neg); }
+      .crash-head p { margin: 0; color: var(--ink-2); font-size: 15px; max-width: 92ch; }
+      .crash-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-bottom: 1px solid var(--line); }
+      .crash-stat { padding: 14px 18px; border-left: 1px solid var(--line); }
+      .crash-stat:first-child { border-left: 0; }
+      .crash-stat .lab { font-size: 11.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 0 0 3px; }
+      .crash-stat .val { font-size: 19px; font-weight: 700; line-height: 1.2; margin: 0; color: var(--neg); }
+      .crash-stat .sub { font-size: 12.5px; color: var(--muted); margin: 3px 0 0; }
+      @media (max-width: 860px) { .crash-stats { grid-template-columns: repeat(2, 1fr); } .crash-stat:nth-child(3) { border-left: 0; } .crash-stat { border-top: 1px solid var(--line); } .crash-stat:nth-child(-n+2) { border-top: 0; } }
+      .crash-body { padding: 18px 22px 20px; }
+      .crash-body h4 { margin: 18px 0 8px; font-size: 15.5px; font-weight: 800; }
+      .crash-body h4:first-child { margin-top: 0; }
+      /* price ladder */
+      .ladder { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0; margin: 4px 0 6px; }
+      .rung { flex: 1 1 120px; border: 1px solid var(--line); background: var(--surface-2); padding: 10px 12px; position: relative; }
+      .rung + .rung { border-left: 0; }
+      .rung .p { font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 16px; margin: 0; }
+      .rung .t { font-size: 12px; color: var(--muted); margin: 2px 0 0; line-height: 1.4; }
+      .rung.now .p { color: var(--ink); }
+      .rung.warn .p { color: var(--mix); }
+      .rung.bad .p { color: var(--neg); }
+      .rung.target { background: var(--neg-soft); border-color: var(--neg); }
+      .rung.target .p { color: var(--neg); font-size: 18px; }
+      @media (max-width: 700px) { .rung { flex: 1 1 45%; } .rung + .rung { border-left: 1px solid var(--line); } }
+      /* chain */
+      .chain { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 4px 0 6px; }
+      .chain .step { background: var(--ink); color: var(--bg); font-size: 13px; font-weight: 700; padding: 7px 12px; border-radius: 999px; white-space: nowrap; }
+      .chain .step.hot { background: var(--neg); color: #fff; }
+      .chain .arr { color: var(--muted); font-weight: 700; }
+      /* role rows */
+      .roles { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      @media (max-width: 860px) { .roles { grid-template-columns: 1fr; } }
+      .role { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; background: var(--surface); }
+      .role .r-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; justify-content: space-between; margin-bottom: 5px; }
+      .role h5 { margin: 0; font-size: 15px; font-weight: 800; line-height: 1.3; }
+      .role .tagrole { font-size: 11.5px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: var(--neg); background: var(--neg-soft); padding: 3px 9px; border-radius: 999px; white-space: nowrap; }
+      .role .tagrole.neutral { color: var(--unk); background: var(--unk-soft); }
+      .role p { margin: 0; font-size: 14px; color: var(--ink-2); }
+      .role p b { color: var(--ink); }
+      .crash-gate { border: 1.5px dashed var(--line-strong); border-radius: 10px; padding: 14px 16px; margin-top: 14px; background: var(--surface-2); }
+      .crash-gate p { margin: 0 0 6px; font-size: 14.5px; color: var(--ink-2); }
+      .crash-gate p:last-child { margin-bottom: 0; }
+      .crash-gate b { color: var(--ink); }
+      .crash-fine { font-size: 12.5px; color: var(--muted); margin: 12px 0 0; }
+
+      /* ---------- Watchlist ---------- */
+      .watch { padding: 8px 22px 14px; counter-reset: w; }
+      .watch li { list-style: none; padding: 12px 0 12px 46px; position: relative; border-top: 1px solid var(--line); color: var(--ink-2); font-size: 15px; }
+      .watch li:first-child { border-top: 0; }
+      .watch li::before {
+        counter-increment: w; content: counter(w);
+        position: absolute; left: 0; top: 10px; width: 30px; height: 30px; border-radius: 50%;
+        background: var(--amber-soft); color: var(--amber); font-weight: 800; font-size: 14px;
+        display: grid; place-items: center;
+      }
+      .watch li b { color: var(--ink); }
+      ul.watch { margin: 0; }
+
+      /* ---------- Balance bar ---------- */
+      .balance { padding: 18px 22px; }
+      .balance .bar { display: flex; height: 16px; border-radius: 8px; overflow: hidden; margin: 10px 0 8px; }
+      .balance .bar i { display: block; height: 100%; }
+      .balance .bar .b-neg { background: var(--neg); }
+      .balance .bar .b-mix { background: var(--mix); }
+      .balance .bar .b-pos { background: var(--pos); }
+      .balance .bar .b-unk { background: var(--unk); opacity: .55; }
+      .balance p { margin: 0; color: var(--ink-2); font-size: 15px; }
+      .balance .cap { display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 12.5px; color: var(--muted); }
+
+      footer.page { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 18px; color: var(--muted); font-size: 13.5px; }
+      footer.page h2 { font-size: 15px; color: var(--ink); margin: 0 0 8px; }
+      footer.page ul { margin: 0 0 12px; padding-left: 18px; }
+      footer.page li { margin-bottom: 4px; overflow-wrap: anywhere; }
+      footer.page p { max-width: 90ch; }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        * { transition: none !important; }
+      }
+    </style>
+  </head>
+<body>
+  <div class="wrap">
+    <header class="page">
+      <p class="kicker">Cập nhật 20/11/2026</p>
+      <h1>Mọi lực đang kéo giá vàng — qua một khung đọc vĩ mô</h1>
+      <p class="lede">
+        Trong khung phân tích này, vàng là <strong>vị thế phòng thủ</strong>, không phải kênh làm giàu:
+        lực đỡ bền nhất của nó là dòng mua cơ cấu của các ngân hàng trung ương, còn lực ép mạnh nhất là
+        <strong>chi phí cơ hội</strong> — khi kênh an toàn trả 4–5%/năm, giữ một kim loại không sinh lãi là tự bỏ mất khoản lợi đó mỗi ngày.
+        Hiện tại thị trường đang sống trong <strong>kịch bản A — “lãi cao lâu hơn”</strong>: Fed đã tăng lãi trở lại, USD mạnh,
+        và giá vàng vừa thủng cả mốc “sàn ~3.800 USD/ounce” được nêu ở video 79. Bản đồ này xếp 7 kênh truyền dẫn quanh giá vàng,
+        ghi rõ kênh nào đang ép, kênh nào đang đỡ — và đâu là phần nội dung rút ra từ loạt video, đâu là hàm ý người biên soạn suy ra cho kế hoạch vàng dài hạn.
+      </p>
+      <p class="snapshot-note">Ảnh chụp thị trường tại 20/11/2026 theo báo chí tài chính; các mức giá/dự báo gắn với từng video là nội dung được nêu tại thời điểm video phát hành — xem mục “Bối cảnh” để đối chiếu.</p>
+      <div class="stats" role="list" aria-label="Số liệu chính tại 20/11/2026">
+        <div class="stat" role="listitem">
+          <p class="lab">Giá vàng spot · 20/11/2026</p>
+          <p class="val down mono">3.539,64 <span style="font-size:13px">USD/oz</span></p>
+          <p class="sub">−2,4% trong ngày · −9% trong tuần · thấp nhất 14 tháng (báo chí tài chính)</p>
+        </div>
+        <div class="stat" role="listitem">
+          <p class="lab">Đỉnh chu kỳ · đầu 2026</p>
+          <p class="val mono">~5.336,60 <span style="font-size:13px">USD/oz</span></p>
+          <p class="sub">Từ đỉnh tới 20/11: ≈ −34% — đợt điều chỉnh sâu nhất của chu kỳ tăng này</p>
+        </div>
+        <div class="stat" role="listitem">
+          <p class="lab">“Sàn” nêu ở video 79</p>
+          <p class="val down mono">~3.800 — ĐÃ THỦNG</p>
+          <p class="sub">Giá hiện tại thấp hơn sàn ~260 USD: sàn cấu trúc không giữ được trong nhịp rơi này</p>
+        </div>
+        <div class="stat" role="listitem">
+          <p class="lab">Lãi suất Fed</p>
+          <p class="val hot mono">3,75–4,00%</p>
+          <p class="sub">Đã tăng lãi trở lại sau 3 năm; kỳ vọng tăng tiếp là nguyên nhân báo chí nêu cho đợt rơi</p>
+        </div>
+        <div class="stat" role="listitem">
+          <p class="lab">Dự báo ngân hàng · video 62</p>
+          <p class="val mono">5.000–6.000 <span style="font-size:13px">USD/oz</span></p>
+          <p class="sub">Citi ~5.000 · JPMorgan ~6.000 · Goldman ~5.400 · UBS ~5.900–6.000 trong 6–12 tháng</p>
+        </div>
+        <div class="stat" role="listitem">
+          <p class="lab">NHTW gom vàng</p>
+          <p class="val mono">~1.000 <span style="font-size:13px">tấn/năm</span></p>
+          <p class="sub">Nhịp mua cơ cấu theo video 9 — biến phân biệt “chỉnh đốn” với “đảo chiều xu hướng”</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- ================= MAP ================= -->
+    <section class="block" aria-labelledby="map-h">
+      <h2 class="sec" id="map-h"><span class="tag">Bản đồ</span> VÀNG ở trung tâm, 7 kênh truyền dẫn xung quanh</h2>
+      <p class="sec-sub">Màu của mỗi kênh là chiều tác động <strong>ở thời điểm 20/11/2026</strong> theo khung phân tích này: đỏ = đang ép giá xuống, vàng nâu = hai chiều, xanh = đang nâng đỡ. Nhấp vào một kênh để xuống phần mô tả chi tiết ở “Mục lục yếu tố”.</p>
+      <div class="card map-frame">
+        <svg viewBox="0 0 1244 800" role="group" aria-label="Bản đồ 7 kênh truyền dẫn tác động vào giá vàng">
+          <!-- connectors -->
+          <g fill="none" stroke-width="3" opacity="0.55">
+            <path d="M370 118 L548 330" style="stroke:var(--neg)"/>
+            <path d="M874 118 L696 330" style="stroke:var(--neg)"/>
+            <path d="M622 126 L622 300" style="stroke:var(--mix)"/>
+            <path d="M370 400 L528 400" style="stroke:var(--mix)"/>
+            <path d="M874 400 L716 400" style="stroke:var(--pos)"/>
+            <path d="M370 682 L548 470" style="stroke:var(--neg)"/>
+            <path d="M874 682 L696 470" style="stroke:var(--neg)"/>
+          </g>
+          <!-- center -->
+          <circle cx="622" cy="400" r="92" style="fill:var(--amber-fill)"/>
+          <text x="622" y="392" text-anchor="middle" class="btc-glyph">Au</text>
+          <text x="622" y="428" text-anchor="middle" style="font:700 15px 'Be Vietnam Pro',sans-serif;fill:#fff">VÀNG</text>
+          <text x="622" y="524" text-anchor="middle" class="center-price">3.539,64</text>
+          <text x="622" y="546" text-anchor="middle" class="center-sub">USD/ounce · spot 20/11/2026 · đã thủng “sàn 3.800” (video 79)</text>
+          <!-- node 3: top center, mix -->
+          <a href="#kenh-4">
+            <rect x="452" y="30" width="340" height="96" rx="14" class="cluster-card"/>
+            <rect x="452" y="30" width="6" height="96" rx="3" style="fill:var(--mix)"/>
+            <text x="474" y="60" class="g-title">Chiến tranh – dầu – Hormuz</text>
+            <text x="474" y="84" style="font:700 11.5px 'Be Vietnam Pro',sans-serif;fill:var(--mix)">HAI CHIỀU · ĐANG NGUỘI DẦN</text>
+            <text x="474" y="106" style="font:500 12px 'Be Vietnam Pro',sans-serif;fill:var(--muted)">Dầu rời mốc 100 USD → bớt áp lực lạm phát (v49–50)</text>
+          </a>
+          <!-- node 1: top left, neg -->
+          <a href="#kenh-1">
+            <rect x="30" y="70" width="340" height="96" rx="14" class="cluster-card"/>
+            <rect x="30" y="70" width="6" height="96" rx="3" style="fill:var(--neg)"/>
+            <text x="52" y="100" class="g-title">Lãi suất thực &amp; chi phí cơ hội</text>
+            <text x="52" y="124" style="font:700 11.5px 'Be Vietnam Pro',sans-serif;fill:var(--neg)">NGƯỢC · KÊNH ÉP MẠNH NHẤT</text>
+            <text x="52" y="146" style="font:500 12px 'Be Vietnam Pro',sans-serif;fill:var(--muted)">Fed 3,75–4,00% — vàng 0% lãi (v79–80)</text>
+          </a>
+          <!-- node 2: top right, neg -->
+          <a href="#kenh-2">
+            <rect x="874" y="70" width="340" height="96" rx="14" class="cluster-card"/>
+            <rect x="874" y="70" width="6" height="96" rx="3" style="fill:var(--neg)"/>
+            <text x="896" y="100" class="g-title">USD mạnh</text>
+            <text x="896" y="124" style="font:700 11.5px 'Be Vietnam Pro',sans-serif;fill:var(--neg)">NGƯỢC</text>
+            <text x="896" y="146" style="font:500 12px 'Be Vietnam Pro',sans-serif;fill:var(--muted)">Vàng đắt hơn với người mua ngoài Mỹ (v62)</text>
+          </a>
+          <!-- node 4: middle left, mix -->
+          <a href="#kenh-3">
+            <rect x="30" y="352" width="340" height="96" rx="14" class="cluster-card"/>
+            <rect x="30" y="352" width="6" height="96" rx="3" style="fill:var(--mix)"/>
+            <text x="52" y="382" class="g-title">Nhân sự &amp; độc lập Fed</text>
+            <text x="52" y="406" style="font:700 11.5px 'Be Vietnam Pro',sans-serif;fill:var(--mix)">HAI CHIỀU · BIÊN ĐỘ SỰ KIỆN LỚN NHẤT</text>
+            <text x="52" y="428" style="font:500 12px 'Be Vietnam Pro',sans-serif;fill:var(--muted)">Tin Warsh từng làm vàng rơi ~500 USD (v44)</text>
+          </a>
+          <!-- node 5: middle right, pos -->
+          <a href="#kenh-5">
+            <rect x="874" y="352" width="340" height="96" rx="14" class="cluster-card"/>
+            <rect x="874" y="352" width="6" height="96" rx="3" style="fill:var(--pos)"/>
+            <text x="896" y="382" class="g-title">NHTW gom vàng · phi đô la hóa</text>
+            <text x="896" y="406" style="font:700 11.5px 'Be Vietnam Pro',sans-serif;fill:var(--pos)">THUẬN · CẤU TRÚC DÀI HẠN</text>
+            <text x="896" y="428" style="font:500 12px 'Be Vietnam Pro',sans-serif;fill:var(--muted)">~1.000 tấn/năm — lực đỡ “sàn” của giá (v9)</text>
+          </a>
+          <!-- node 6: bottom left, neg -->
+          <a href="#kenh-6">
+            <rect x="30" y="634" width="340" height="96" rx="14" class="cluster-card"/>
+            <rect x="30" y="634" width="6" height="96" rx="3" style="fill:var(--neg)"/>
+            <text x="52" y="664" class="g-title">Cạnh tranh vốn</text>
+            <text x="52" y="688" style="font:700 11.5px 'Be Vietnam Pro',sans-serif;fill:var(--neg)">NGƯỢC</text>
+            <text x="52" y="710" style="font:500 12px 'Be Vietnam Pro',sans-serif;fill:var(--muted)">T-Bill 4–5% · trái phiếu AI 8–9% · vàng 0% (v81)</text>
+          </a>
+          <!-- node 7: bottom right, neg -->
+          <a href="#kenh-7">
+            <rect x="874" y="634" width="340" height="96" rx="14" class="cluster-card"/>
+            <rect x="874" y="634" width="6" height="96" rx="3" style="fill:var(--neg)"/>
+            <text x="896" y="664" class="g-title">Thanh lý đòn bẩy trong cú sốc</text>
+            <text x="896" y="688" style="font:700 11.5px 'Be Vietnam Pro',sans-serif;fill:var(--neg)">NGƯỢC · NGẮN HẠN</text>
+            <text x="896" y="710" style="font:500 12px 'Be Vietnam Pro',sans-serif;fill:var(--muted)">Vay mua ở đỉnh buộc phải bán ra (v62, 79)</text>
+          </a>
+        </svg>
+        <p class="map-hint">Trên màn hình nhỏ, danh sách đầy đủ kèm cơ chế và dấu hiệu theo dõi nằm ở mục “Mục lục yếu tố” phía dưới.</p>
+        <div class="legend" aria-hidden="true">
+          <span><i class="sw" style="border-color:var(--pos)"></i> Lực nâng đỡ</span>
+          <span><i class="sw" style="border-color:var(--neg)"></i> Lực đè nặng</span>
+          <span><i class="sw" style="border-color:var(--mix)"></i> Hai chiều / tùy điều kiện</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= BALANCE ================= -->
+    <section class="block" aria-labelledby="bal-h">
+      <h2 class="sec" id="bal-h"><span class="tag">Cán cân</span> Lực nào đang thắng thế?</h2>
+      <div class="card balance">
+        <p>
+          <strong>Ngắn hạn, phe ép đang thắng rõ rệt:</strong> 4 trong 7 kênh đang đè lên giá — chi phí cơ hội, USD mạnh,
+          cạnh tranh vốn và thanh lý đòn bẩy. Lực nâng đỡ duy nhất là dòng mua cơ cấu của ngân hàng trung ương,
+          một lực <strong>dài hạn và chậm</strong>: nó đỡ xu hướng nhiều năm chứ không cản được một nhịp rơi theo lãi suất.
+          Bằng chứng rõ nhất là sự kiện 20/11/2026: giá spot về <strong>3.539,64 USD/ounce</strong> (giảm ~2,4% trong ngày, ~9% trong tuần,
+          thấp nhất 14 tháng), <strong>đã thủng mốc “sàn ~3.800”</strong> được nêu ở video 79 — sàn đó là “cấu trúc” chứ không phải mốc kỹ thuật tuyệt đối,
+          và nó không giữ được khi kỳ vọng Fed tăng lãi cùng USD vọt lên, đúng kênh chi phí cơ hội trong khung phân tích này.
+          Hai kênh hai chiều (nhân sự Fed, dầu/Hormuz) là phần có thể lật cán cân nhanh nhất theo cả hai phía.
+        </p>
+        <div class="bar" role="img" aria-label="Cán cân 7 kênh truyền dẫn: 4 kênh ngược, 2 kênh hai chiều, 1 kênh thuận">
+          <i class="b-neg" style="width:57%"></i><i class="b-mix" style="width:29%"></i><i class="b-pos" style="width:14%"></i>
+        </div>
+        <div class="cap">
+          <span>Ngược: 4 kênh</span><span>Hai chiều: 2 kênh</span><span>Thuận: 1 kênh (cấu trúc dài hạn)</span><span>Đỉnh chu kỳ ~5.336,60 USD/oz (đầu 2026) → nay ≈ −34%</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TIMELINE / CONTEXT ================= -->
+    <section class="block" aria-labelledby="ctx-h">
+      <h2 class="sec" id="ctx-h"><span class="tag">Bối cảnh</span> Giá vàng &amp; dự báo trong loạt video — và thực tế 20/11/2026</h2>
+      <p class="sec-sub">Đọc theo thứ tự thời gian, quan điểm trong loạt bài dịch chuyển cùng thị trường — không phải “nói hai lời”: khi biến quyết định là bất an thể chế, loạt bài nghiêng lên 6.000–7.000; khi biến quyết định đổi thành lãi suất/chi phí cơ hội, loạt bài nghiêng xuống sàn 3.800. Bài học rút ra: <strong>đừng trích một mức giá đơn lẻ làm “mục tiêu” — phải trích kèm điều kiện đi cùng mức giá đó</strong>. Dòng cuối là thực tế thị trường, không phải nội dung từ loạt video.</p>
+      <div class="card timeline">
+        <div class="trow">
+          <span class="d">Video 9</span>
+          <span class="e"><b>Giai đoạn tăng:</b> vàng ~<b>3.382 USD/ounce</b> (so ~1.000–1.200 năm 2016). Lực đẩy: NHTW mua ~1.000 tấn/năm, địa chính trị, thương chiến, kỳ vọng Fed giảm lãi. Hai biến phải theo dõi: nhịp mua của NHTW và diễn biến thuế quan.</span>
+          <span class="st open">Ghi nhận trong video</span>
+        </div>
+        <div class="trow">
+          <span class="d">Video 22</span>
+          <span class="e"><b>Dự báo giữ vững:</b> vàng “không sụp” ít nhất <b>2–3 năm tới</b> — chừng nào bất an còn và NHTW còn mua, giá chỉ lên xuống theo thị trường.</span>
+          <span class="st">Dự báo</span>
+        </div>
+        <div class="trow">
+          <span class="d">Video 44</span>
+          <span class="e"><b>Đỉnh &amp; cú rơi nhân sự Fed (đầu 2/2026):</b> vàng ở vùng <b>trên 5.000 USD/ounce</b> sau khi tăng gấp đôi trong hơn một năm; có đợt <b>rơi ~500 USD/ounce trong 1–2 ngày</b> khi có tin bổ nhiệm Kevin Warsh (hawkish) thay Powell — rồi bật lại trên 5.000.</span>
+          <span class="st open">Ghi nhận trong video</span>
+        </div>
+        <div class="trow">
+          <span class="d">Video 44–45</span>
+          <span class="e"><b>Dự báo vùng đỉnh:</b> nếu khuấy động (thuế quan, chiến tranh, tấn công Fed) tiếp diễn, vàng giữ ~5.000 và có thể lên <b>6.000–7.000 USD</b>; nếu mọi chuyện êm lại, vàng đi xuống; <b>xuống 3.000 USD thì khó xảy ra trong 2026–27</b>.</span>
+          <span class="st">Dự báo có điều kiện</span>
+        </div>
+        <div class="trow">
+          <span class="d">Video 54</span>
+          <span class="e"><b>Chuyển sang phòng thủ:</b> vàng chỉ còn hợp để phòng thủ. Ước lượng được nêu: rớt nhiều lắm <b>~10%</b>, lên có thể <b>10–20%</b> nhờ NHTW còn mua. Người nhảy vào gần đỉnh vì FOMO là người lỗ nhiều nhất.</span>
+          <span class="st">Đánh giá / dự báo</span>
+        </div>
+        <div class="trow">
+          <span class="d">Video 58</span>
+          <span class="e"><b>Sau thượng đỉnh Mỹ–Trung 5/2026:</b> vàng giữ vùng <b>4.200–4.400</b> nhưng <b>hết động lực tăng</b> — dòng tiền xoay sang tài sản rủi ro khi chứng khoán toàn cầu lên và USD giảm.</span>
+          <span class="st open">Ghi nhận + dự báo trong video</span>
+        </div>
+        <div class="trow">
+          <span class="d">Video 62</span>
+          <span class="e"><b>Lao dốc (nói ngày 12/6):</b> vàng ~<b>4.200 USD/ounce</b>. Video dẫn dự báo các ngân hàng (đưa ra trước đó 3–4 tháng, phụ thuộc hoàn toàn vào địa chính trị/lạm phát/lãi suất): <b>Citi</b> ~5.000 · <b>JPMorgan</b> ~6.000 · <b>Goldman Sachs</b> ~5.400 · <b>UBS</b> ~5.900–6.000 USD/ounce trong 6–12 tháng.</span>
+          <span class="st">Dự báo bên thứ ba</span>
+        </div>
+        <div class="trow">
+          <span class="d">Video 79</span>
+          <span class="e"><b>Sập từ đỉnh:</b> đỉnh <b>5.500–5.600 USD/ounce (tháng 1/2026)</b> rồi sập gần 1.000 USD xuống ~<b>4.100–4.165</b> — dù chiến tranh và lạm phát vẫn còn, chỉ vì Fed tăng lãi làm chi phí cơ hội quá đắt. <b>Sàn cứng được nêu ~3.800 USD/ounce</b> nhờ lực mua NHTW.</span>
+          <span class="st open">Ghi nhận trong video</span>
+        </div>
+        <div class="trow">
+          <span class="d">Video 80</span>
+          <span class="e"><b>Chưa chạm đáy:</b> vàng ~4.100, đáy được nêu ~3.800 và <b>chưa chạm đáy</b>; Fed tăng thêm 1–2 lần nữa thì vàng còn sụt vì chi phí cơ hội. Vàng khó quay lại mức “điên rồ” đầu năm.</span>
+          <span class="st">Ghi nhận + dự báo trong video</span>
+        </div>
+        <div class="trow">
+          <span class="d">20/11/2026</span>
+          <span class="e"><b>Thực tế thị trường:</b> vàng spot <b>3.539,64 USD/ounce</b> — giảm ~2,4% trong ngày, ~9% trong tuần, thấp nhất 14 tháng. <b>Đã thủng mốc “sàn ~3.800” của video 79</b> khoảng 260 USD. Nguyên nhân báo chí nêu: kỳ vọng Fed tăng lãi và USD vọt — đúng kênh chi phí cơ hội/USD trong khung phân tích này. Đỉnh chu kỳ ~5.336,60 (đầu 2026) → nay ≈ −34%.</span>
+          <span class="st hot">Thực tế · đã thủng sàn</span>
+        </div>
+      </div>
+      <p class="chart-note">Lưu ý nguồn: mức đỉnh giữa các video không khớp nhau tuyệt đối (video 72 nói “từng lên ~5.000”, video 79 nói đỉnh 5.500–5.600); giá “hiện tại” trong video 79 được nói cả 4.165 lẫn ~4.100. Bản đồ giữ nguyên cách nêu của từng video, không tự hợp nhất — chi tiết ở bản tổng hợp đi kèm.</p>
+    </section>
+
+    <!-- ================= INDEX + DETAILS ================= -->
+    <section class="block" aria-labelledby="idx-h">
+      <h2 class="sec" id="idx-h"><span class="tag">Mục lục</span> 7 kênh truyền dẫn — cơ chế, dấu hiệu theo dõi, video nguồn</h2>
+      <p class="sec-sub">Phần “cơ chế” được diễn lại ý từ nội dung các video; mỗi thẻ ghi rõ video nguồn để tra cứu trong bản tổng hợp.</p>
+      <div class="index-grid">
+        <div class="card igroup">
+          <h3>Nhóm đang ép xuống <span class="net" style="color:var(--neg)">4 kênh</span></h3>
+          <div class="irow"><span class="glyph" style="background:var(--neg-soft);color:var(--neg)">↓</span><span><span class="t">Lãi suất thực &amp; chi phí cơ hội</span><br/><span class="m">Kênh ép mạnh nhất · video 54, 62, 79, 80</span></span></div>
+          <div class="irow"><span class="glyph" style="background:var(--neg-soft);color:var(--neg)">↓</span><span><span class="t">USD mạnh</span><br/><span class="m">Kênh định giá trực tiếp · video 49, 62</span></span></div>
+          <div class="irow"><span class="glyph" style="background:var(--neg-soft);color:var(--neg)">↓</span><span><span class="t">Cạnh tranh vốn: T-Bill &amp; AI</span><br/><span class="m">An toàn 4–5% · trái phiếu AI 8–9% · video 58, 81</span></span></div>
+          <div class="irow"><span class="glyph" style="background:var(--neg-soft);color:var(--neg)">↓</span><span><span class="t">Thanh lý đòn bẩy trong cú sốc</span><br/><span class="m">Ngắn hạn, theo cú sốc · video 54, 62, 79</span></span></div>
+        </div>
+        <div class="card igroup">
+          <h3>Hai chiều &amp; nâng đỡ <span class="net" style="color:var(--mix)">2 hai chiều · 1 thuận</span></h3>
+          <div class="irow"><span class="glyph" style="background:var(--mix-soft);color:var(--mix)">↕</span><span><span class="t">Nhân sự &amp; độc lập Fed</span><br/><span class="m">Biên độ sự kiện lớn nhất · video 42, 44, 45</span></span></div>
+          <div class="irow"><span class="glyph" style="background:var(--mix-soft);color:var(--mix)">↕</span><span><span class="t">Chiến tranh – dầu – Hormuz</span><br/><span class="m">Trú ẩn có điều kiện · video 49, 50, 62</span></span></div>
+          <div class="irow"><span class="glyph" style="background:var(--pos-soft);color:var(--pos)">↑</span><span><span class="t">NHTW gom vàng &amp; phi đô la hóa</span><br/><span class="m">Lực đỡ cấu trúc dài hạn · video 9, 22, 44, 62</span></span></div>
+        </div>
+      </div>
+
+      <div class="card detail" id="kenh-1">
+        <div class="d-head"><span class="badge neg">↓ Ngược · đang thắng thế</span><span class="badge plain">Mức tác động: Cao</span></div>
+        <h3>1 · Lãi suất thực &amp; chi phí cơ hội — kênh ép vàng mạnh nhất</h3>
+        <p class="desc"><b>Cơ chế (theo loạt video):</b> Vàng không trả lãi, cổ tức hay lợi nhuận. Khi Fed tăng lãi, USD đắt hơn và trái phiếu/cổ phiếu trả lãi cao thành lựa chọn thay thế — giữ vàng là tự bỏ mất khoản lợi đó. Đợt sập ~1.000 USD từ đỉnh tháng 1/2026 diễn ra <em>dù chiến tranh và lạm phát vẫn còn</em>, chỉ vì chi phí cơ hội trở nên quá đắt (video 79, 80). Chỉ một tuyên bố “kỳ này không giảm lãi” của Fed cũng đủ làm vàng giảm, và nhà đầu tư dùng đòn bẩy phải bán để trả lãi (video 54, 62).</p>
+        <p class="src"><b>Dấu hiệu theo dõi:</b> lãi suất thực của Mỹ, lợi suất T-Bill/trái phiếu ngắn hạn, kỳ vọng đường lãi suất Fed. <b>Video nguồn:</b> 54, 62, 79, 80.</p>
+      </div>
+
+      <div class="card detail" id="kenh-2">
+        <div class="d-head"><span class="badge neg">↓ Ngược</span><span class="badge plain">Mức tác động: Cao</span></div>
+        <h3>2 · USD mạnh/yếu — kênh định giá trực tiếp</h3>
+        <p class="desc"><b>Cơ chế (theo loạt video):</b> Vàng định giá bằng USD nên nằm trong tam giác: lạm phát tăng → lãi suất tăng → USD lên giá → vàng đắt hơn với người mua ngoài Mỹ → cầu giảm, giá giảm (video 62). Nhưng quan hệ không máy móc: trong chiến tranh, USD <em>tăng</em> giá vì nhà đầu tư tin trở lại mà vàng vẫn lập đỉnh mới nhờ ngân hàng trung ương mua (video 49) — khi động cơ mua là thể chế/dự trữ, kênh USD có thể bị kênh ngân hàng trung ương lấn át.</p>
+        <p class="src"><b>Dấu hiệu theo dõi:</b> chỉ số USD (DXY), lợi suất trái phiếu 10 năm; phân biệt “chế độ đầu tư tài chính” với “chế độ dự trữ thể chế”. <b>Video nguồn:</b> 44, 49, 62.</p>
+      </div>
+
+      <div class="card detail" id="kenh-3">
+        <div class="d-head"><span class="badge mix">↕ Hai chiều</span><span class="badge plain">Mức tác động: Cao · biên độ sự kiện lớn nhất</span></div>
+        <h3>3 · Nhân sự &amp; độc lập Fed — kênh sự kiện hai chiều</h3>
+        <p class="desc"><b>Cơ chế (theo loạt video):</b> Chỉ riêng tin bổ nhiệm Kevin Warsh (bị coi là bảo thủ/hawkish) làm chủ tịch Fed đã khiến vàng <b>rơi ~500 USD/ounce trong 1–2 ngày</b> rồi bật lại, vì thị trường suy ra USD sẽ không mất giá mạnh và lãi không giảm nhanh (video 44). Ở chiều ngược lại, nỗi lo Fed bị chính trị hóa (chiếm đa số 4/7 ghế thống đốc, hạ lãi nhân tạo) là chất xúc tác tăng mạnh nhất cho vàng trong khung phân tích này — vàng tăng chính là dấu hiệu thế giới phòng thủ trước rủi ro này (video 42, 44).</p>
+        <p class="src"><b>Dấu hiệu theo dõi:</b> các mốc bổ nhiệm chủ tịch Fed, diễn biến vụ Powell/Cook, cán cân ghế thống đốc; không ra quyết định lớn ngay trong nhịp phản ứng đầu tiên (vàng đã bật lại sau cú rơi Warsh). <b>Video nguồn:</b> 42, 44, 45.</p>
+      </div>
+
+      <div class="card detail" id="kenh-4">
+        <div class="d-head"><span class="badge mix">↕ Hai chiều · đang nguội dần</span><span class="badge plain">Mức tác động: Trung bình</span></div>
+        <h3>4 · Chiến tranh, dầu, Hormuz — kênh trú ẩn có điều kiện</h3>
+        <p class="desc"><b>Cơ chế (theo loạt video):</b> “Chiến tranh → mua vàng” là phản xạ không đáng tin trong khung phân tích này. Chuỗi đúng là: chiến tranh → dầu → lạm phát → phản ứng của Fed → vàng. Dầu tắc ở Hormuz đáng lẽ đẩy vàng lên, nhưng lạm phát Mỹ vọt (4,2% ở video 62) khiến Fed có thể tăng lãi lại, USD mạnh lên và vàng bị bán — <em>kênh lãi suất thắng kênh trú ẩn</em>. Ngưỡng được nêu trong loạt video: dầu 100–110 USD kéo dài trên 6 tháng → lạm phát Mỹ cộng thêm ~0,2 đến ~1 điểm % (video 49, 50). Hiện dầu đang nguội, rời mốc 100 USD, nên áp lực lạm phát qua kênh này đang giảm bớt.</p>
+        <p class="src"><b>Dấu hiệu theo dõi:</b> giá Brent so với các ngưỡng 72 / 92 / 100–110 USD và thời gian dầu ở trên 100 USD. <b>Video nguồn:</b> 9, 44, 49, 50, 62.</p>
+      </div>
+
+      <div class="card detail" id="kenh-5">
+        <div class="d-head"><span class="badge pos">↑ Thuận · cấu trúc dài hạn</span><span class="badge plain">Mức tác động: Cao (dài hạn)</span></div>
+        <h3>5 · Ngân hàng trung ương gom vàng &amp; phi đô la hóa — kênh sàn dài hạn</h3>
+        <p class="desc"><b>Cơ chế (theo loạt video):</b> Đây là lực mua cơ cấu bền nhất: ~<b>1.000 tấn/năm</b> trong 5 năm gần đây, gấp đôi trước đó, động cơ là phòng phong tỏa kiểu Nga qua SWIFT và giảm phụ thuộc USD (video 9, 22). Trung Quốc mua chia nhỏ từng đợt khi giá xuống và “còn phải mua dài dài” (video 62). Chính lực mua này, theo loạt video, là yếu tố tạo “sàn cứng” ~3.800 USD/ounce ở video 79. <b>Lưu ý trung thực:</b> thực tế 20/11/2026 giá đã thủng sàn đó — sàn cấu trúc là lực đỡ theo xu hướng nhiều năm, không phải mốc kỹ thuật không thể vỡ trong một nhịp rơi.</p>
+        <p class="src"><b>Dấu hiệu theo dõi:</b> nhịp mua của NHTW còn ở ~1.000 tấn/năm hay chậm lại rõ rệt — đây là biến phân biệt “chỉnh đốn trong xu hướng trú ẩn” với “xu hướng trú ẩn đã kết thúc”. <b>Video nguồn:</b> 9, 22, 44, 62, 79.</p>
+      </div>
+
+      <div class="card detail" id="kenh-6">
+        <div class="d-head"><span class="badge neg">↓ Ngược</span><span class="badge plain">Mức tác động: Trung bình – Cao</span></div>
+        <h3>6 · Cạnh tranh vốn: lãi an toàn &amp; chứng khoán/AI — kênh hút tiền ra khỏi vàng</h3>
+        <p class="desc"><b>Cơ chế (theo loạt video):</b> Nhà đầu tư luôn đứng trước cùng một câu hỏi chi phí cơ hội (video 81): T-Bill và trái phiếu big tech trả ~<b>4–5%</b>, trái phiếu AI mới phát hành trả <b>8–9%</b> — trong khi vàng trả 0%. Khi thị trường sợ, đối thủ của vàng là T-Bill/USD; khi thị trường tham (risk-on), đối thủ là chứng khoán/AI: sau thượng đỉnh Mỹ–Trung, loạt video dự báo dòng tiền không còn đổ vào vàng mà xoay sang tài sản rủi ro, vàng giữ 4.200–4.400 nhưng hết động lực tăng (video 58). Vàng chỉ “thắng thế” khi cả hai đối thủ cùng kém hấp dẫn, hoặc khi động cơ mua là thể chế.</p>
+        <p class="src"><b>Dấu hiệu theo dõi:</b> lợi suất T-Bill, lợi suất trái phiếu AI/công nghệ, nhịp xoay vòng tiền sau các sự kiện thư giãn địa chính trị. <b>Video nguồn:</b> 37, 58, 81.</p>
+      </div>
+
+      <div class="card detail" id="kenh-7">
+        <div class="d-head"><span class="badge neg">↓ Ngược · ngắn hạn</span><span class="badge plain">Mức tác động: Trung bình (theo cú sốc)</span></div>
+        <h3>7 · Đòn bẩy &amp; thanh lý dây chuyền — kênh làm vàng rơi cùng tài sản rủi ro</h3>
+        <p class="desc"><b>Cơ chế (theo loạt video):</b> Trong đợt lao dốc ở video 62, ngoài tam giác lãi suất còn lực bán thứ hai: nhóm nhà đầu tư vay mượn đòn bẩy đã ôm vàng lúc giá cao — vàng nằm yên/sụt trong khi các khoản đầu tư khác cần tiền trả lãi/nợ, nên họ bán vàng để trang trải; bán theo thuật toán càng khuếch đại đà xuống. Video 79 nhắc lại: người mua ở đỉnh bằng tiền vay buộc phải bán vì vàng không sinh lãi để trả nợ. Hệ quả: trong cú sốc thanh khoản, vàng bị bán <em>vì bán được</em>, không phải vì luận điểm trú ẩn sai.</p>
+        <p class="src"><b>Dấu hiệu theo dõi:</b> tốc độ rơi kèm khối lượng tăng vọt trong các phiên sốc; đợt rơi sâu đầu tiên thường là nhịp thanh lý kỹ thuật — đánh giá luận điểm trú ẩn phải chờ nhịp đó qua. <b>Video nguồn:</b> 54, 62, 79.</p>
+      </div>
+    </section>
+
+    <!-- ================= UNKNOWNS ================= -->
+    <section class="block" aria-labelledby="unk-h">
+      <h2 class="sec" id="unk-h"><span class="tag">Ẩn số</span> 6 ẩn số: biết chắc sẽ tác động — chưa biết sẽ ngã về phía nào</h2>
+      <p class="sec-sub">Đây là các biến mà khung phân tích này xác định là quyết định, nhưng chiều và cường độ chưa xác định được ở thời điểm 20/11/2026.</p>
+      <div class="unk-grid">
+        <div class="ucard">
+          <p class="q">?</p>
+          <h3>Nhịp gom của NHTW có duy trì ~1.000 tấn/năm?</h3>
+          <p>Đây là biến phân biệt “đợt chỉnh đốn trong xu hướng trú ẩn còn nguyên” với “xu hướng trú ẩn đã kết thúc”. Nếu nhịp mua chậm lại rõ rệt, toàn bộ luận điểm “sàn cấu trúc” phải hạ kỳ vọng.</p>
+          <p class="when">Rõ dần qua <b>số liệu mua vàng của NHTW (WGC)</b> hằng quý.</p>
+        </div>
+        <div class="ucard">
+          <p class="q">?</p>
+          <h3>Fed tăng lãi thêm bao nhiêu lần nữa?</h3>
+          <p>Theo video 80, Fed tăng thêm 1–2 lần nữa thì vàng còn sụt vì chi phí cơ hội. Ngược lại, thất nghiệp chạm 4,5–5% là công tắc buộc Fed dừng/giảm (video 76) — điểm đảo chiều cho áp lực lên vàng.</p>
+          <p class="when">Rõ dần qua <b>FOMC tháng 12/2026</b> và các kỳ họp tiếp theo.</p>
+        </div>
+        <div class="ucard">
+          <p class="q">?</p>
+          <h3>USD và lợi suất 10 năm đi tới đâu?</h3>
+          <p>Lợi suất dài hạn là thước đo chi phí cơ hội thực tế của việc giữ vàng; còn nếu lợi suất 10 năm tăng vọt vì <em>bán tháo trái phiếu</em>, đó lại là tín hiệu “đường đỏ” của kịch bản mất niềm tin USD — hai chiều ngược hẳn nhau.</p>
+          <p class="when">Theo dõi <b>liên tục</b>, đối chiếu từng kỳ CPI/việc làm Mỹ.</p>
+        </div>
+        <div class="ucard">
+          <p class="q">?</p>
+          <h3>Dầu có bùng lại qua Hormuz?</h3>
+          <p>Dầu đang nguội là một lý do áp lực lạm phát giảm. Nhưng nếu dầu trở lại vùng 100–110 USD và giữ trên 6 tháng, bài toán đổi hẳn: lạm phát cộng thêm ~0,2–1 điểm % và Fed bị kẹt (video 49, 50).</p>
+          <p class="when">Mốc gần nhất: <b>họp OPEC+ 29/11/2026</b> và diễn biến Hormuz.</p>
+        </div>
+        <div class="ucard">
+          <p class="q">?</p>
+          <h3>Cú sốc quanh Nvidia/AI có lan thành risk-off diện rộng?</h3>
+          <p>Nếu nhóm AI/chứng khoán bị bán tháo diện rộng, kênh thanh lý đòn bẩy (kênh 7) có thể kéo vàng rơi cùng tài sản rủi ro trong nhịp đầu — dù luận điểm trú ẩn không đổi. Lưu ý: các nghi vấn liên quan trong video 84–85 <em>chưa có bằng chứng kết án</em> theo chính nội dung các video đó.</p>
+          <p class="when">Rõ dần qua <b>diễn biến thị trường AI/bán dẫn</b> các tuần tới.</p>
+        </div>
+        <div class="ucard">
+          <p class="q">?</p>
+          <h3>Mốc tâm lý sau khi thủng 3.800 là gì?</h3>
+          <p>“Sàn cứng” của video 79 đã vỡ ngày 20/11/2026 (spot 3.539,64). Câu hỏi thực tế: lực mua của NHTW và nhà đầu tư dài hạn có xuất hiện ở vùng giá thấp hơn này hay không, và ở nhịp nào.</p>
+          <p class="when">Quan sát <b>các tuần sau 20/11/2026</b> và số liệu mua vào của NHTW.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= UPCOMING ================= -->
+    <section class="block" aria-labelledby="tl-h">
+      <h2 class="sec" id="tl-h"><span class="tag">Sắp tới</span> Các mốc sẽ làm rõ dần các ẩn số</h2>
+      <div class="card timeline">
+        <div class="trow">
+          <span class="d">29/11/2026</span>
+          <span class="e"><b>Họp OPEC+</b> — quyết định sản lượng dầu, biến đầu vào của chuỗi dầu → lạm phát → Fed → vàng (kênh 4).</span>
+          <span class="st hot">Gần nhất</span>
+        </div>
+        <div class="trow">
+          <span class="d">12/2026</span>
+          <span class="e"><b>FOMC tháng 12</b> — quyết định lãi suất và tín hiệu đường lãi 2027: biến chi phối kênh chi phí cơ hội (kênh 1) và cạnh tranh vốn (kênh 6).</span>
+          <span class="st hot">Quyết định</span>
+        </div>
+        <div class="trow">
+          <span class="d">Hằng tháng</span>
+          <span class="e"><b>CPI &amp; việc làm Mỹ</b> — CPI là biến có thể hủy hoặc mở kịch bản cắt lãi; thất nghiệp chạm 4,5–5% là công tắc đảo chiều áp lực lên vàng (video 76).</span>
+          <span class="st open">Định kỳ</span>
+        </div>
+        <div class="trow">
+          <span class="d">Hằng quý</span>
+          <span class="e"><b>Số liệu mua vàng của ngân hàng trung ương (WGC)</b> — kiểm chứng nhịp ~1.000 tấn/năm: chỉ báo nền quan trọng nhất của kế hoạch vàng dài hạn (kênh 5).</span>
+          <span class="st open">Định kỳ</span>
+        </div>
+        <div class="trow">
+          <span class="d">Liên tục</span>
+          <span class="e"><b>Lợi suất trái phiếu Mỹ 10 năm &amp; T-Bill ngắn hạn</b> — thước đo chi phí cơ hội thực tế (an toàn 4–5%, trái phiếu AI 8–9% — video 81); tăng vọt vì bán tháo là tín hiệu “đường đỏ” của kịch bản D.</span>
+          <span class="st open">Theo dõi</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SCENARIOS ================= -->
+    <section class="block" aria-labelledby="sc-h">
+      <h2 class="sec" id="sc-h"><span class="tag">Kịch bản</span> Bốn kịch bản vĩ mô — hàm ý riêng cho vàng</h2>
+      <p class="sec-sub">Bốn kịch bản dùng lại khung A–D của bản tổng hợp crypto (điều kiện và dấu hiệu theo nội dung các video). Phần <strong>hàm ý cho vàng là của người biên soạn</strong>, dựng từ cơ chế giá vàng trong loạt video ở mục “Mục lục” — không phải lời khuyên mua/bán.</p>
+      <div class="scen-grid">
+        <article class="card scen mid">
+          <h3>Kịch bản A — Cơ sở</h3>
+          <p class="zone">“Lãi cao lâu hơn” · vàng bị ép dai dẳng</p>
+          <p><b>Điều kiện:</b> Lạm phát lõi kẹt ~3,4–3,7%, Fed giữ lãi 3,5–4% hoặc tăng thêm 1–2 lần rồi dừng; USD mạnh; Fed giữ độc lập. Đây là trạng thái chiếm phần lớn các video từ 62 trở đi — và là trạng thái thị trường đang ở tại 20/11/2026.</p>
+          <p><b>Hàm ý cho vàng (người biên soạn):</b> Kịch bản ép vàng dai dẳng nhất trong ngắn hạn: chi phí cơ hội 4–5% đánh vào vàng mỗi ngày, đúng mẫu hình video 79–80. Nhưng luận điểm trú ẩn dài hạn không mất hiệu lực vì lực mua thể chế vẫn chạy. Môi trường này hợp với “giữ vị thế phòng thủ ở cỡ bảo hiểm, mua rải khi giá bị ép” hơn là thoát hàng hay đuổi lợi nhuận.</p>
+        </article>
+        <article class="card scen mid">
+          <h3>Kịch bản B — Thuận thanh khoản</h3>
+          <p class="zone">Hai lực ngược nhau · đỡ ép nhưng khó dẫn sóng</p>
+          <p><b>Điều kiện:</b> Chiến tranh Iran/Hormuz đàm phán xong, dầu rơi khỏi 100 USD hướng về 40–50; lạm phát về 2–2,5% (hoặc ~2,7% trong 6–12 tháng); Fed quay lại cắt lãi; hoặc biến thể thư giãn sau thượng đỉnh Mỹ–Trung (video 58).</p>
+          <p><b>Hàm ý cho vàng (người biên soạn):</b> Lực thuận theo cơ chế cổ điển: Fed cắt lãi → USD yếu → vàng lên (nền của dự báo JPMorgan ~6.000 ở video 62). Lực nghịch theo quan sát trong chính video 58: khi thị trường thư giãn, dòng tiền xoay <em>ra khỏi</em> vàng sang tài sản rủi ro — vàng giữ giá nhưng hết động lực tăng. Kết luận: B là kịch bản vàng đỡ bị ép và có thể hồi, không phải kịch bản vàng dẫn sóng.</p>
+        </article>
+        <article class="card scen mid">
+          <h3>Kịch bản C — Đình lạm</h3>
+          <p class="zone">Hai nhịp · bị bán trước, hưởng lợi sau</p>
+          <p><b>Điều kiện:</b> Lạm phát phía cung (dầu/Hormuz, capex AI, thuế quan bền vững theo luật) khiến lãi suất là “thuốc không đúng bệnh”; dầu giữ 100–110 USD trên 6 tháng; Fed tăng lãi liên tiếp kèm GDP Mỹ trượt về 1–1,5%.</p>
+          <p><b>Hàm ý cho vàng (người biên soạn):</b> Nhịp một — Fed còn tăng được và USD còn mạnh: vàng bị bán như video 62/79, cộng nguy cơ thanh lý dây chuyền; lạm phát cao <em>không</em> cứu vàng trong nhịp này. Nhịp hai — chỉ khi thị trường kết luận Fed không trị nổi lạm phát hoặc thắt chặt làm gãy tăng trưởng/tín dụng, vàng mới phát huy vai trò phòng thủ lạm phát cổ điển. Vị thế phải sống sót qua nhịp một mới tới được nhịp hai.</p>
+        </article>
+        <article class="card scen good">
+          <h3>Kịch bản D — Sốc đuôi</h3>
+          <p class="zone">Mất niềm tin USD · vàng hưởng lợi nhất</p>
+          <p><b>Điều kiện:</b> Hành pháp chiếm được Fed (đa số 4/7 ghế bị chính trị hóa, hạ lãi nhân tạo — video 42), hoặc thế giới ngừng tin trái phiếu/USD. Loạt video nhấn mạnh <b>hiện chưa có dấu hiệu nào</b> (video 73), chân trời 10–20 năm (video 72).</p>
+          <p><b>Hàm ý cho vàng (người biên soạn):</b> Kịch bản vàng hưởng lợi rõ nhất trong cả bốn — bối cảnh của dự báo 6.000–7.000 USD ở video 44, và là kịch bản toàn bộ lực mua thể chế đang phòng thủ. Hai lưu ý bắt buộc: nhịp đầu của cú sốc vẫn có thể là bán tháo mọi tài sản thanh khoản gồm cả vàng để lấy tiền mặt; và đây là rủi ro đuôi dài hạn — định cỡ vị thế như bảo hiểm theo xác suất đuôi, không đặt cược toàn bộ kế hoạch vào nó.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= DISCIPLINE ================= -->
+    <section class="block" aria-labelledby="disc-h">
+      <h2 class="sec" id="disc-h"><span class="tag">Kỷ luật</span> Kỷ luật phân bổ — rút từ video 54 và xuyên suốt loạt bài</h2>
+      <div class="card">
+        <ul class="watch">
+          <li><b>Phòng thủ chứ không làm giàu.</b> “Không quốc gia nào giàu lên bằng mua bán vàng và bất động sản” (video 8, 9, 43–54, 62). Vàng để giữ giá trị và phòng rủi ro hệ thống; tỷ trọng vàng xuất phát từ câu hỏi “danh mục cần bao nhiêu bảo hiểm”, không từ kỳ vọng lợi nhuận.</li>
+          <li><b>Đường dài 20–30 năm, chứng khoán thắng vàng.</b> Phép so được lặp lại nhiều lần trong loạt bài: cùng một số tiền bỏ vào vàng và S&P 500 trong 20–25 năm thì chứng khoán thắng; vàng chỉ thắng ở khung ~5 năm biến động (video 9, 46, 54, 62). Đây là neo định cỡ quan trọng nhất trong khung này.</li>
+          <li><b>Giải ngân rải 10% theo thời gian.</b> Video 54 khuyên giải ngân rải <b>10%</b> theo thời gian và đa dạng hóa; ở video 62: người có tiền nhàn rỗi và kỷ luật thì mua từng mớ khi giá xuống, và nếu chỉ là chỉnh đốn tạm thời thì “án binh tại chỗ” — đừng di chuyển.</li>
+          <li><b>Chỉ dùng tiền nhàn rỗi, không vay mượn.</b> Công thức được chốt ở video 79: chỉ đầu tư vàng bằng tiền nhàn rỗi không vay mượn, đa dạng hóa giữa ngân hàng/chứng khoán/trái phiếu/vàng/bất động sản, tự quyết theo khung thời gian của mình.</li>
+          <li><b>Cấm FOMO và vay tiền mua gần đỉnh.</b> “Tối kỵ FOMO nhào vào ở giai đoạn cuối khi giá đã cao; không bao giờ vay tiền để mua vàng; không bỏ hết trứng vào một giỏ” (video 44). Người sốt ruột nhảy vào gần đỉnh là người lỗ nhiều nhất (video 54); FOMO mua đỉnh và hoảng bán trên đường xuống là hai sai lầm giết nhà đầu tư (video 62).</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= SOURCES ================= -->
+    <footer class="page">
+      <h2>Nguồn &amp; giới hạn của bản đồ</h2>
+      <p>
+        Trang này là <b>cách đọc và hiểu chủ quan của người biên soạn</b>, rút ra từ loạt <b>85 video kinh tế công khai trên YouTube</b>
+        (85 video dài + 6 Shorts), qua 18 lô tóm tắt và bản <span class="mono">TONG_HOP_VI_MO_CHO_KE_HOACH_VANG.md</span>;
+        <b>không phải quan điểm chính thức của tác giả loạt video và không dẫn lời trực tiếp</b>. Nội dung theo video được
+        <b>diễn lại ý từ transcript phụ đề tự động tiếng Việt của YouTube</b> —
+        phụ đề này sai chữ và sai số ở nhiều chỗ (tên riêng, thuật ngữ), các bản tóm tắt đã khôi phục theo mạch nói và đánh dấu chỗ nhiễu;
+        <b>mọi con số định dùng để ra quyết định đều cần đối chiếu nguồn gốc</b>. Mọi hàm ý cho kế hoạch vàng là suy luận của người biên soạn.
+      </p>
+      <p>
+        Số liệu giữa các video <b>đôi khi mâu thuẫn</b> và bản đồ giữ nguyên theo từng video, không tự hợp nhất: mức đỉnh 5.000 (video 72) so với
+        5.500–5.600 USD/ounce (video 79); giá “hiện tại” 4.165 so với ~4.100 trong cùng video 79; nhịp mua của ngân hàng trung ương ~1.000 tấn/năm (video 9)
+        so với con số Trung Quốc mua 700–800 tấn trong ~6 tháng (video 79); lạm phát Mỹ tháng 5 là 4,2% rồi 4,5% trong cùng video 62.
+        Dự báo trong loạt video cũng thay đổi theo trạng thái thị trường — khi dùng phải trích kèm điều kiện đi cùng.
+      </p>
+      <p>
+        Giá vàng tại <b>20/11/2026</b> (spot ~3.539,64 USD/ounce, −2,4% trong ngày, ~−9% trong tuần, thấp nhất 14 tháng; đỉnh chu kỳ ~5.336,60 USD/ounce khoảng đầu 2026)
+        là <b>số liệu thị trường từ báo chí tài chính</b>, không phải nội dung từ loạt video — và được ghi trung thực kể cả chi tiết bất lợi cho khung:
+        giá đã thủng mốc “sàn ~3.800” được nêu ở video 79.
+      </p>
+      <ul>
+        <li>Loạt video nguồn: 85 video dài + 6 Shorts về kinh tế thế giới, công khai trên YouTube.</li>
+        <li>Bản tổng hợp đi kèm: <span class="mono">TONG_HOP_VI_MO_CHO_KE_HOACH_VANG.md</span> (bản chị em: <span class="mono">TONG_HOP_VI_MO_CHO_KE_HOACH_CRYPTO.md</span>).</li>
+        <li>Giá vàng 20/11/2026 và diễn biến phiên: tổng hợp từ báo chí tài chính cùng ngày.</li>
+      </ul>
+      <p>
+        <b>Không phải lời khuyên đầu tư.</b> Loạt video luôn từ chối tư vấn mua/bán cho cá nhân (video 9, 44, 54, 62) — chỉ bóc tách các lực đẩy/kéo giá
+        và để mỗi người tự quyết theo tuổi tác, tài sản và khung thời gian của mình. Mọi “hàm ý cho kế hoạch vàng” trên trang này là <b>suy luận của người biên soạn</b>
+        từ khung phân tích trên, không phải khuyến nghị, và không thay thế lớp phân tích riêng (giá hiện tại, thuế, chi phí kênh nắm giữ, quản trị rủi ro) trước khi ra quyết định thực tế.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
