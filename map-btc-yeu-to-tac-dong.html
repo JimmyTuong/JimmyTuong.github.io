@@ -1,0 +1,1028 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAArbklEQVR42k27eZBl6Vne+fuWs91zl1xuZlZW1l5d1VXVrd5brVZLtASiG0ksEkICLMAxY5jBM3gCJiYwM4wxEY5xhB1hw58T2OEJDxgjsQ0IIRAeZLNIaGt1V9e+V+W+3v2e7Vvmj5Pdnoy4kREnM8/N833v97zP+zzPFR/92PcTBAFJkhDHCd3uEYQO6Xbn6Xa7SKlQUlNUOVVVYZ2j2WpxfGmRhcV5GklMFGq0UsI6q6SUVgjhy9LgvMN7f9Ia8z6l5LNKqeeCIJgVQpyXUrS9d94YI4xxGGMNiLedc5lS6mtSittKyb+VUt6QUhopJVprtFTaW+ss3nkPzlk8Amsd2bSgqiqiKCRphHgv+PYbl3nzO2/x1JNPsLi8xJvfeRvvPa1WE2stOssmDEcGIUCrgLt37yCEJ4pDojBhZmaexcUlTp48zcWLF2mkDQbDAb1en8FoyMrKsljszkmlpBVCGCEE3vuXnXOfsNZ90Hv/hHO+7b0FBN6XCCEAsNYJ5xzWOqrSaO/9szpQaB28X2uFEORKqdtKqW9IKf9ICPFl51whhUBLoZRU3qFcVRm8A6Ukxkicc1SVpSwM586eZWN9k7fevspLjYTZ2Rm2trZoNBbJsgzx/g+8gkAQ6AClBEKAEBJTGYqiREiBs54gjDhz5iyvvPIBnn76KbrdRXZ2d9Sj1VU7OzvLmdPHlhpJ4wfB/zdlWb5cVR5TWYw1FEXurDU+DCMRRQFCIKy1IopCpJQ4B8Y4wiBwOpBIKb33TlhrJYDWGiEEQoibgdK/Eyj1O1Jwo15sp6131jl8VlqmkynWObTSDAZDbt26yfLyUd546wpSWFZWjrO2ukYQBIzHE8TL738/Qii00kSBxjmH9RaJwDuPl5IwDEFAluUIoTi+cky8/5X3iw9/6FXXbLU69+7f/wUh+NljKytLSRJhjPHZtLJZUciiKMRkOhFxHNFIGiglEXjiKEIHgiDQGOMBSRSHSAFSynoT6h9455wDJN5LJRVaqUIr8dvSi38h8De9AuuRlcONRxMm44zKGiaTKbdv3eLq1WusHFuh3+8xneZsbW6iA817nnwG9eJ7P8iJE2dpz8zRbHcIkxQdRIRhTJI0MLYizwuEEGitCXSgsrJ0t2/f8Tdu3voxpeRvX7p44VPGuub+3oFNG02U1tLYUk6muRiORiLQmkaSYIxBSgjDkEArwkAhhSKKIoQEPEghkUrhnENrLbTWQkoptdZCKeWUlE5KEUjBs0qqn5R47b39OyGEkR4VaO29AOs8k8mU0jiuXbvGjatXmZ2dY3VtnSyb0kgTZmY6qJ//n3+Z555/nvPnz3P23DkWl47QaLRJWzPoICKOI8IgRmqF8ELjvPXeHm000s+Np9NfuvzWlflbt+6ax86fE81WS1pjRRgGSCkZ9IcYY0jimNFwCALCMEBJiVaCKAwPd5saH5xHSoE1hrIsa2yoDFVVHS6eFEIghVTeC2+FpKED/d0C8cMg3nLw0IGUUuE9CAHZNKPf67O+tgbe0Wm1cc5x9NgKRVGgfuZnf5ZmM6LbnWNxfo6V5SMsryxzZGkRhyDLSsIwEo1mS64cO26brdbrWTb90/Fw8GwrbdooarCxvae+/ca3xKVLF+jOz6GVQkgoywpjHPv7PfKqJFCaKA4JA4VWChkoPFAZQ1UZxtMMLzx4QZ4VgMBZh7GGQ3DFOkdZlsJYJ5VWXmlphVBHPPKnnPcjj/iawyOVlM46XxQFw8GI4aBPd36OdrvDfHeO+e48SmnUpz/z48RhRLuZEocBaZLQbiZ0Z+c5e+Y05x5/TLRbLdE/OHCra6s/j1S/dfTEqZZA2N7BnjroHwgVBOzv77PQnePF55+jKAu892TZlI2NbYaTKSqISOOYMNCHoAZSCkAwGGZsbe9z9/4jbt17wKA3ItAha+vrXL78NknSIMty9vcO2NjYYm93D+ccCCWs9VJI4YSQ0uO/T2t9Qkj5FY8rhEd6hNc6YDAYMJ6MaDXbGGvZ3tkGQP39//YfEOr6n4rjmDiKCUKFUpIoDMTsbFuePnXanTt//jeEVP/bnTv37cP791lcWFBPvucpOmmTW7duMM0yPv766zx+4TGMqzCVxTlHUZWMJ1MmWYkSnkBKkkYD6yxlaekPJtx/tMqtO3dY29hkY3Ob3e1d1tfXufz2ZeI4Zm1tnY3NTTY3t6jKkrm5OZRWmMoxneZUZSGc9ziPdd4976z9iPDi9xAi885JD955wfr6Gv1+j/n5ee7cuce9e3dRf++zP4lAkMQRYRASBAFSOoSQh53HOyn9bzSS+GeWl1eqI0dWVCNtyI31NcbjIY+fP8/Tzz7D6699Lx99/SPgLWEQEocx7XaLOEowlQEhiZOEKAqIk5iiKHm4us7D1XWy3PBwdZV79+8ivaeYZly7doUojtjb28MYw8rKCqdPn+Ts2dM0mynew2QypapKiqrEI8V0OpXeU1nrj1trv9s583sqkJlWgZRS+n6/z53bN9jc2CDPMjrtNtpYT7udkjRSglCBqAmLEEjw1jn3G0KInxFSmLQRBsdWlkiSkAuPn+dbb3yLr33j65xYWeHc2ZMc9A7odmdBgNaS/YMepsoJtEQHgiSOiaII7zwIUDqk1xvSH48YjwZM+n2K8YjpeMLC0hLzC4tIKXnyySc4c+YMURgwnYzIsxwQZNMc5xxhFNQs0BjiOA5arZZJ0+RFpcSfK6Ve11L2m2kqlpdX/HicMxz1OPfY48zPz6PlYZ8XQgKCMAzRWmtrjbHW/XwQiJ8RQlbW28C5iplOSlHmIOGxs+cYD0fcuH2bK1evMDPT4aX3vY+Pf/z7mOm0CKMAYwxhHOLHE8qigCTGOY/3vq42pRn299lcfcRw0KfZbHHx0iXCKEJ4z/zcHNlkyltvvsV0PEEIwfLyMipQBEFAZSp6wz5RGBKGEdMsR4eBVpoqDuMXnXX/Rkr1I61mUx8/ccx4D1IIxuMJxli0946Dgz7T8YQ8G7O/t6fStGFWVla+1zr3awJMo9HQSZIQhAFJI2F+fg4p+xxdXqbfP0N/OGB4sE9RGr7+zTdoNFu89pEP19TUOvACZy1FUVCUOVoLlFYkjRjw7G/vsLO1RavdopE2eLT6iI21NYo8J01TGmnMYDCk1+sTxTErKyusHD/BhQsXmZ+fpzIGLyTeQ6fTwVSGPC8CiayCMPiUMdWv5nn2q4uLXf3YucfNrZtXyfOMhYUF1Ec/9gmuXbvKn/zJF/jqV78m8yznyPLy0tzc3JeVUmlZFmIwGMiiyDEOtnZ22d7eZX//gIWFLt35eXq9AdvbGwRK05yZo6wM1nqUDqhKy3A4xnuPsYYw0CilmeY5j9Yecf3K26w9fEjaSJlMp4ymY7a3thF4xuMBo9EB48mQwWCA9xZrS3oHezx4cI9bN65zcNBjZq5LGNacRSlFVVUoVZM2JbUpiuLDURR9dfno0p1HjzaUVNIfP7bMwUEf/eU//xJ3bt1kdm6GY8dPiKLI7f/zB7//74ej4ZIQWJxTxlrSRoOFpSMEYczMfJe9vV3SNOXFF99LGAU4D1leMqdDisrz9tUbHPSGtJoJJ44dpdVOmU4mBKHCmIrr125y/dYtNtfXmOYZiwuLzC92ufvgPq+99hqmqvid3/mPNNMEEMzPL3Kwv8f87BLj8ZAg1BR5ydXLb1MWJT/4Qz9Iq9kkzzOiKCbLctJGinNOhmEowP8miItzc3ODb33zQDz7zHf5KGqgqqpGQ++dun3rur17586P7Oxs/69FUZg8z3RVVXjvcV6ws7vD6up9bt+6TpFlbG1v8ca3vo31HhWENFsdojglCCOkUIzHI5qNmOeefYq52Q46UOhAkSQN+r0he3sH7G7v8j2vfYSlI0tcv3aNVqtFHEVcuHiB7Z0dBsMh3teM7iMfeY1/+A//Ea12hx/7e59lb2/Ac88/TzNN6feGHD1+nGbaQgJhFBKFEWEYCCmldd61ojhoTsb5F7/0Z19Si4uz/ty5C4hLTz6JFFqYqhJJFLQQ4o3KVKeDMPRKKum9eJeFSSXq3l6UNBoNkkYD6SXzR5YJk5R2e4Z2u0MYBoz6A44eXeKjr32Y2ZkmQgiyLKsJjJfkecmVq1fwHuIk5Fd+5VdoNzvMzXcRwvPY2VOcOXOKg4MeRWlYWlzk+z76UTa29gi0JAg0RWY5fvIo1pbs7R6wurnNyvJRZtptBsMBadIgCkN0oL33zrXaqb9x/cH7/sk/+ZVvn3/8pPyB7/+E04GOaDSacm5+3qog+AUhxBmFMAK0VJI4jhBCkKYpeMmRI8sUZcZbb73BoN9HyIDxcESCptOW6ECTZVOGoyFLdp5GmhBFId47rA1wxlOZitnZFufPn2F5eZmrV6/x8vs/yObWDs04otVK0WFMVlqeeOoZysqglebGzZuEQUTQbuGd5fixFawp0Vpy8uQJOu0Og+EIY6t3hy+tNaGUwgN4tA70v4rj+ENXrrzNU08/iT55+qyYTMbOedE9dez0/3jqscfc8aPL6vjKCrMzbXSgkEKSFzmD/oA7d+/ypS/9KYN+H+csWWmQUUI3TUF4egcHOGfJy5IoSZBS4K1DSo9EUrkSHShG4xFvv32Nty7XU9ri4gqlUeztrJGkLY4cP8PxlSPYqmSpO0eapiRxBAjiRsr27j5Xb90kTRrMdtqEoSGKY+ZmNcYYhILqUEuQUuJBIaTNsuzVKAo/HJXRV/70i19U+ud+7ufUYNA3N2/d+eGbN+903/zOm7bf78uyqJidnWGaZ+zt7bGzvc3G5iarjx4i8OgwJs8zhBREcQOAoqjH5rIs8R6UVEgpcN7VL+rvEoWSkiAIuXLlOpYHNNMWT7/nSXrDozy4e59vfusN9vZOsdBdIIgbWBGwczBEKclspyIMQpaPpAhfj9dhGKKUIAwjhIipquqQh1jKsqxnbe+9s440bfx3cdL9StpoCV0Z42Zn5uSHX/3ATz/7zJN+fWOTaVaxt7/H9u4ORVFQVhVCCGZmZ5nrLrCzvcn9OzeRSqGDgDiKAIdzFiEkAlBCYK2lKi3x4dgLjlrbCwmCkA+++gHmF46wtr5Jp9Oi2YhZWnyR4WDEnQfr3L7/kElW0BuOiJKE+bl50jgiOtQwlVYI4ZFK8s6XlLWWEIU1CcM7hJRkWU6eF2o8Gfsg1D9AqY+A3NLD0dSdObn43u5c6/njx476p554QpXGMhpPwQuqyqC0Yjqd8uDhKrfv38c6T6vVZtCrUEqSTcZY4YmimDBMaDebVHmBEpKyNCilahCVoi5H73HOE8URFy+eZ3Zulv7BPlpKZmc7LC52OfvYGS6tn2U4zpifn6URJyRxhFYSrTTOu0Nt0QMef3jIjXU4Y1ECtBSoMMB6QDh6/ZE4OOgZJWXqtP7xsix+TU6Lkv5w9KmirGSRF24yniC8ZaaVEgcKKRz5dMJoNKLf72ONpZE2MNZirSHPc6x1eO8RQmKtwTqLDgKsq68bYymKEmNqAdQYA4ApDWkj5MTxRY4eWUArzWg0xXmL94aV5UVOHV8hVgprSvIipyxLsiyjKiuMsYeLUHcqrSRaQKglSoCzFc6UCG+JghCtA3Z3D8RkOiUI1Ke0lkqPx2O139v/UBQp5mY6Ig5DqsohpMFLgVSiFjZNgReeOEnw1uGsRSkNOISq5TJrLVoHCCmRUlFWJdMsI81jEPVigKCqLM6BjGrxNVCC5eUFWq0mo/GE6SQnikJMZRAe0mZ6yCQtprIIAeoQ3Jyt27MUHi0FQigEHiUU3gcYZymMp5oaGmlEp5PKTmeGo8uzTzvvj+osy45Op9MLvV6PKNAyUAqPx1uLlBKFPFSKBbOzs4yneT3eHoJcGEZ4PFmWEcfJu5K3w2OtZTyesLQwT5IklGXJaDTGe4HWUFUlQkhCHVGZkiSJCAJFWVYopYiiGCEU1jlMVSGlQISH9/cOqepdV1qgRS2BSQTCOxCeUEeEeMy0AFFSlsWhzihdtzvfDKPGyxrPB61xbSGkK8pSTqZT4jh696zWIpwiUApr61IuigznLEVZoKxFOZBBDWwAZVkSRfU9yqLEVBU+DhFCEMcR3nu0DgiC4N2BSSDx3qKkYqaT4KmFzfps12e53gmPtw5kXfZKChQgvEcKAd4jEIfVYTE4dKBJGwnjyZiiNEilfHumQxA0XtNKqfdkeUF/MPJxHJFEEWVZvrsA3nkqa/DOY8qS/d0d+r09svEIYwxRlKDDkJmZGbQODq9FRFFEZexh96HGBa2x1uC9J88znPM0m416x1CArHmHlFhr6zryHuFrlBdS4nmn5B316Qe8QHgOgbF+P+8A73ESjLOUVYkUkihOkEqLpNFkdmbuaV1W5fNhEOKME0VeMZZTWq0GSZJgrWWaT6nKkoPBiLv37nGwt81kPMJUJUJAFIUsHjmCiiIGgyHOwczMzLvVowNNGAR47ymKguk0xznPdDqh0XAkSYSWCmPqbuEseFf/7TvdQ0n5jkx+uCAOKQBrkSisAEvd7oR3eMDgDxfDk00LsmnBdFoQxyGnTp0Ux48dIwyT89paO6eUIIwC8iIjDlXtCAlBEARoHVCVYzbXN1l7tMrm+jqT4QhTVTTaLRrNDs3ODOPJlEajSZwkJFGM0vrwHB9WgvQ45+qH9FVtxmiNkB7jSmqRSKNEPW+80+Kc90hRO0zO2xoHDpuflBKHf3exvQMhFFIJPDVulUWBNTVwNtKYmU6Lhe550UobdDozbS2lPKeVJkkSEWh5yKgUxljyvGA0GnHnzm3u3LrO+uoDinyCcxVJkpI220RxyngyZX6+SxRF9Po9yiKnEaQkjaSWso1FaY9SQY3SUpBnJXlWsGcM1hjanTbaQ4UnDAJwIA4ftjJlDXzOArI+It4jhcbjagYkFELVO+6oF8BWBgeoICRC4REUeUm71abRaCKRXidJ0p6bnyOKQhGGGqU1CIF1DmsNw2Gf/f1dsmwIVHhfEYYhjaQBDryzzM/OE4Yha2trICAJNHlxyMiiCCHr+2kNgZZ4X6vQo+GEoshRWrN/MODYsWWCQIPncBHqTvKOK+W8w1pbY5MXeOnAO6SSVMbgbF1hHGKOs468LOj1R5RVzVJv3LjFgweCpaUlokgLHUWxd9YJayy5t3jvkFVd/kprFha6SPkkk+mE9bVH5NMcpQMG1QHGeTqdDjOdDps721hraTab5NMRMgiw1jEaDGi1GoRKYW2FFzVACVkfu8XFORrNhLcu32RjY4eTJ4/VPARDEOga+JzDVA4v6nK31mIdCFHjhq3qtmmdpShLiqLCOVvjmPNUlaGoLNMsZ3tnm8tvfp0rV69y4eITyDs3bwmcI9AajAPrmI4zdrb32N87wDnB/HyX48dOkiQtirKi1+9TWcPC4iKnzpyhMBWdTodjx44RRiF5njMYDGi326RpE32IB3EUk8QpadogjkOazQZRHNKINI+dPsrmzg7be/tMs5xJlpMXFQ4BSuJlje7CK/7/GgXev0vClKqFUvCkaYoxFQBBEBDogOFwjFKC2blZTp06xczsDPqP//B3wXk+8+lP4myF945GM6HfH9IfjCidJwkCRqMhk8kY5z2nzpzj6MpxsjxnvruAkJrRaEyj0SBNG9g8Z25hiXarTXumTavZQAiPRwISJUErgUAR6BBrDTOdFnGccP/+I1aOHqHdbuKpJ8kwVLU9LmtOEOgQYw3W2Jpu23riq3mBJgwiqtLQOxgyzUvyvGBrr8/DB/e5f/8OeZZz9uxZnnrmGbR3mfnWN76mL168xPnzp5npNNFKkU0KinyP9fUN1h4+4PJb32Y8mXDu4hOcv/QUWxtbbG5u8J+/8peMxxO8r0vuiSffgzGG1QcPeOqpS0RxfNjiauyunCEMI5QKmeYZoTFYZ2g1W7SaKddv32daOFaOdlman0UQI0Qtof/XYEXNL97hKtbWM4aUisFgQJblWGDQH1EZgxTQ6/fZ3NpkMOgRxzHew8L8PFoirm5tPnj685/7LffMc8/JKAxYX33IsD9kmk0ZT4YMhz3a7Q6PPX6BhSMruKpEVDmTYY/peMSFCxfp9/rs7uxw7e23WF5axiPY29thmmVMx5YkCVlcmD9Ug7e5d/8RQioeP3+aU6dWGPR6LHbnaEQh3/7WtxmfP0v05AWiMKYsLaDQuh62eKfFlWVNhYREylpprqwjKysK48hKy2Q0YHFhDmMq6tSJoKyqmqobg1ZaTqSUrD68zcb6Gu976SWszbn38DYnT58niCPmFxZoNFvMdZdoNFK8KZmbbdNsNIjTFh/4rg/x5ptvUZUVvd4+w0Gf8xcvMeiP+Nu/+Tp7uzs4b1k5skyYhCRJyte//k36/QMe3r1EZ7bN+XOneOY9T/DSc09w9+4dbty8TZLEOO9Z6M6ipMZZh3UVSmqkAucgL3KMNeAlzkN/MGKa5QhZk6jpNCefFkyGI7Y3N8B5kIpJXtAfTyq1sLDwdFmal5zzztlCrq+t8+zTL3HxiYusbmxw9vxF5rvLdNpzdLtdZudmkEqSJk2kVKyvbxAnKUEcU1mY6y6y1F1gY2Od4WDArevXWHv0EGsNO/s9sumEt958gxvX3qa/v8d33nyTJy5d4Hs+9AreFiwuLdBqd7h56zb9fp9GnBAGqp4HlERIDuMyNfnJ84KqtEynGf3BoHZ8paYoCvq9Pr3+oM4J5BXXLl8mn46Ymem493/wVaFFeE0dP3HsdFmWHw91xNxcV+TFlL/7xrf47I/9BJ2ZlDv311k4chSlNUmSkKYprTQl0Ip2Z4a00+H6jVs45zl1+gzPPf8CRxa7fO1v/pqD/T2cr8jzjNFwROUs165f5/Llt5ifnyOrCk6dOcHP/aP/njg87ELes3RkiaSRcu3GTYI4YbbTIc+nAMRxXEOpklhTEyNja/PFOU9ZVvV0eki7p0XGaDRhdXWV8ajHeDyiMzPjvuvVV+VoOPlb9fQzz0x2d3d/2lobnH38KY6fOcfuzhr3767zi7/0j9nZ2eDuvYe0ZmaIwoAkTmg2mwShotnp0F1Y5MyZM3S7XWY6bYJA8X//u99gf3eHsioYDAZYV1tWN25cozM7x6VLT9LtznHp0kV+7DOf4djRI1hTIaSsF8E5Fo8s0ZmZ5eHqWv3gSVx7l4dzhQeKohZFxpOMIi9xQlAZQ5blTPOCyWTKwUGPne1NNlcfsL21jkfQXVzkvS++T3z1b7/26+p7X/vY8P79e5+xVblQVc499vgTYn52hm9+46v0+1M++9kfRUlJWRmiUNdUuc4KEQQ1cyzLijCKiMKQP/j857h78xpKCypTMZ0WPPH0Mzz3wgvcvH6Dj3/847zw/Au88PwzfPT7XufI0gLCewIV1KRWAUiQnqWFReZmF1jb2iSbTkkOVWYdaCQSYyyD4ZBpUVBay87ePllRMp5m7O332NraYW93h831VXp7W0xGQ1qdWS498bQIdVR8/vO/+8u6u3yiXFo6+tXVB3cv7u9tukf378lnn3+OtbWH/PZ/+Lesbzzihz/9aZ55zxGEVBRVhTFVzc6MpyocUZTQH/b4ypf/gpvXr5A2U5xzeAxhHPDyB97PsD9ACYWKGhw7cZzlxS5VVRAFEh8ovASNxKGYWIcQDgfMdGc5c/YMt27dZmfvALygsJ4wjMiznP5gxO7+Afu7e3X0bTRkun/AZNrnYHOLvd4e49GISZkRJSneGnfm7GPy8uXLd/Z21u7oR/cfsXLs1B+uPnr4085X8trlbzPTbvPsC+9lcLDHX33lS3z9a3/D0eUVlleOE6cpjTQlUJpsMsZbQVll3Ll7nd7ODu12SlUWKAnSOd77wgu85+IF/t+/+E/gDVffeIOXnn2SbruNjAK0FFBVyNKArgcnN8zwRYH0jmgyYmlng2Cwz/DuVQ7yDBnFNNKUNNC08hzd73OkzCnHB4gyx1vL2njKzqggqip2Q4EMm1gB89051+/ty69+9a++eGSpW4pnnn9ZHD9xMr5548qVPMtOqzDxKmrJx55+mmaacuvaZfZ3tjFVQTadgvckWmO9RUcRCI3x0AgUWkoqoRDpHCaMaTRTPvb9n0S05vjO1Zv09rah1ebS6Qv8XHaVY9NtjAjRAlxWUgpNcOEioj8mX7tDEIfI6YTJ/gbeFGTZhIMspzetSNOYtoCm8HTSmEQpJsWEUenYrxx9J3loJDcqSz9qMzCSrMzQQeSF1O5gb++pRhJfE+fOndNpq2uKMP7VTEb/1MUzpoybegwEUYJWAaUxlEGIVJog0EjAEkHSREUNKgTGGSRgVADpHMJD5C2hEkwzSxAGEKcMvSMpLf/q5v/FK9ObeBURaU3amaW0lipswqkL7H37r9FRwGgyoTzMA+fWMbSwWxq0dCxGEfOBpqUcTW+ptGBETBk0WC8rrhxMuDLNqaIW49xgcLYqC5nn+X9JksaHvfdKW2vdaLiPSGd/0yn/S9V0N9DJwEeVFQKJCwPiVhfnYgqhqaqQkgDRTAm8R+QWRI5EMpUxCoiG+5wWYxrCspGVRHGLsdFcUinz8y2ujSJ8a4ZxKUF4xlXO7sEenSjGjvqM545yX8UoB/HKaXSckFnPqDRUKiBSEiEVZaOBOHqUmYV52N1GCFg89Tj7rkI+fER05S7tzVVurK5iCovUAjwiisJ/I4THmEpo55xz3qrIFndj4T8XOflTvrTGSallmBAGAWXtlGLRnJ9JuXhinj+83SP3DYQvOD+bcjTW/Of7a3hf4oqcVjMkThWOmLww9IOIS8cXOdJUvLm1Q3bxGSp9lCKrEFoiXUVvbx8dafQTz3HkhZdAazpLR0iSJuOsoHAF48GUMh/jpKfVmmVmfh7fnqGrE3pbD5mUJQd377L+4CGraw/Z2t3FW0EcR66sSlUUxW0pxR+AF855o621KC29L3KBcf/Mq/ATpc+aOkq8FEII5/HFFO9AN5rkQtKrNJUKOJFYxtazNhyz05si8pzHW4pJGPMtI3Flizhu8IsfvMgf3B3ym3fGaGmYZI7i3DOce/5YrQCFMeXeLvtvv0UpBcXsPMU0Q8ch0kPkLEmgGQ+m2NGQvNcnK3Os38JHIWvjCXdkQL6zzvr9e2zv7LA6GLFjDGMclZO1QlprCb8cx2nebLbUYNC3WkpJoJVTClXZ8k7l7L/wUfx/pGFgrBR6XGaISNDwOZaUzYnj3qMBgRS8frTFzb0pf7U5ZCIcxB1mjs0RuICHB44kUcy0muiwhVUOGoZUeSba4nwADx+yt7NLub2P298i29lgz+bsVOCmGSkO4x1TWSLxxI0OZtKnGk4onSe3lmFVIoOYXlExLXN8s4NcmK91SGcJrEVlpVVaKmf5cpIkv9topKqqhUrE+fPna3EBL5xBZqVXqt280pxZODe13lVKyTBqUgURbuYoC+1ZpnHK/VLQxpLlEzpJwlNHj/KXuyOMUuAavLTS4NOXFvmXb03YKRxCKZ7oxnzPSpd/e6PPL+78Jz5268/oW4tzFisdEwN74z47uWc+jZjTjhnhmQkc0oPRDZrtNplTbFnLsLBkZcFYxoy0ZpLn9EvB6jhjlGcsHF9hivR37txznU4ThHxiNBzdAiHiOHZSKrS1FmsdQnqPE144Ubqq+KlAir8JvfSynIokjEQetLB4pLe0Tcm8dRwYj/UBobPM6BwlNKFKcWnI2Id84UHBwAR897E2m2XOnbFh8nAHMS2xw21S2SOIU/LSslVJdoyjUiElFiM0hSnZ1wZdQYVi6C1zuWESRhxEDcokJDcVmYzpG0eeGLJJRmd2lmJ/n1de/RD3Vjft6uqmNsb/wnjcv9loJCoMY1uWVS2153lea+9aEYaxU94pU1Z/V4xH/0sYN34tDuPKWALKEucm3C8ypBAEcZNlBYQt1grF797exus2P3yqy7rXfH0PsAopClaCjMrC9bxiwyt8HBEkc2QzS2wTUnZCDqxkUlQkVMzFMzQXlkhm2swtzDLfO0AiOf7Uc0z2DlBekLabmMoyGAyocKQHA7Y312kbz73VNRaOHeOV73rVbP7+F3WWTX+/1Wr+ere7qLTWdjqtB6tGo4GuzYR3nF1HZSprvdC9/d1fl0H4TDo7+/cLLSopZCCFJMo1l44f4ebI088c5GNm44DTaYMrxZSv3LhBGbYJW0vMe8WO13z+/gDnHMszEa8stfm9W30WP/b9nDv/Q3StxnjNxsYa6foqcnuL7tkLBItd4jil1WrD5gaxlPhTp2kMB8T9Ef3RCFf2CZwk29xh+ugRB1tb7Ax7bA17fPonf8q2Z2Z1I22+rZT6mSROZJbn7h0t0RhTR2jEoeUEUJQFprJ4IaySSmrJ/5ANh5eK0L0Y4EyohI7DJu1AIqspZVWHoo+qlKYKCUZ9ChWSi5xACNJoETGsiNIGXhhsJtmeGIQx9GUL1Z5H9/uU/X3KnT1Gj1ZJBgPWplfwcUxbhrXqMR3R9PWUaHsHZJMJk2zAeJKxvb/PwWTC5rRgoCTrvR4vv/aa++AHXlFSBb3HHnvss08++UTv6tVrSkjpkjim2WwyGo2YTCY1BjjnEFJgrK31diG88EZIW011IF/X3vx5nmUvZpWvZGyDr1+dUoqQlVaCjzWPxiNWJyXSGM7Nppiowf1pxt3pAzySE0HKXBrxV3sTdvaGkM5w5y/+jJtfuMxwMGaa9dgajdgdjWkJR79wWAuzAXRCQYgH4SEQTIRiWuTgBVbEBB5KWzDxhrFVdE+esh//4U+q2fluLwyar6dp4+0Xn39BHTt+3P7RH/0JYRQyzaaUZUmSJOjKGNRhBTjnkUIhAW+cs8rIZtrslda8Xpbmz6VUL1bTYRUFOrDG431KlLQIrORIM2SiBdvjIVJFCCYsBZIDqXmwC/f2+zTjFh978jT/ZTNn99oNhtt/ShCFBDJAZQ4zqZgEEIoQHzgi6WuTQ8BYBFir8NJj4zYDKyjjBn0pKRpt9KTCTCfmhz75SX3hwpM9JYPXG43om0GU6Dt37psf//FP8+abV1hbW8PZikYjqeM6zlpCHdQ2q/dI6fEIvHdEYeiklNIb18Pa13HV/ym8+Ewrlk5YwySbyHFh0EHIhROL3B2V3M8UTCqSZsQrp4/wlT3LgZWQTTgeBjzWjvjqgy18pJFByjQO2dcpg4bEdRQmTkjitPYMgwDX6RC0mzTac0SdGRrtFoUTDMYZgyxn8ughbm/fD9a37ImTJ/Wr3/O931Fa/wOtg+8I7/XM3IzJyoq02eJTn/oRPv/5zxNFklazSb8/rNPi1tXHQB1+fqeWsCWBljhXujwvpbW+F4Thjwqlr1vcP/WVoYE3Rxa66kE/E5cfrDPQMUljhtNzEbfKgC+uDilUzIm5Fs3FWa5PBP/88gj8HD/wwQ9ztFpk2kiYP3uJ5bw2QoZVgY5i0jQlbXVozyzQbjfJR1NMXjIYHLD98B6rewc8fLTK3s6unUwnyhSl/synf+zznU7nZ4WSvTBQytvKJEnMJCt58603efnl9/LHf/wF1lbv00hSOp2ZegHcYZZHqdqb986htUIpga0qhLcuVFK4IhciCH91NDBfs0L/O6Q/mk9HSKHtxDhllKdZjDEuBWswhUcqR+hbLDYCbkwVaTrHJJuiVk6QnjiJH/XRx07idneh16OsHKLwCFtietsc3HjAw+0tJpMJd+/eZutgh4PxhP3BwOVVhQxDlePLT/7ET/zjp55+6te9c2illBLeCg/tVpMoTLl9+w4ffPVV3ve+l/ncg7uAZTIdo2uj8b++3rGZBLWkVRmLEhIdBr6oKu8c2knx5zrgWWv53x9s7fysU1Fw5vhxN3DOb+e5fHAwEUZZnjjZJW0v8o2NEXcGE3TQ5NJKg7e94MZ33ubq9Q2mW6sY5xn199nv7zOejPCVRwtPaCswJf0qxydN9gdDP/I4EzdpJFKFSYON3uBLjz//7C++/F2vXikKI9NG7JVSVgiBEoIkCnHesrW5S1UannrPe/jCHzdBeKwt0e+YDHWMra4GKSXOO8qirD/VVeZYU6J0BK403qGEtzso/T9FQv0HY7J/1l+//71Rs8tinNIbbpmAQGxOd2XUXBeaCB2GiGSWe/cNRTLP3vYWb7z572log3F14qyOO0imXjAS4CuL0trLsM76zhxd1maSqWFRYdFXSh388wvPv/gff+gznyEKYiWlsBwqxnV6xDMajYjCiCrPmU4y0rTN/HyX/f0t4jiuKwBAqdo1sYfhKOcc3jmkUochyArpJAKJdFhvjZAqkGEYfd0gXzPOvRb54idmvf6Ez/NWZRzlRFHu3HezOvDEkShkKsbpnODIBUozpp/OUozXQSqiqFF7gdbijHBTa6l0wtR5OR2XQgop7XTkMmf/soLf7OXD31k8eab87u/7ATk7s0DtnDugfgarBJVx5JXBWMPe/i55mZMXBeIwkSIEdQW8k8h4hxO867lR/0IQhIfXwJoKqQIO+ZTFSdmMEp+Z7MsiV182wq+0pPzRQphPUEyfJkjazlmK/j6tKMPlB/SNp7AZ3zFNmr0Ci6eyA1QYEoYaqWM5dpCbCosqBkV1a5KPvySD4LeEUm+LIODoqZO875UPqGarbZXWhzEJwaFhTFEWWCOxDgb9PjoM2NjcIgxbXLx4kbVH9+okOYdRk3cqAHg3cmKMefezPe8EnKC2poSgtqkQzluByydqnE1ROlhvpM1/jedfq6I8FbripaIov1tZ+2yD8vHO3Hx7oRv5E6YSreOnWTq3QGe2RRDG6ChG66By1r29Oxjc2dk7+Mvdvf2vmvHouh30zXAyQkotTq6cUo9fuGRnZ+ds2kjqbMChPV7HZgVC1NmkjfVblGWB9xV/89df46Mf+0FOnDxOGIYURcH/B34KCINubzr7AAAAAElFTkSuQmCC" />
+    <title>Map yếu tố tác động BTC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #eceef0;
+        --surface: #ffffff;
+        --surface-2: #f4f5f6;
+        --ink: #16191d;
+        --ink-2: #3c434c;
+        --muted: #626b76;
+        --line: #d5d9de;
+        --line-strong: #b9bfc7;
+        --amber: #d97a06;
+        --amber-fill: #f7931a;
+        --amber-soft: #fdf0dd;
+        --pos: #14743f;
+        --pos-soft: #e2f2e7;
+        --neg: #c23333;
+        --neg-soft: #fae7e7;
+        --mix: #9a6a06;
+        --mix-soft: #f7ecd2;
+        --unk: #5d6672;
+        --unk-soft: #e8eaed;
+        --shadow: 0 1px 2px rgba(16, 20, 24, .06), 0 8px 24px rgba(16, 20, 24, .06);
+        color-scheme: light;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0d0f12;
+          --surface: #16191e;
+          --surface-2: #1c2026;
+          --ink: #e9edf1;
+          --ink-2: #c3cad2;
+          --muted: #98a1ac;
+          --line: #2b3038;
+          --line-strong: #3d434d;
+          --amber: #f5a83c;
+          --amber-fill: #f7931a;
+          --amber-soft: #2c2113;
+          --pos: #4cc07a;
+          --pos-soft: #152a1e;
+          --neg: #f07171;
+          --neg-soft: #2e1a1a;
+          --mix: #e0aa3e;
+          --mix-soft: #2b2312;
+          --unk: #a7b0bb;
+          --unk-soft: #23272d;
+          --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px rgba(0, 0, 0, .35);
+          color-scheme: dark;
+        }
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", sans-serif;
+        font-size: 16px;
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+      }
+      .mono { font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace; }
+      .wrap { max-width: 1280px; margin: 0 auto; padding: 0 16px 64px; }
+      a { color: var(--amber); }
+      a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+
+      /* ---------- Header ---------- */
+      header.page { padding: 28px 0 6px; }
+      .kicker {
+        font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+        color: var(--amber); margin: 0 0 8px;
+      }
+      h1 { font-size: clamp(26px, 4.6vw, 40px); line-height: 1.15; font-weight: 800; margin: 0 0 10px; letter-spacing: -.01em; }
+      .lede { color: var(--ink-2); max-width: 78ch; margin: 0 0 6px; font-size: 16.5px; }
+      .snapshot-note { color: var(--muted); font-size: 13.5px; margin: 4px 0 0; }
+
+      /* ---------- Stat strip ---------- */
+      .stats {
+        display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin: 20px 0 22px;
+      }
+      .stat {
+        background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+        padding: 12px 14px; box-shadow: var(--shadow);
+      }
+      .stat .lab { font-size: 11.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 0 0 4px; }
+      .stat .val { font-size: 20px; font-weight: 700; line-height: 1.2; margin: 0; }
+      .stat .sub { font-size: 12.5px; color: var(--muted); margin: 3px 0 0; }
+      .stat .val.down { color: var(--neg); }
+      .stat .val.hot { color: var(--amber); }
+      @media (max-width: 980px) { .stats { grid-template-columns: repeat(3, 1fr); } }
+      @media (max-width: 560px) { .stats { grid-template-columns: repeat(2, 1fr); } .stat .val { font-size: 17px; } }
+
+      /* ---------- Section scaffolding ---------- */
+      section.block { margin-top: 34px; }
+      h2.sec {
+        font-size: clamp(20px, 3vw, 26px); font-weight: 800; margin: 0 0 6px; letter-spacing: -.01em;
+        display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+      }
+      h2.sec .tag { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--amber); }
+      .sec-sub { color: var(--muted); margin: 0 0 14px; max-width: 82ch; font-size: 15px; }
+      .card {
+        background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+        box-shadow: var(--shadow);
+      }
+
+      /* ---------- Map ---------- */
+      .map-tools {
+        display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 12px;
+      }
+      .map-tools .lbl { font-size: 13px; font-weight: 600; color: var(--muted); margin-right: 2px; }
+      .fbtn {
+        min-height: 38px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line-strong);
+        background: var(--surface); color: var(--ink-2); font: inherit; font-size: 13.5px; font-weight: 600; cursor: pointer;
+      }
+      .fbtn[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+      .fbtn .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; vertical-align: 1px; }
+      .map-frame { padding: 10px 6px 4px; overflow: hidden; }
+      .map-frame svg { display: block; width: 100%; height: auto; }
+      .map-hint { color: var(--muted); font-size: 13px; margin: 10px 4px 2px; }
+      .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--ink-2); margin: 8px 4px 4px; }
+      .legend span { display: inline-flex; align-items: center; gap: 6px; }
+      .legend .sw { width: 22px; height: 0; border-top: 3px solid; display: inline-block; }
+      .legend .sw.dash { border-top-style: dashed; }
+
+      svg .cluster-card { fill: var(--surface); stroke: var(--line-strong); }
+      svg .cluster-card.unknown { stroke-dasharray: 6 5; }
+      svg .g-title { font: 700 14.5px "Be Vietnam Pro", sans-serif; fill: var(--ink); }
+      svg .g-net { font: 600 10.5px "Be Vietnam Pro", sans-serif; }
+      svg .pill { cursor: pointer; }
+      svg .pill rect { fill: var(--surface-2); stroke: var(--line); }
+      svg .pill:hover rect { stroke: var(--amber); }
+      svg .pill text { font: 500 12px "Be Vietnam Pro", sans-serif; fill: var(--ink-2); }
+      svg .pill.sel rect { stroke: var(--amber); stroke-width: 2; fill: var(--amber-soft); }
+      svg .pill.sel text { fill: var(--ink); font-weight: 700; }
+      svg .flow { fill: none; stroke-width: 3; opacity: .55; }
+      svg .center-price { font: 700 25px "IBM Plex Mono", monospace; fill: var(--ink); }
+      svg .center-sub { font: 500 11.5px "Be Vietnam Pro", sans-serif; fill: var(--muted); }
+      svg .btc-glyph { font: 800 44px "Be Vietnam Pro", sans-serif; fill: #fff; }
+      .dimmed { opacity: .14 !important; transition: opacity .25s; }
+      svg .pill, svg .cluster { transition: opacity .25s; }
+
+      /* ---------- Detail panel ---------- */
+      .detail { margin-top: 14px; padding: 20px 22px; border-left: 5px solid var(--amber); }
+      .detail .d-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 8px; }
+      .detail h3 { font-size: 20px; margin: 0; font-weight: 800; line-height: 1.3; }
+      .badge {
+        display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 700;
+        padding: 4px 10px; border-radius: 999px; white-space: nowrap;
+      }
+      .badge.pos { background: var(--pos-soft); color: var(--pos); }
+      .badge.neg { background: var(--neg-soft); color: var(--neg); }
+      .badge.mix { background: var(--mix-soft); color: var(--mix); }
+      .badge.unk { background: var(--unk-soft); color: var(--unk); }
+      .badge.plain { background: var(--surface-2); color: var(--ink-2); border: 1px solid var(--line); }
+      .detail p.desc { margin: 6px 0 10px; color: var(--ink-2); max-width: 95ch; }
+      .detail .src { font-size: 13px; color: var(--muted); margin: 0; }
+      .detail .src b { color: var(--ink-2); font-weight: 600; }
+
+      /* ---------- Chart ---------- */
+      .chart-frame { padding: 18px 18px 10px; }
+      .chart-frame svg { display: block; width: 100%; height: auto; }
+      svg .grid-line { stroke: var(--line); stroke-width: 1; }
+      svg .axis-lab { font: 500 11px "IBM Plex Mono", monospace; fill: var(--muted); }
+      svg .price-line { fill: none; stroke: var(--amber-fill); stroke-width: 2.4; stroke-linejoin: round; stroke-linecap: round; }
+      svg .price-area { fill: var(--amber-fill); opacity: .10; }
+      svg .anno { font: 600 11.5px "Be Vietnam Pro", sans-serif; fill: var(--ink-2); }
+      svg .anno-line { stroke: var(--line-strong); stroke-width: 1; stroke-dasharray: 3 3; }
+      .chart-note { font-size: 13px; color: var(--muted); margin: 8px 4px 4px; }
+
+      /* ---------- Factor index ---------- */
+      .index-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      @media (max-width: 860px) { .index-grid { grid-template-columns: 1fr; } }
+      .igroup { padding: 14px 16px 8px; }
+      .igroup.unknown { border-style: dashed; }
+      .igroup h3 { margin: 0 0 4px; font-size: 15.5px; font-weight: 700; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+      .igroup h3 .net { font-size: 12px; font-weight: 700; }
+      .irow {
+        display: flex; gap: 10px; align-items: flex-start; width: 100%; text-align: left;
+        background: none; border: 0; border-top: 1px solid var(--line); padding: 10px 2px;
+        font: inherit; cursor: pointer; color: var(--ink); min-height: 44px;
+      }
+      .irow:hover { background: var(--surface-2); }
+      .irow.sel { background: var(--amber-soft); }
+      .irow .glyph { flex: 0 0 auto; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 800; margin-top: 1px; }
+      .glyph.pos { background: var(--pos-soft); color: var(--pos); }
+      .glyph.neg { background: var(--neg-soft); color: var(--neg); }
+      .glyph.mix { background: var(--mix-soft); color: var(--mix); }
+      .glyph.unk { background: var(--unk-soft); color: var(--unk); }
+      .irow .t { font-size: 14.5px; font-weight: 600; line-height: 1.35; }
+      .irow .m { font-size: 12.5px; color: var(--muted); }
+
+      /* ---------- Unknown questions ---------- */
+      .unk-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+      @media (max-width: 980px) { .unk-grid { grid-template-columns: repeat(2, 1fr); } }
+      @media (max-width: 620px) { .unk-grid { grid-template-columns: 1fr; } }
+      .ucard { border: 1.5px dashed var(--line-strong); border-radius: 12px; padding: 16px 18px; background: var(--surface); }
+      .ucard .q { font-size: 32px; font-weight: 800; color: var(--unk); line-height: 1; margin: 0 0 8px; font-family: "IBM Plex Mono", monospace; }
+      .ucard h3 { margin: 0 0 6px; font-size: 16px; font-weight: 700; line-height: 1.35; }
+      .ucard p { margin: 0 0 8px; font-size: 14px; color: var(--ink-2); }
+      .ucard .when { font-size: 12.5px; color: var(--muted); margin: 0; }
+      .ucard .when b { color: var(--amber); font-weight: 700; }
+
+      /* ---------- Timeline ---------- */
+      .timeline { padding: 6px 20px; }
+      .trow { display: grid; grid-template-columns: 118px 1fr auto; gap: 14px; padding: 12px 0; border-top: 1px solid var(--line); align-items: baseline; }
+      .trow:first-child { border-top: 0; }
+      .trow .d { font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 14px; color: var(--amber); white-space: nowrap; }
+      .trow .e { font-size: 15px; color: var(--ink-2); }
+      .trow .e b { color: var(--ink); }
+      .trow .st { font-size: 11.5px; font-weight: 700; padding: 3px 9px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); color: var(--muted); white-space: nowrap; }
+      .trow .st.hot { background: var(--neg-soft); color: var(--neg); border-color: transparent; }
+      .trow .st.open { background: var(--unk-soft); color: var(--unk); border-color: transparent; }
+      @media (max-width: 620px) { .trow { grid-template-columns: 108px 1fr; } .trow .d { font-size: 13px; } .trow .st { grid-column: 2; justify-self: start; } }
+
+      /* ---------- Scenarios ---------- */
+      .scen-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+      @media (max-width: 900px) { .scen-grid { grid-template-columns: 1fr; } }
+      .scen { padding: 18px 20px; border-top: 5px solid var(--line-strong); }
+      .scen.good { border-top-color: var(--pos); }
+      .scen.mid { border-top-color: var(--mix); }
+      .scen.bad { border-top-color: var(--neg); }
+      .scen h3 { margin: 0 0 2px; font-size: 18px; font-weight: 800; }
+      .scen .zone { font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 15px; margin: 0 0 10px; }
+      .scen.good .zone { color: var(--pos); } .scen.mid .zone { color: var(--mix); } .scen.bad .zone { color: var(--neg); }
+      .scen p { margin: 0 0 8px; font-size: 14.5px; color: var(--ink-2); }
+      .scen p b { color: var(--ink); }
+      .scen .fine { font-size: 12.5px; color: var(--muted); }
+
+      /* ---------- Crash scenario -70% ---------- */
+      .crash { border: 1.5px solid var(--neg); padding: 0; overflow: hidden; }
+      .crash-head { background: var(--neg-soft); padding: 20px 22px 16px; border-bottom: 1px solid var(--line); }
+      .crash-head h3 { margin: 0 0 4px; font-size: 21px; font-weight: 800; line-height: 1.25; }
+      .crash-head h3 .pct { color: var(--neg); }
+      .crash-head p { margin: 0; color: var(--ink-2); font-size: 15px; max-width: 92ch; }
+      .crash-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-bottom: 1px solid var(--line); }
+      .crash-stat { padding: 14px 18px; border-left: 1px solid var(--line); }
+      .crash-stat:first-child { border-left: 0; }
+      .crash-stat .lab { font-size: 11.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 0 0 3px; }
+      .crash-stat .val { font-size: 19px; font-weight: 700; line-height: 1.2; margin: 0; color: var(--neg); }
+      .crash-stat .sub { font-size: 12.5px; color: var(--muted); margin: 3px 0 0; }
+      @media (max-width: 860px) { .crash-stats { grid-template-columns: repeat(2, 1fr); } .crash-stat:nth-child(3) { border-left: 0; } .crash-stat { border-top: 1px solid var(--line); } .crash-stat:nth-child(-n+2) { border-top: 0; } }
+      .crash-body { padding: 18px 22px 20px; }
+      .crash-body h4 { margin: 18px 0 8px; font-size: 15.5px; font-weight: 800; }
+      .crash-body h4:first-child { margin-top: 0; }
+      /* price ladder */
+      .ladder { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0; margin: 4px 0 6px; }
+      .rung { flex: 1 1 120px; border: 1px solid var(--line); background: var(--surface-2); padding: 10px 12px; position: relative; }
+      .rung + .rung { border-left: 0; }
+      .rung .p { font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 16px; margin: 0; }
+      .rung .t { font-size: 12px; color: var(--muted); margin: 2px 0 0; line-height: 1.4; }
+      .rung.now .p { color: var(--ink); }
+      .rung.warn .p { color: var(--mix); }
+      .rung.bad .p { color: var(--neg); }
+      .rung.target { background: var(--neg-soft); border-color: var(--neg); }
+      .rung.target .p { color: var(--neg); font-size: 18px; }
+      @media (max-width: 700px) { .rung { flex: 1 1 45%; } .rung + .rung { border-left: 1px solid var(--line); } }
+      /* chain */
+      .chain { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 4px 0 6px; }
+      .chain .step { background: var(--ink); color: var(--bg); font-size: 13px; font-weight: 700; padding: 7px 12px; border-radius: 999px; white-space: nowrap; }
+      .chain .step.hot { background: var(--neg); color: #fff; }
+      .chain .arr { color: var(--muted); font-weight: 700; }
+      /* role rows */
+      .roles { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      @media (max-width: 860px) { .roles { grid-template-columns: 1fr; } }
+      .role { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; background: var(--surface); }
+      .role .r-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; justify-content: space-between; margin-bottom: 5px; }
+      .role h5 { margin: 0; font-size: 15px; font-weight: 800; line-height: 1.3; }
+      .role .tagrole { font-size: 11.5px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: var(--neg); background: var(--neg-soft); padding: 3px 9px; border-radius: 999px; white-space: nowrap; }
+      .role .tagrole.neutral { color: var(--unk); background: var(--unk-soft); }
+      .role p { margin: 0; font-size: 14px; color: var(--ink-2); }
+      .role p b { color: var(--ink); }
+      .crash-gate { border: 1.5px dashed var(--line-strong); border-radius: 10px; padding: 14px 16px; margin-top: 14px; background: var(--surface-2); }
+      .crash-gate p { margin: 0 0 6px; font-size: 14.5px; color: var(--ink-2); }
+      .crash-gate p:last-child { margin-bottom: 0; }
+      .crash-gate b { color: var(--ink); }
+      .crash-fine { font-size: 12.5px; color: var(--muted); margin: 12px 0 0; }
+
+      /* ---------- Watchlist ---------- */
+      .watch { padding: 8px 22px 14px; counter-reset: w; }
+      .watch li { list-style: none; padding: 12px 0 12px 46px; position: relative; border-top: 1px solid var(--line); color: var(--ink-2); font-size: 15px; }
+      .watch li:first-child { border-top: 0; }
+      .watch li::before {
+        counter-increment: w; content: counter(w);
+        position: absolute; left: 0; top: 10px; width: 30px; height: 30px; border-radius: 50%;
+        background: var(--amber-soft); color: var(--amber); font-weight: 800; font-size: 14px;
+        display: grid; place-items: center;
+      }
+      .watch li b { color: var(--ink); }
+      ul.watch { margin: 0; }
+
+      /* ---------- Balance bar ---------- */
+      .balance { padding: 18px 22px; }
+      .balance .bar { display: flex; height: 16px; border-radius: 8px; overflow: hidden; margin: 10px 0 8px; }
+      .balance .bar i { display: block; height: 100%; }
+      .balance .bar .b-neg { background: var(--neg); }
+      .balance .bar .b-mix { background: var(--mix); }
+      .balance .bar .b-pos { background: var(--pos); }
+      .balance .bar .b-unk { background: var(--unk); opacity: .55; }
+      .balance p { margin: 0; color: var(--ink-2); font-size: 15px; }
+      .balance .cap { display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 12.5px; color: var(--muted); }
+
+      footer.page { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 18px; color: var(--muted); font-size: 13.5px; }
+      footer.page h2 { font-size: 15px; color: var(--ink); margin: 0 0 8px; }
+      footer.page ul { margin: 0 0 12px; padding-left: 18px; }
+      footer.page li { margin-bottom: 4px; overflow-wrap: anywhere; }
+      footer.page p { max-width: 90ch; }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        * { transition: none !important; }
+      }
+    
+      .site-nav{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 18px}
+      .site-nav a{padding:7px 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink-2);text-decoration:none;font-weight:600;font-size:14px;line-height:1.2}
+      .site-nav a:hover{border-color:var(--line-strong);color:var(--ink)}
+      .site-nav a.active{background:var(--amber-soft);border-color:var(--amber);color:var(--amber)}
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <nav class="site-nav" aria-label="Các trang">
+        <a href="index.html">Trang chủ</a>
+        <a href="map-btc-yeu-to-tac-dong.html" class="active" aria-current="page">BTC</a>
+        <a href="map-vang-khung-vi-mo.html">Vàng vĩ mô</a>
+        <a href="map-btc-khung-vi-mo.html">BTC vĩ mô</a>
+      </nav>
+      <header class="page">
+        <p class="kicker">Bản đồ tác động · Bitcoin</p>
+        <h1>Mọi lực đang kéo BTC — và những ẩn số chưa có lời giải</h1>
+        <p class="lede">
+          BTC ở trung tâm. Xung quanh là 8 nhóm yếu tố đã xác định được từ bảng phân tích thị trường
+          (vĩ mô, pháp lý, dòng tiền tổ chức, on-chain, phái sinh, chu kỳ, hệ sinh thái, rủi ro) — cộng thêm
+          một cụm riêng gồm đúng <strong>9 ẩn số: những yếu tố biết chắc sẽ tác động nhưng chưa biết sẽ xảy ra thế nào</strong>,
+          để đối chiếu khi dự đoán. Chạm vào bất kỳ yếu tố nào trên bản đồ để xem chi tiết, số liệu và nguồn.
+        </p>
+        <p class="snapshot-note">
+          Ảnh chụp dữ liệu tại <strong>19–20/11/2026</strong>, tổng hợp từ báo cáo phân tích thị trường crypto tháng 11/2026.
+          Đây là bản đồ phân tích, <strong>không phải khuyến nghị mua/bán</strong>.
+        </p>
+      </header>
+
+      <div class="stats" role="list" aria-label="Số liệu chính tại 19/11/2026">
+        <div class="stat" role="listitem">
+          <p class="lab">Giá BTC · 19/11/2026</p>
+          <p class="val mono">62.144 <span style="font-size:13px">USD</span></p>
+          <p class="sub">−0,75% ngày · −23,14% tháng · −31,35% năm (Binance/Finnhub)</p>
+        </div>
+        <div class="stat" role="listitem">
+          <p class="lab">Từ đỉnh 10/2025</p>
+          <p class="val down mono">≈ −50%</p>
+          <p class="sub">Đỉnh: 124.773–126.200 USD tùy nguồn — chưa thống nhất</p>
+        </div>
+        <div class="stat" role="listitem">
+          <p class="lab">Fear &amp; Greed</p>
+          <p class="val down mono">10–13</p>
+          <p class="sub">“Sợ hãi cực độ”, 16–19/11 (alternative.me)</p>
+        </div>
+        <div class="stat" role="listitem">
+          <p class="lab">ETF BTC spot · phiên 18/11</p>
+          <p class="val down mono">−306,5 tr USD</p>
+          <p class="sub">Từ đầu tháng 11: −2,9 tỷ USD (Farside)</p>
+        </div>
+        <div class="stat" role="listitem">
+          <p class="lab">Lãi suất Fed</p>
+          <p class="val hot mono">3,75–4,00%</p>
+          <p class="sub">Đã tăng 9/2026 · họp quyết định 9/12/2026</p>
+        </div>
+        <div class="stat" role="listitem">
+          <p class="lab">BTC dominance</p>
+          <p class="val mono">58,1–59,5%</p>
+          <p class="sub">Vốn hóa toàn thị trường ~2,13–2,24 nghìn tỷ USD</p>
+        </div>
+      </div>
+
+      <!-- ================= MAP ================= -->
+      <section class="block" aria-labelledby="map-h">
+        <h2 class="sec" id="map-h"><span class="tag">Bản đồ</span> BTC ở trung tâm, các lực xung quanh</h2>
+        <p class="sec-sub">
+          Mũi tên chỉ hướng lực ròng của từng nhóm đang tác động vào BTC lúc này: xanh = nâng đỡ, đỏ = đè nặng,
+          vàng = hai chiều, xám đứt nét = chưa xác định. Độ đậm của nhận định theo mức độ tác động trong báo cáo (Cao / Trung bình / Thấp).
+        </p>
+
+        <div class="map-tools" role="group" aria-label="Lọc yếu tố theo hướng tác động">
+          <span class="lbl">Lọc theo hướng:</span>
+          <button class="fbtn" data-filter="all" aria-pressed="true">Tất cả</button>
+          <button class="fbtn" data-filter="pos" aria-pressed="false"><span class="dot" style="background:var(--pos)"></span>Tích cực</button>
+          <button class="fbtn" data-filter="neg" aria-pressed="false"><span class="dot" style="background:var(--neg)"></span>Tiêu cực</button>
+          <button class="fbtn" data-filter="mix" aria-pressed="false"><span class="dot" style="background:var(--mix)"></span>Hai chiều</button>
+          <button class="fbtn" data-filter="unk" aria-pressed="false"><span class="dot" style="background:var(--unk)"></span>Chưa xác định</button>
+        </div>
+
+        <div class="card map-frame">
+          <svg id="mapSvg" viewBox="0 0 1244 1010" role="group" aria-label="Bản đồ các yếu tố tác động vào Bitcoin"></svg>
+          <p class="map-hint">Chạm / nhấp vào một yếu tố để xem mô tả đầy đủ, mức độ tác động và nguồn ở khung chi tiết ngay bên dưới. Trên màn hình nhỏ, danh sách đầy đủ nằm ở mục “Mục lục yếu tố” phía dưới.</p>
+          <div class="legend" aria-hidden="true">
+            <span><i class="sw" style="border-color:var(--pos)"></i> Lực ròng nâng đỡ</span>
+            <span><i class="sw" style="border-color:var(--neg)"></i> Lực ròng đè nặng</span>
+            <span><i class="sw" style="border-color:var(--mix)"></i> Hai chiều / trái ngược nhau</span>
+            <span><i class="sw dash" style="border-color:var(--unk)"></i> Chưa xác định</span>
+          </div>
+        </div>
+
+        <div class="card detail" id="detailPanel" aria-live="polite">
+          <div class="d-head">
+            <h3 id="dName">—</h3>
+          </div>
+          <div class="d-head" id="dBadges"></div>
+          <p class="desc" id="dDesc"></p>
+          <p class="src" id="dSrc"></p>
+        </div>
+      </section>
+
+      <!-- ================= BALANCE ================= -->
+      <section class="block" aria-labelledby="bal-h">
+        <h2 class="sec" id="bal-h"><span class="tag">Cán cân</span> Lực nào đang thắng thế?</h2>
+        <div class="card balance">
+          <p>
+            <strong>Ngắn hạn, phe đè nặng đang thắng rõ rệt:</strong> có tới 7 yếu tố mức tác động “Cao” ở phía tiêu cực —
+            Fed đảo chiều tăng lãi suất, lạm phát dai dẳng, lợi suất &amp; USD mạnh, ETF rút ròng, LTH/cá voi phân phối,
+            stablecoin co lại và vụ hack Binance. Ngược lại, cả 2 yếu tố tích cực mức “Cao” (hạ tầng ETF, khung pháp lý rõ ràng hơn)
+            đều là <strong>cấu trúc dài hạn</strong>: chúng giữ nền cho BTC nhưng chưa tạo lực mua ngay lúc này.
+            Riêng cụm “chưa xác định” là phần có thể lật cán cân theo cả hai phía — Fed 9/12 và ví trộm Binance là hai ẩn số lớn nhất.
+          </p>
+          <div class="bar" role="img" aria-label="Cán cân 24 yếu tố đã xác định trên bản đồ: 12 tiêu cực, 7 hai chiều, 5 tích cực; ngoài ra có 9 ẩn số chưa xác định">
+            <i class="b-neg" style="width:50%"></i><i class="b-mix" style="width:29%"></i><i class="b-pos" style="width:21%"></i>
+          </div>
+          <div class="cap">
+            <span>Tiêu cực: 12 yếu tố</span><span>Hai chiều: 7</span><span>Tích cực: 5</span><span>+ 9 ẩn số chưa xác định (chưa tính vào cán cân)</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= CHART ================= -->
+      <section class="block" aria-labelledby="chart-h">
+        <h2 class="sec" id="chart-h"><span class="tag">Bối cảnh</span> Giá BTC 2021–2026: đang ở đâu trong chu kỳ?</h2>
+        <p class="sec-sub">
+          Tháng 11/2026 là khoảng 19 tháng sau halving 4/2024 — đúng giai đoạn các chu kỳ trước (2018, 2022) đang ở sâu trong thị trường gấu.
+          Mức giảm lũy kế qua 2025–26 (~−21%) vẫn nhẹ hơn nhiều so với −74% (2018) hay −64% (2022).
+        </p>
+        <div class="card chart-frame">
+          <svg id="chartSvg" viewBox="0 0 760 300" role="img" aria-label="Biểu đồ giá đóng cửa hàng tháng của Bitcoin từ tháng 1/2021 đến tháng 11/2026, đỉnh khoảng tháng 10/2025 rồi giảm về khoảng 62 nghìn đô"></svg>
+          <p class="chart-note">Giá đóng cửa theo tháng, dữ liệu finance đi kèm báo cáo (lấy 19/11/2026 20:43 UTC). Điểm tháng 11/2026 là dữ liệu tính đến 19/11; giá spot cùng thời điểm: 62.144 USD.</p>
+        </div>
+      </section>
+
+      <!-- ================= FACTOR INDEX ================= -->
+      <section class="block" aria-labelledby="idx-h">
+        <h2 class="sec" id="idx-h"><span class="tag">Mục lục</span> Toàn bộ yếu tố trên bản đồ</h2>
+        <p class="sec-sub">Danh sách đầy đủ theo nhóm — chạm vào một dòng để mở chi tiết ở khung dưới bản đồ. Ký hiệu: ▲ nâng đỡ · ▼ đè nặng · ◆ hai chiều · ? chưa xác định.</p>
+        <div class="index-grid" id="indexGrid"></div>
+      </section>
+
+      <!-- ================= UNKNOWN ================= -->
+      <section class="block" aria-labelledby="unk-h">
+        <h2 class="sec" id="unk-h"><span class="tag">Ẩn số</span> 9 ẩn số: biết chắc sẽ tác động — chưa biết sẽ xảy ra thế nào</h2>
+        <p class="sec-sub">
+          Bản đồ có đúng 9 ẩn số, tất cả đều là nút trong cụm “Chưa xác định” trên bản đồ. Đây là phần cố tình để mở: các biến số mà báo cáo ghi nhận là <strong>chưa xác minh được</strong> hoặc
+          <strong>chưa xảy ra</strong>. Mỗi thẻ ghi rõ vì sao chưa biết và mốc nào sẽ cho câu trả lời — phần việc dự đoán thuộc về người đọc bản đồ.
+        </p>
+        <div class="unk-grid" id="unkGrid"></div>
+      </section>
+
+      <!-- ================= TIMELINE ================= -->
+      <section class="block" aria-labelledby="tl-h">
+        <h2 class="sec" id="tl-h"><span class="tag">Sắp tới</span> Các mốc sẽ làm rõ dần các ẩn số</h2>
+        <div class="card timeline" id="timeline"></div>
+      </section>
+
+      <!-- ================= SCENARIOS ================= -->
+      <section class="block" aria-labelledby="sc-h">
+        <h2 class="sec" id="sc-h"><span class="tag">Kịch bản</span> Ba kịch bản trong báo cáo</h2>
+        <p class="sec-sub">Khung phân tích của báo cáo gốc — không phải dự báo giá chắc chắn. Vùng giá tham chiếu: hỗ trợ 62.000 / 60.000 / 58.566 USD; kháng cự 68.000 (MA 200 tuần) / 75.000 / 82.300 (giá vốn ETF) / ~87.700 USD.</p>
+        <div class="scen-grid">
+          <article class="card scen good">
+            <h3>Tích cực</h3>
+            <p class="zone">68.000 → 75.000 → 82–88k</p>
+            <p><b>Điều kiện kích hoạt:</b> PCE 25/11 và/hoặc NFP 4/12 yếu hơn dự kiến → Fed <b>giữ nguyên</b> (không tăng) ngày 9/12 kèm dot plot ôn hòa; ETF BTC quay lại dòng vào dương nhiều phiên; stablecoin ngừng co.</p>
+            <p><b>Diễn biến kỳ vọng:</b> BTC lấy lại 68.000 (MA 200 tuần) rồi 75.000; đóng tuần trên 75.000 thì mục tiêu hồi tiếp theo là vùng giá vốn 82–88k.</p>
+            <p class="fine">Tham chiếu dài hạn (quan điểm, không phải sự kiện): JPMorgan ~170.000 USD theo khung định giá so với vàng đã điều chỉnh biến động — đưa ra khi điều kiện khác hiện tại, độ tin cậy giảm trong bối cảnh này.</p>
+          </article>
+          <article class="card scen mid">
+            <h3>Trung lập — khả năng cao theo dữ liệu hiện tại</h3>
+            <p class="zone">58.000 – 75.000</p>
+            <p><b>Điều kiện kích hoạt:</b> Fed tăng đúng 25đcb như thị trường đã định giá (~90%), không bất ngờ lớn; ETF rút ròng chậm lại nhưng chưa dương bền vững; không có sự cố mới.</p>
+            <p><b>Diễn biến kỳ vọng:</b> BTC đi ngang – giảm nhẹ trong vùng 58.000–75.000 USD, tích lũy kiểu thị trường gấu; altcoin tiếp tục kém hơn BTC, dominance duy trì 57–60%.</p>
+          </article>
+          <article class="card scen bad">
+            <h3>Tiêu cực</h3>
+            <p class="zone">Phá 60.000 → 58.566 → vùng 50.000?</p>
+            <p><b>Điều kiện kích hoạt:</b> Fed tăng 50đcb hoặc dot plot báo hiệu tăng tiếp đầu 2027; CPI 10/12 nóng; ví trộm Binance xả hàng quy mô lớn được xác nhận; thanh lý dây chuyền qua 60.000 USD.</p>
+            <p><b>Diễn biến kỳ vọng:</b> phá 60.000 → kiểm tra 58.566 (đáy đóng cửa 2026).</p>
+            <p class="fine">Quan điểm được trích: Wintermute (17/11/2026) cảnh báo khả năng trượt về vùng 50.000 USD; một nhà phân tích trên Motley Fool cho rằng BTC có thể kết năm dưới 50.000 USD. Mẫu hình giảm &gt;70% của các chu kỳ trước tương đương ~37.400 USD — đây là phép ngoại suy lịch sử, không phải dự báo của tổ chức.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ================= CRASH -70% ================= -->
+      <section class="block" aria-labelledby="crash-h">
+        <h2 class="sec" id="crash-h"><span class="tag">Kịch bản cực đoan</span> Nếu BTC giảm −70% từ đỉnh thì sao?</h2>
+        <p class="sec-sub">
+          Lớp kịch bản giả định gắn thêm lên bản đồ: mốc −70% nằm <strong>xa hơn cả cảnh báo về vùng 50.000 của Wintermute</strong> trong kịch bản tiêu cực ở trên.
+          Nó không tới bằng một yếu tố đơn lẻ, mà bằng một chuỗi ba nhịp — <strong>kích hoạt → khuếch đại → bán ép buộc</strong> — trong đó cả 8 nhóm yếu tố trên bản đồ đều tham gia, mỗi nhóm một vai.
+          Đây là <strong>điều kiện để kịch bản xảy ra, không phải dự báo</strong> nó sẽ xảy ra.
+        </p>
+
+        <div class="card crash">
+          <div class="crash-head">
+            <h3>Kịch bản <span class="pct">−70%</span> từ đỉnh 10/2025 → quanh 37.800 USD</h3>
+            <p>Tính từ đỉnh 126.080 USD (mức hay được dùng nhất trong khoảng đỉnh chưa thống nhất 124.773–126.200): 126.080 × 30% = <strong>37.824 USD</strong>. Con số này gần như trùng với phép ngoại suy lịch sử trong báo cáo — mẫu hình giảm &gt;70% của các chu kỳ trước tương đương ~37.400 USD (ngoại suy, không phải dự báo của tổ chức nào).</p>
+          </div>
+
+          <div class="crash-stats" role="list" aria-label="Các mốc của kịch bản trừ 70 phần trăm">
+            <div class="crash-stat" role="listitem">
+              <p class="lab">Mốc −70% tính toán</p>
+              <p class="val mono">37.824 USD</p>
+              <p class="sub">126.080 × 30% · khoảng theo đỉnh: ~37.432–37.860</p>
+            </div>
+            <div class="crash-stat" role="listitem">
+              <p class="lab">Mức lưới 15M gần nhất</p>
+              <p class="val mono">37.961 USD</p>
+              <p class="sub">Mức số 71/148 trong lưới BTC 15M · chênh +137 USD (+0,36%)</p>
+            </div>
+            <div class="crash-stat" role="listitem">
+              <p class="lab">Hai mức lưới kẹp quanh</p>
+              <p class="val mono">37.500 / 38.465,7</p>
+              <p class="sub">Dưới: 37.500 (cách −324) · trên kế tiếp: 38.465,7</p>
+            </div>
+            <div class="crash-stat" role="listitem">
+              <p class="lab">Từ giá hiện tại 62.144</p>
+              <p class="val mono">−39,1% nữa</p>
+              <p class="sub">62.144 → 37.824 · tức mất thêm ~24.320 USD</p>
+            </div>
+          </div>
+
+          <div class="crash-body">
+            <h4>Thang giá phải đi qua — không nhảy thẳng xuống −70%</h4>
+            <div class="ladder" role="list" aria-label="Thang giá từ hiện tại xuống mốc trừ 70 phần trăm">
+              <div class="rung now" role="listitem"><p class="p">62.144</p><p class="t">Giá hiện tại · 19/11/2026 · đã ≈ −50% từ đỉnh</p></div>
+              <div class="rung warn" role="listitem"><p class="p">60.000</p><p class="t">Đóng cửa tuần dưới mốc này = mở kịch bản tiêu cực; dưới đó là vùng thanh lý dây chuyền</p></div>
+              <div class="rung warn" role="listitem"><p class="p">58.566</p><p class="t">Đáy đóng cửa năm 2026 (30/6)</p></div>
+              <div class="rung bad" role="listitem"><p class="p">50.452,08</p><p class="t">Mốc −60%: tính toán 50.432 · mức lưới số 93/148, chênh chỉ +20 USD</p></div>
+              <div class="rung target" role="listitem"><p class="p">37.961</p><p class="t">Mốc −70% trên lưới · mức số 71/148 (tính toán: 37.824)</p></div>
+            </div>
+
+            <h4>Chuỗi phải xảy ra, theo đúng thứ tự</h4>
+            <div class="chain" aria-label="Chuỗi diễn biến của kịch bản trừ 70 phần trăm">
+              <span class="step hot">Fed / dữ liệu nóng</span><span class="arr">→</span>
+              <span class="step">ETF rút mạnh hơn</span><span class="arr">→</span>
+              <span class="step">Vỡ 60.000</span><span class="arr">→</span>
+              <span class="step hot">Thanh lý dây chuyền</span><span class="arr">→</span>
+              <span class="step">LTH / cá voi / thợ đào bán theo</span><span class="arr">→</span>
+              <span class="step">Stablecoin co tiếp</span><span class="arr">→</span>
+              <span class="step">Vỡ 50.452 (mốc −60%)</span><span class="arr">→</span>
+              <span class="step hot">37.961 (mốc −70%)</span>
+            </div>
+
+            <h4>Từng nhóm trên bản đồ tác động thế nào trong kịch bản này</h4>
+            <div class="roles">
+              <article class="role">
+                <div class="r-head"><h5>1 · Vĩ mô</h5><span class="tagrole">Ngòi nổ — điều kiện cần</span></div>
+                <p>Phải tệ hơn mức đã định giá (~90% Fed tăng 25đcb ngày 9/12). Tức là <b>PCE 25/11 / NFP 4/12 / CPI 10/12 ra nóng</b>, rồi Fed <b>tăng 50đcb</b> hoặc dot plot báo tăng tiếp đầu 2027. Lúc đó lợi suất 10 năm (đang 5,10–5,15%) và DXY (103,5–103,6, cao nhất từ 4/2025) còn lên nữa — BTC đang giao dịch như tài sản rủi ro theo Nasdaq, không phải “vàng số”, nên <b>không có lực đỡ phòng thủ</b>.</p>
+              </article>
+              <article class="role">
+                <div class="r-head"><h5>3 · Dòng tiền tổ chức</h5><span class="tagrole">Động cơ chính</span></div>
+                <p>ETF BTC đã rút <b>−2,9 tỷ USD</b> từ đầu tháng 11; giá vốn trung bình của người giữ ETF là 82.300 — ở 62.144 họ đã lỗ ~−24%, ở 37.824 là <b>−54%</b>, nên áp lực rút vốn sẽ tăng, không giảm. Cộng thêm <b>MSCI loại Strategy/Metaplanet/Upexi</b> khỏi chỉ số (hiệu lực sau đóng cửa 30/11) buộc quỹ thụ động bán MSTR. Strategy có giá vốn 75.452 — ở 37.824 là <b>−50%</b>, STRC đã thủng mệnh giá, kênh huy động vốn để mua BTC coi như đóng.</p>
+              </article>
+              <article class="role">
+                <div class="r-head"><h5>5 · Phái sinh &amp; tâm lý</h5><span class="tagrole">Bộ khuếch đại</span></div>
+                <p>Đường đi bắt buộc phải <b>xuyên 60.000 trước</b>. Dưới mốc đó là thanh lý dây chuyền: tiền lệ 13–14/11 đã là <b>1,3–2,06 tỷ USD/ngày</b>, và 10/10/2025 là <b>19,16 tỷ USD trong 24 giờ</b>. Funding đang âm nhẹ, put chiếm ~70% khối lượng quyền chọn, Fear &amp; Greed đã 10–13 — xuống −70% thì tâm lý <b>không tạo đáy, nó tạo bán đuổi</b>.</p>
+              </article>
+              <article class="role">
+                <div class="r-head"><h5>4 · On-chain</h5><span class="tagrole">Bán từ người nắm giữ</span></div>
+                <p>Không còn là đầu cơ: LTH đã đang phân phối <b>−72.000 đến −121.000 BTC/30 ngày</b>, LTH SOPR &lt; 1 (bán lỗ). Ở 37.824, MVRV ước <b>~0,77</b> (hiện 1,27 ở 62.144) — tức toàn thị trường nằm dưới giá vốn thực tế; STH (giá vốn 74.200–75.457) lỗ <b>~-49%</b>. Cá voi đang nạp ròng ~55 triệu USD/ngày lên sàn sẽ tăng tốc, không đảo chiều.</p>
+              </article>
+              <article class="role">
+                <div class="r-head"><h5>7 · Hệ sinh thái &amp; stablecoin</h5><span class="tagrole">“Bột khô” cạn</span></div>
+                <p>Cung stablecoin đã co <b>−14,2 tỷ USD/30 ngày</b>, nhanh nhất từ cú sụp Terra 2022. Xuống sâu hơn, TVL DeFi (đang ~70 tỷ USD) rơi theo giá, altcoin sập nặng hơn BTC nên dominance BTC còn tăng trên mức 58–59,5% hiện tại — tiền không rời hẳn thì cũng chỉ trú vào BTC, <b>không đỡ được BTC</b>.</p>
+              </article>
+              <article class="role">
+                <div class="r-head"><h5>8 · Rủi ro &amp; sự cố</h5><span class="tagrole">Chất xúc tác riêng của crypto</span></div>
+                <p>Không cần hack mới. Chỉ cần <b>ví trộm Binance</b> (6,34 tỷ USD ngày 29/10, còn ~2,4–3,5 tỷ chưa đóng băng, đã di chuyển 63 triệu USD ETH sau 2 tuần im lặng) bị xác nhận xả quy mô lớn là đủ thành điều kiện kích hoạt mà báo cáo đã ghi cho kịch bản tiêu cực.</p>
+              </article>
+              <article class="role">
+                <div class="r-head"><h5>6 · Thợ đào &amp; chu kỳ</h5><span class="tagrole">Lực bán phụ — lực đỡ bằng 0</span></div>
+                <p>Phát hành mới sau halving chỉ ~450 BTC/ngày, không thấm gì so với dòng ETF tỷ đô. Hashprice đã ~30 USD/PH/ngày, gần thấp kỷ lục ngay ở giá 62k; thợ đào niêm yết đã bán ~một nửa lượng nắm giữ từ đầu 2026 để chuyển sang AI — ở 37.824 họ là <b>bên bán ép buộc tiếp</b>, kèm tắt máy và hashrate rơi.</p>
+              </article>
+              <article class="role">
+                <div class="r-head"><h5>2 · Pháp lý</h5><span class="tagrole neutral">Vắng mặt — không cứu</span></div>
+                <p>CLARITY đình trệ ở Thượng viện (cloture 49–50), gói quy tắc GENIUS chưa xong toàn bộ, dự trữ chiến lược Mỹ đến 16/11 vẫn mua <b>$0</b> trên thị trường mở. Trong kịch bản này nhóm pháp lý <b>không gây sụp — nó chỉ không cứu</b>: không có tin pháp lý tích cực nào kịp xuất hiện để chặn đà.</p>
+              </article>
+            </div>
+
+            <div class="crash-gate">
+              <p><b>Cổng ẩn số:</b> trong 9 ẩn số trên bản đồ, <b>5 cái phải ngã về phía xấu</b> thì kịch bản này mới đủ điều kiện — Fed 9/12, bộ ba PCE/NFP/CPI, ví Binance xả, dự trữ BTC Mỹ không mua, và CLARITY/GENIUS.</p>
+              <p><b>Chỉ là phụ:</b> HYPE, TVL Layer 2 và hạn quyết định ETF tháng 12 — tác động altcoin là chính, không quyết định đường đi của BTC trong kịch bản này.</p>
+            </div>
+
+            <p class="crash-fine">Nguồn số liệu: báo cáo phân tích thị trường crypto tháng 11/2026 (ảnh chụp 19–20/11/2026) cho mọi số liệu thị trường, on-chain và sự kiện; các mốc lưới 50.452,08 (số 93/148) và 37.961 (số 71/148) lấy từ lưới BTC 15M gồm 148 mức. MVRV ~0,77 tại 37.824 là ước tính suy ra từ MVRV 1,27 tại 62.144 trong báo cáo, không phải số đo trực tiếp. Kịch bản là giả định phân tích — không phải dự báo giá và không phải khuyến nghị mua/bán.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= WATCHLIST ================= -->
+      <section class="block" aria-labelledby="w-h">
+        <h2 class="sec" id="w-h"><span class="tag">Kết luận báo cáo</span> 5 yếu tố quan trọng nhất cần theo dõi</h2>
+        <div class="card">
+          <ul class="watch">
+            <li><b>Quyết định Fed 9/12/2026 và dữ liệu trước đó (PCE 25/11, NFP 4/12, CPI 10/12).</b> Biến số chi phối toàn thị trường lúc này — chênh lệch giữa “tăng 25đcb như đã định giá” và “tăng 50đcb / dot plot diều hâu hơn” sẽ quyết định hướng quý tới.</li>
+            <li><b>Dòng ETF BTC spot hàng ngày (Farside).</b> Chuỗi rút −2,9 tỷ USD trong tháng 11 phải chấm dứt và đảo dương bền vững mới có lực cầu cấu trúc; một phiên dương đơn lẻ (+7,9 triệu USD ngày 16/11) là chưa đủ.</li>
+            <li><b>Cung stablecoin (DefiLlama/Glassnode).</b> Mức co −14,2 tỷ USD/30 ngày là “đèn đỏ” thanh khoản rõ nhất; ổn định trở lại là điều kiện cần cho mọi nhịp hồi.</li>
+            <li><b>Ví trộm Binance và niềm tin sàn.</b> Khoảng 2,4–3,5 tỷ USD chưa đóng băng là nguồn cung treo lớn nhất thị trường; ngược lại, Binance bồi hoàn đầy đủ mà không sụp đổ là khác biệt căn bản so với FTX 2022.</li>
+            <li><b>Hành vi LTH/cá voi và vùng giá 60.000–68.000 USD.</b> LTH SOPR &lt; 1 và phân phối của cá voi cần đảo chiều; đóng tuần dưới 60.000 USD mở kịch bản tiêu cực, lấy lại 68.000–75.000 USD là điều kiện tối thiểu của kịch bản tích cực.</li>
+          </ul>
+        </div>
+      </section>
+
+      <footer class="page">
+        <h2>Nguồn &amp; giới hạn của bản đồ</h2>
+        <p>
+          Toàn bộ số liệu lấy từ báo cáo “Phân tích thị trường Crypto — Tháng 11/2026” (tổng hợp 19/11/2026, xác minh bổ sung 20/11/2026).
+          Báo cáo phân biệt rõ <b>sự kiện đã xảy ra</b> với <b>dự đoán/quan điểm</b> (ghi rõ chủ thể); các con số thị trường định giá (xác suất Fed, dự báo giá)
+          không phải quyết định hay cam kết của bất kỳ cơ quan nào. Nơi nguồn mâu thuẫn (dự trữ sàn, số dư dự trữ chiến lược, đỉnh 10/2025),
+          bản đồ giữ nguyên cả hai phía và đánh dấu “chưa xác minh”.
+        </p>
+        <ul>
+          <li>CoinDesk, 17/11/2026 (đọc trực tiếp): <a href="https://www.coindesk.com/markets/2026/11/17/bitcoin-remains-penned-in-near-usd64-000-even-as-etf-outflow-streak-ends" target="_blank" rel="noopener">Bitcoin remains penned in near $64,000 even as ETF outflow streak ends</a></li>
+          <li>CoinDesk, 19/11/2026: <a href="https://www.coindesk.com/markets/2026/11/19/bitcoin-holds-above-usd63-750-but-fed-rate-hike-threats-loom-large" target="_blank" rel="noopener">Bitcoin holds above $63,750 but Fed rate hike threats loom large</a></li>
+          <li>Dòng ETF (Farside qua TFTC): <a href="https://www.tftc.io/bitcoin-etf-flows" target="_blank" rel="noopener">tftc.io/bitcoin-etf-flows</a> · Số chốt phiên 18/11 (Farside/SoSoValue): <a href="https://www.kucoin.com/news/flash/us-bitcoin-and-ethereum-spot-etfs-recorded-net-outflows-of-306-5m-and-39-8m-on-nov-18" target="_blank" rel="noopener">BTC −306,5 tr / ETH −39,8 tr USD</a></li>
+          <li>Biên bản FOMC (ABA Banking Journal, 18/11/2026): <a href="https://bankingjournal.aba.com/2026/11/fomc-minutes-show-close-call-over-possible-rate-hike/" target="_blank" rel="noopener">FOMC minutes show close call over possible rate hike</a></li>
+          <li>OCC — quy tắc cuối GENIUS Act, 21/10/2026: <a href="https://www.occ.gov/news-issuances/news-releases/2026/nr-occ-2026-92.html" target="_blank" rel="noopener">News Release 2026-92</a></li>
+          <li>MSCI loại Strategy khỏi chỉ số (CoinDesk, 12/11/2026): <a href="https://www.coindesk.com/markets/2026/11/12/msci-is-dropping-strategy-from-its-index-and-the-exclusion-could-hit-its-bitcoin-buying-machine" target="_blank" rel="noopener">MSCI is dropping Strategy from its index</a></li>
+          <li>Binance — báo cáo sơ bộ vụ hack 6,34 tỷ USD, 3/11/2026: <a href="https://www.binance.com/en/square/post/11-03-2026-binance-initial-report-fbi-attributes-6-34-billion-attack-to-north-korea-which-used-fake-job-interviews-and-an-ai-tool-to-reach-hot-wallets-users-fully-covered-384321660235967" target="_blank" rel="noopener">Binance initial report</a></li>
+          <li>On-chain: <a href="https://bgeometrics.com/signals/" target="_blank" rel="noopener">BGeometrics signals</a> · <a href="https://cryptoquant.com/insights/quicktake/6afc7bc4d38bc874c0606bd3-Exchange-BTC-Reserves-Reach-the-98th-Percentile-of-the-Past-Year-at-285M-as-BTC-" target="_blank" rel="noopener">CryptoQuant Quicktake — dự trữ sàn 2,85 triệu BTC</a> · Stablecoin: <a href="https://defillama.com/stablecoins" target="_blank" rel="noopener">DefiLlama Stablecoins</a></li>
+        </ul>
+        <p>Bản đồ là ảnh chụp tại thời điểm báo cáo (19–20/11/2026) và không tự cập nhật. Các mốc trong mục “Sắp tới” sẽ thay đổi bức tranh khi chúng xảy ra.</p>
+      </footer>
+    </div>
+
+    <script>
+      "use strict";
+      var SVGNS = "http://www.w3.org/2000/svg";
+      function el(tag, attrs, parent) {
+        var n = document.createElementNS(SVGNS, tag);
+        for (var k in attrs) n.setAttribute(k, attrs[k]);
+        if (parent) parent.appendChild(n);
+        return n;
+      }
+      function txt(parent, x, y, str, cls, anchor) {
+        var t = el("text", { x: x, y: y, "class": cls || "", "text-anchor": anchor || "start" }, parent);
+        t.textContent = str;
+        return t;
+      }
+      var DIR = {
+        pos: { glyph: "▲", label: "Tích cực — nâng đỡ BTC", color: "var(--pos)" },
+        neg: { glyph: "▼", label: "Tiêu cực — đè nặng BTC", color: "var(--neg)" },
+        mix: { glyph: "◆", label: "Hai chiều / trái ngược", color: "var(--mix)" },
+        unk: { glyph: "?", label: "Chưa xác định", color: "var(--unk)" }
+      };
+      var CSSVAR = { pos: "#14743f", neg: "#c23333", mix: "#9a6a06", unk: "#5d6672" };
+      if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        CSSVAR = { pos: "#4cc07a", neg: "#f07171", mix: "#e0aa3e", unk: "#a7b0bb" };
+      }
+
+      var GROUPS = {
+        macro:   { name: "1 · Vĩ mô", x: 24,  y: 108, net: "neg", netLabel: "Đè nặng" },
+        legal:   { name: "2 · Chính sách & pháp lý", x: 330, y: 26, net: "mix", netLabel: "Dài hạn +, ngắn hạn tắc" },
+        inst:    { name: "3 · Dòng tiền tổ chức", x: 662, y: 26, net: "neg", netLabel: "Đè nặng lúc này" },
+        onchain: { name: "4 · On-chain", x: 968, y: 108, net: "mix", netLabel: "Hai chiều" },
+        deriv:   { name: "5 · Phái sinh & tâm lý", x: 968, y: 400, net: "mix", netLabel: "Hai chiều" },
+        cycle:   { name: "6 · Cung – cầu & chu kỳ", x: 968, y: 692, net: "mix", netLabel: "Hai chiều" },
+        eco:     { name: "7 · Hệ sinh thái", x: 662, y: 800, net: "mix", netLabel: "Hai chiều" },
+        risk:    { name: "8 · Rủi ro & sự cố", x: 24, y: 400, net: "neg", netLabel: "Đè nặng" },
+        unknown: { name: "? · Chưa xác định", x: 24, y: 560, net: "unk", netLabel: "Chưa biết hướng", unknown: true }
+      };
+
+      var FACTORS = [
+        /* ---- Vĩ mô ---- */
+        { id: "fed", g: "macro", short: "Fed tăng lãi suất, ~90% tăng tiếp 9/12", name: "Fed đảo chiều tăng lãi suất — thị trường định giá tăng tiếp ngày 9/12", dir: "neg", level: "Cao", tf: "Ngắn – trung hạn",
+          desc: "Fed tăng 25 điểm cơ bản ngày 16/9/2026 lên 3,75–4,00% (biểu quyết 12–0, lần tăng đầu tiên kể từ 2023), sau 3 lần cắt giảm cuối 2025. Ngày 28/10/2026 Fed giữ nguyên với biểu quyết 10–2 — hai thành viên bất đồng (Cook, Hammack) muốn tăng tiếp; biên bản họp tháng 10 (công bố 18/11) cho thấy quyết định giữ nguyên là “sít sao” và gần như mọi thành viên đồng ý sẽ cần tăng thêm để đưa lạm phát về 2%.",
+          src: "Fed qua ABA Banking Journal, 18/11/2026; CoinDesk, 19/11/2026. Xác suất tăng 25đcb ngày 9/12 (~90–100% tùy nguồn/ngày: CME FedWatch, Kalshi) là định giá của thị trường, thay đổi theo ngày — không phải quyết định của Fed." },
+        { id: "cpi", g: "macro", short: "Lạm phát dai dẳng: CPI lõi +0,3% × 3 tháng", name: "Lạm phát dai dẳng + thị trường lao động mạnh", dir: "neg", level: "Cao", tf: "Ngắn – trung hạn",
+          desc: "CPI tháng 10/2026 tăng +0,4% theo tháng (kỳ vọng +0,3%), CPI lõi +0,3% tháng thứ 3 liên tiếp; PCE tháng 9/2026 ở mức 3,6% toàn phần / 3,1% lõi theo năm — đều trên mục tiêu 2%. Việc làm tháng 10 thêm 165.000 (dự báo ~65.000), thất nghiệp giảm còn 4,1% — lao động mạnh cho Fed thêm dư địa thắt chặt. BLS không công bố CPI theo năm cho tháng 10 vì thiếu dữ liệu thời kỳ đóng cửa chính phủ 2025.",
+          src: "BLS / BEA qua báo cáo tổng hợp, 11/2026." },
+        { id: "dxy", g: "macro", short: "Lợi suất 10Y >5,1% · DXY cao nhất 19 tháng", name: "Lợi suất trái phiếu & USD mạnh", dir: "neg", level: "Cao", tf: "Ngắn – trung hạn",
+          desc: "Lợi suất trái phiếu 10 năm Mỹ ở 5,10% ngày 12/11/2026 (số liệu chính thức của Bộ Tài chính Mỹ), ~5,115–5,15% các ngày 13–17/11. DXY ~103,5–103,6 — cao nhất kể từ tháng 4/2025. Chi phí cơ hội của việc giữ một tài sản không sinh lãi như BTC tăng mạnh.",
+          src: "Bộ Tài chính Mỹ / Reuters qua Swiss Financial Time, 12/11/2026." },
+        { id: "riskoff", g: "macro", short: "BTC giảm cùng nhịp cổ phiếu công nghệ", name: "Tương quan tài sản rủi ro: BTC giảm cùng Nasdaq", dir: "neg", level: "Trung bình", tf: "Ngắn – trung hạn",
+          desc: "S&P 500 đóng cửa 7.416,59 ngày 16/11/2026 (−1,92%); Nasdaq Composite 24.509,76 (−2,49%, vào vùng điều chỉnh, −10,9% từ đỉnh 6/10). Crypto giảm cùng nhịp cổ phiếu công nghệ — BTC đang giao dịch như tài sản rủi ro vĩ mô trong giai đoạn này, vai trò “vàng số” phòng thủ chưa thể hiện trong 2026.",
+          src: "Số liệu thị trường 16/11/2026 (nhiều nguồn)." },
+
+        /* ---- Pháp lý ---- */
+        { id: "claritylaw", g: "legal", short: "SEC–CFTC, GENIUS, MiCA: rõ ràng hơn hẳn", name: "Khung pháp lý rõ ràng hơn hẳn giai đoạn 2021–2024", dir: "pos", level: "Cao", tf: "Dài hạn",
+          desc: "Ngày 17/3/2026, SEC và CFTC ra diễn giải chung phân loại tài sản crypto thành 5 nhóm, xác định phần lớn token (gồm BTC, ETH, SOL, XRP trong 16 tài sản nêu tên) là hàng hóa số, không tự thân là chứng khoán. GENIUS Act — luật stablecoin liên bang đầu tiên của Mỹ — đã ký 18/7/2025. MiCA áp dụng đầy đủ, thời kỳ chuyển tiếp kết thúc 1/7/2026; Hồng Kông cấp 2 giấy phép phát hành stablecoin đầu tiên ngày 10/4/2026.",
+          src: "SEC/CFTC qua AMLBot & Global Legal Post, 2026." },
+        { id: "reserve", g: "legal", short: "Dự trữ BTC chiến lược Mỹ: cấm bán, chưa mua", name: "Dự trữ Bitcoin chiến lược của Mỹ — khóa cung nhưng chưa mua thêm", dir: "mix", level: "Trung bình", tf: "Dài hạn",
+          desc: "Sắc lệnh 14233 ngày 6/3/2025 lập Strategic Bitcoin Reserve từ BTC tịch thu, cấm bán, và chỉ đạo tìm cách mua thêm “trung hòa ngân sách”. Mặt nâng đỡ: lượng BTC đủ điều kiện nằm ngoài thị trường vĩnh viễn nếu được luật hóa (dự luật ARMA). Mặt chưa thành lực mua: tính đến 16/11/2026, Bộ Tài chính chưa mua một BTC nào trên thị trường mở ($0); ARMA mới qua ủy ban Hạ viện 28–21 ngày 16/9/2026, chưa biểu quyết toàn thể. Số dư chính thức: xem thẻ “chưa xác định”.",
+          src: "BlockchainReporter, 16/11/2026; báo cáo tổng hợp mục Nhóm 2." },
+        { id: "stall", g: "legal", short: "CLARITY đình trệ · gói GENIUS chưa xong hết", name: "Pháp lý chưa hoàn thiện: CLARITY đình trệ, GENIUS còn thiếu quy tắc", dir: "neg", level: "Trung bình", tf: "Trung hạn",
+          desc: "CLARITY Act (cấu trúc thị trường, phân quyền SEC/CFTC): Hạ viện thông qua 17/7/2025 (294–134) nhưng biểu quyết cloture tại Thượng viện thất bại 49–50 ngày 15/9/2026 — dự luật đình trệ, còn motion to reconsider giữ khả năng hồi sinh. GENIUS Act: OCC đã ban hành quy tắc cuối cùng ngày 21/10/2026 (cơ quan liên bang đầu tiên hoàn tất phần của mình, hiệu lực 18/1/2027), nhưng toàn bộ gói liên cơ quan chưa xong — quy tắc BSA/AML/OFAC ra riêng phối hợp Bộ Tài chính, Fed và FDIC chưa hoàn tất phần của họ.",
+          src: "OCC News Release 2026-92; Sidley / Gibson Dunn, 10–11/2026." },
+
+        /* ---- Tổ chức ---- */
+        { id: "etfout", g: "inst", short: "ETF BTC rút ròng −2,9 tỷ USD từ đầu 11", name: "ETF Bitcoin đảo chiều rút ròng", dir: "neg", level: "Cao", tf: "Ngắn – trung hạn",
+          desc: "ETF BTC spot Mỹ rút ròng −2,9 tỷ USD từ đầu tháng 11/2026 (11/13 phiên rút ròng; phiên rút lớn nhất 5/11: −430,2 triệu USD; chuỗi 5–13/11 rút 7 phiên liên tiếp tổng −1,91 tỷ). Phiên 18/11 chốt −306,5 triệu USD theo bảng Farside (IBIT −148,7; FBTC −69,3; BITB −36,6; GBTC −20,3; ARKB −19,3; Grayscale Mini BTC −10,5; HODL −1,8; các quỹ còn lại 0 — không quỹ nào dương). Dòng tiền năm 2026 đã lật sang âm khoảng −1,56 đến −2,14 tỷ USD. Giá vốn trung bình của nhà đầu tư ETF ~82.300 USD (Glassnode) — đang lỗ ~21% ở giá hiện tại. ETF ETH còn tệ hơn: rút ròng 7 tuần liên tiếp, tháng 10 −1,607 tỷ USD.",
+          src: "Farside Investors qua TFTC / CoinDesk, 11/2026; bảng chốt phiên 18/11 xác minh lại 20/11/2026." },
+        { id: "etfstruct", g: "inst", short: "Hạ tầng ETF: lũy kế +54,1–54,8 tỷ USD", name: "Hạ tầng ETF đã thành cấu trúc dài hạn", dir: "pos", level: "Cao", tf: "Dài hạn",
+          desc: "Lũy kế dòng vào ETF BTC spot đạt +54,1 đến +54,8 tỷ USD kể từ khi ra mắt 11/1/2024; các ETF nắm khoảng 6,2% nguồn cung lưu hành; tổng tài sản ETF ~77,7 tỷ USD (18/11/2026). Kênh phân phối qua cố vấn và tổ chức đã hình thành — đây là trụ cầu dài hạn của BTC mà altcoin không có ở quy mô tương đương.",
+          src: "TFTC / Farside, 18/11/2026." },
+        { id: "treasury", g: "inst", short: "Strategy 850.849 BTC · MSCI loại khỏi chỉ số", name: "Doanh nghiệp kho bạc: vẫn mua nhỏ giọt, nhưng rủi ro chỉ số đã thành hiện thực", dir: "mix", level: "Trung bình", tf: "Trung hạn",
+          desc: "172 công ty niêm yết nắm 1,29 triệu BTC (19/11/2026). Strategy nắm 850.849 BTC (Form 8-K, đến 15/11), giá vốn bình quân 75.452 USD/BTC — đang lỗ ~16–21%; vẫn mua +485 BTC tuần 9–15/11 và +1.036 BTC tuần 2–8/11, nhưng đồng thời chi 188–208 triệu USD/tuần để mua lại cổ phiếu ưu đãi STRC (đã thủng mệnh giá 100 USD, thấp nhất 95,50 ngày 19/11) — nhiều hơn tiền mua BTC. MARA đã bán 13.597 BTC sau quý 3/2026. MSCI đã loại Strategy, Metaplanet và Upexi khỏi chỉ số trong đợt rà soát tháng 11 (công bố 11–12/11), hiệu lực sau đóng cửa phiên 30/11/2026 — các quỹ theo dõi chỉ số phải bán cổ phiếu MSTR trước mốc này.",
+          src: "Form 8-K Strategy qua Bittery, 16/11/2026; CoinDesk, 12/11/2026 (xác minh lại 20/11)." },
+
+        /* ---- On-chain ---- */
+        { id: "lth", g: "onchain", short: "LTH & cá voi đang phân phối, SOPR < 1", name: "Nhà đầu tư dài hạn và cá voi đang phân phối", dir: "neg", level: "Cao", tf: "Ngắn – trung hạn",
+          desc: "Vị thế ròng của nhà đầu tư dài hạn (LTH) giảm khoảng −72.000 đến −121.000 BTC trong 30 ngày (các nguồn/ngày cắt khác nhau, cùng một hướng). LTH SOPR ở 0,862–0,947 (< 1) — ngay cả người nắm dài hạn cũng đang bán lỗ, dấu hiệu đầu hàng (capitulation). Theo Glassnode, các ví lớn nạp ròng ~55 triệu USD/ngày lên sàn trong nhiều tuần — phân phối, không phải tích lũy. Lưu ý độ tin cậy: một bài phân tích ngày 10/11 trái chiều cho rằng cá voi 1.000+ BTC đã cộng ~28.000 BTC/30 ngày, nhưng bài đó kèm nhiều khẳng định không kiểm chứng được và mâu thuẫn dữ liệu một tuần sau — độ tin cậy thấp hơn.",
+          src: "Glassnode qua Oracle of BTC / Crypto Briefing; BGeometrics, 11/2026." },
+        { id: "mvrv", g: "onchain", short: "MVRV ~1,27 · Reserve Risk phân vị 2%", name: "Định giá on-chain đã về vùng thấp lịch sử", dir: "pos", level: "Trung bình", tf: "Trung hạn",
+          desc: "MVRV ~1,27 (13/11) — thấp xa vùng đỉnh chu kỳ (>3) và gần vùng tích lũy lịch sử; MVRV-Z 0,37 (phân vị 22); Reserve Risk ở phân vị 2% lịch sử; STH-MVRV 0,877. Đây là điều kiện từng xuất hiện gần đáy các chu kỳ trước — nhưng là điều kiện, chưa phải tín hiệu xác nhận đảo chiều (đánh giá của các nhà phân tích được trích, không phải sự kiện).",
+          src: "BGeometrics, 13/11/2026; Oracle of BTC, 11/2026." },
+        { id: "exres", g: "onchain", short: "Dự trữ sàn ~2,85 triệu BTC — nguồn mâu thuẫn", name: "Dự trữ BTC trên sàn: hai nguồn đọc ngược nhau", dir: "mix", level: "Thấp – Trung bình", tf: "Ngắn hạn",
+          desc: "Cùng con số ~2,85 triệu BTC, CryptoQuant có hai cách đọc: Axel Adler Jr. (18/11) — dự trữ giảm 21.800 BTC/tuần xuống thấp nhất 90 ngày, netflow 7 ngày −14.300 BTC (rút ròng khỏi sàn, thường là tín hiệu giảm áp lực bán); trong khi CryptoQuant Quicktake (17/11) — dự trữ ở phân vị 98 của năm qua, tăng 2,0% trong 30 ngày. Khác biệt nằm ở cửa sổ và tập sàn được tính. Kết luận an toàn: dự trữ quanh 2,85 triệu BTC, dòng tuần mới nhất nghiêng về rút ra, xu hướng 30 ngày chưa rõ ràng.",
+          src: "CryptoQuant / Axel Adler Jr., 18/11/2026 và CryptoQuant Quicktake, 17/11/2026 — mâu thuẫn được giữ nguyên theo báo cáo." },
+
+        /* ---- Phái sinh ---- */
+        { id: "liq", g: "deriv", short: "Thanh lý 1,3–2,1 tỷ USD/ngày giữa 11", name: "Đòn bẩy & thanh lý dây chuyền", dir: "neg", level: "Trung bình", tf: "Ngắn hạn",
+          desc: "Khoảng 1,3 tỷ USD bị thanh lý trong 24 giờ ngày 13/11/2026 và ~2,06 tỷ USD (93% là vị thế long) trong 24 giờ quanh 14/11 (CoinGlass qua Lookonchain; các cửa sổ trượt khác nhau cho số khác nhau). Tiền lệ kỷ lục 10/10/2025 — ~19,16 tỷ USD thanh lý, 87% long, ~1,62 triệu tài khoản — cho thấy thanh khoản thị trường, nhất là cuối tuần, mỏng đến mức nào.",
+          src: "CoinGlass qua CoinDesk / Lookonchain, 11/2026." },
+        { id: "funding", g: "deriv", short: "Funding hơi âm · OI đã “rửa” ~21%", name: "Funding rate & open interest: vị thế đã nhẹ đi", dir: "mix", level: "Trung bình", tf: "Ngắn hạn",
+          desc: "Funding rate quanh −0,002%/8 giờ đến hơi âm/trung tính trên Binance/OKX/Bybit (19/11) — vị thế nghiêng short nhẹ, không có dấu hiệu long quá tải; quyền chọn put chiếm ưu thế (~70% khối lượng quyền chọn BTC ngày 19/11). Open interest BTC ~42,5 tỷ USD (CoinDesk 19/11); OI tổng đã giảm ~21% trong đợt xả — đòn bẩy đã được “rửa” một phần, giảm nguy cơ thanh lý dây chuyền tiếp, nhưng cũng cho thấy dòng tiền đầu cơ đang rút.",
+          src: "CoinDesk, 17–19/11/2026 (đọc trực tiếp bản 17/11)." },
+        { id: "fear", g: "deriv", short: "Fear & Greed 10–13: sợ hãi cực độ", name: "Tâm lý ở mức sợ hãi cực độ (yếu tố hai mặt)", dir: "mix", level: "Thấp", tf: "Ngắn hạn",
+          desc: "Fear & Greed Index ở 10–13 (“sợ hãi cực độ”) các ngày 16–19/11/2026, giảm từ ~28–32 một tuần trước. Lịch sử cho thấy vùng này thường gần đáy cục bộ, nhưng cũng có thể duy trì rất lâu trong thị trường gấu — báo cáo ghi nhận đây là yếu tố phản chiếu (contrarian), không phải dự báo.",
+          src: "alternative.me / CoinMarketCap qua nhiều nguồn độc lập, 16–19/11/2026." },
+
+        /* ---- Chu kỳ ---- */
+        { id: "techbreak", g: "cycle", short: "Dưới MA 200 tuần ~68.000 · kháng cự dày", name: "Kỹ thuật đã vỡ: dưới MA 200 tuần và các vùng giá vốn", dir: "neg", level: "Trung bình – Cao", tf: "Ngắn hạn",
+          desc: "BTC nằm dưới đường trung bình 200 tuần (~68.000 USD, CoinDesk 17/11), dưới giá vốn của người nắm ngắn hạn (~74.200–75.457 USD) và dưới giá vốn trung bình của nhà đầu tư ETF (~82.300 USD) — cả ba vùng này trở thành kháng cự tâm lý/kỹ thuật mỗi khi giá hồi. Các mốc hỗ trợ tham chiếu: 62.000 (đáy giữa tháng 11), 61.946 (đáy 15/11), 60.000 (đóng cửa tuần dưới mức này = cảnh báo), 58.566 (đáy đóng cửa 2026, ngày 30/6).",
+          src: "CoinDesk, 17/11/2026 (đọc trực tiếp); AInvest; Glassnode." },
+        { id: "miner", g: "cycle", short: "Thợ đào bán tháo · hashprice ~30 USD", name: "Kinh tế mining căng thẳng: thợ đào bán tháo", dir: "neg", level: "Trung bình", tf: "Trung hạn",
+          desc: "Hashprice ~30 USD/PH/ngày (Luxor, 16/11) — gần mức thấp kỷ lục, so với >100 USD trước halving. Theo Glassnode, các thợ đào niêm yết đã bán gần một nửa lượng BTC nắm giữ kể từ đầu 2026 (từ ~110.000 BTC), một phần để chuyển vốn sang hạ tầng AI/trung tâm dữ liệu; tháng 11 ghi nhận mức giảm nắm giữ của thợ đào lớn nhất theo tháng kể từ 2021. MARA đã bán 13.597 BTC sau quý 3/2026.",
+          src: "Luxor qua CoinStats, 16/11/2026; Glassnode qua Hindu BusinessLine, 19/11/2026." },
+        { id: "halving", g: "cycle", short: "Halving 4/2024: phát hành ~450 BTC/ngày", name: "Sau halving: nguồn cung phát hành thấp kỷ lục, mạng lưới vẫn an toàn", dir: "pos", level: "Trung bình", tf: "Trung – dài hạn",
+          desc: "Halving 20/4/2024 giảm phần thưởng khối từ 6,25 xuống 3,125 BTC — phát hành mới chỉ ~450 BTC/ngày; nguồn cung lưu hành ~20,11 triệu trên tối đa 21 triệu BTC. Hashrate ~966 EH/s ngày 16/11 (mempool.space; CoinWarz ước tính cao hơn, ~1.140 EH/s — các tracker khác nhau), độ khó giảm −9,13% ngày 14/11 giúp các thợ đào còn lại; Puell Multiple 0,89 — thợ đào chưa đầu hàng hàng loạt. Halving tiếp theo dự kiến tháng 4/2028.",
+          src: "mempool.space qua Swan, 16/11/2026; báo cáo tổng hợp mục Nhóm 6." },
+
+        /* ---- Hệ sinh thái ---- */
+        { id: "stable", g: "eco", short: "Stablecoin co −14,2 tỷ USD/30 ngày", name: "Thanh khoản stablecoin co lại nhanh nhất kể từ 2022", dir: "neg", level: "Cao", tf: "Ngắn – trung hạn",
+          desc: "Tổng cung stablecoin 283,1 tỷ USD ngày 19/11/2026 (DefiLlama: USDT 175,0 tỷ, USDC 68,6 tỷ; USDT chiếm 61,2%) — vẫn gấp đôi mức 11/2023 (~127 tỷ) nhưng đã giảm 14,2 tỷ USD trong 30 ngày (Glassnode — mức co mạnh nhất kể từ tháng 6/2022) và giảm từ đỉnh 322,4 tỷ USD ngày 17/5/2026. Dự trữ stablecoin trên sàn ở phân vị 1% của năm qua. Đây là chỉ báo “bột khô” (dry powder) đang rời thị trường — hệ tuần hoàn của toàn bộ crypto, và altcoin thanh khoản mỏng bị ảnh hưởng nặng nhất.",
+          src: "Glassnode; DefiLlama, 19/11/2026; CryptoQuant, 17/11/2026." },
+        { id: "dom", g: "eco", short: "Dominance 58–59,5%: vốn trú vào BTC", name: "BTC dominance cao: vốn trú vào BTC, chưa có mùa altcoin", dir: "mix", level: "Trung bình", tf: "Ngắn – trung hạn",
+          desc: "BTC dominance 58,1–59,5% (19/11/2026), ETH dominance ~10,0%; Altcoin Season Index ~42–48 (trung tính). BTC giảm −31% trong 1 năm so với ETH −37% (Finnhub) — BTC được “che chắn” tương đối nhờ 3 trụ cầu riêng (ETF lớn nhất, kho bạc doanh nghiệp, dự trữ quốc gia), nhưng đợt giảm hiện tại lại do chính kênh ETF và vĩ mô của BTC dẫn dắt. DeFi TVL toàn hệ ~70,2–71,3 tỷ USD (−9% trong 7 ngày, phần lớn do giá ETH giảm).",
+          src: "Finnhub, 19/11/2026; DefiLlama, 18–19/11/2026." },
+        { id: "rwa", g: "eco", short: "RWA token hóa ~39,5 tỷ USD, gấp đôi YoY", name: "RWA tăng trưởng bất chấp giá giảm", dir: "pos", level: "Trung bình", tf: "Dài hạn",
+          desc: "Tài sản thực được token hóa (không tính stablecoin) đạt ~39,5 tỷ USD ngày 15/11/2026 (rwa.xyz, “distributed value”) — gấp đôi một năm trước; quỹ trái phiếu Kho bạc token hóa ~13,9–14,3 tỷ USD; Ethereum dẫn đầu ~35,6% RWA phân phối. Tổ chức tài chính tiếp tục xây hạ tầng on-chain ngay trong thị trường gấu — điểm sáng cấu trúc của hệ sinh thái.",
+          src: "rwa.xyz, 15/11/2026." },
+
+        /* ---- Rủi ro ---- */
+        { id: "binance", g: "risk", short: "Hack Binance 6,34 tỷ USD · cung treo 2,4–3,5 tỷ", name: "Vụ hack Binance kỷ lục và nguồn cung treo chưa xử lý", dir: "neg", level: "Cao", tf: "Ngắn – trung hạn",
+          desc: "Ngày 29/10/2026, Binance bị hack ~6,34 tỷ USD — vụ trộm crypto lớn nhất lịch sử (báo cáo sơ bộ của Binance 3/11; FBI quy cho nhóm TraderTraitor của Triều Tiên): tấn công kéo dài nhiều tháng qua phỏng vấn tuyển dụng giả, phần mềm độc hại và công cụ AI nội bộ để chiếm quyền ký ví nóng. Binance tuyên bố người dùng được bồi hoàn 100% (đã bổ sung 98% tài sản bị ảnh hưởng tính đến 31/10), ~2,85 tỷ USD bị đóng băng/chặn; DOJ ngày 12/11/2026 được tòa cho phép tịch thu/phong tỏa >1,2 tỷ USD. Nhưng khoảng 2,4–3,5 tỷ USD chưa đóng băng được và các ví trộm vẫn đang di chuyển (CoinDesk 17/11 ghi nhận hacker đã chuyển 63 triệu USD ETH sau 2 tuần im lặng) — nguồn cung tiềm ẩn (overhang) chưa được xử lý xong.",
+          src: "Binance, 3/11/2026; DOJ qua CryptoCodes, 12/11/2026; CoinDesk, 17/11/2026." },
+        { id: "legacy", g: "risk", short: "Dư âm Terra · FTX · Bybit 2022–2025", name: "Dư âm 5 năm sự cố: Terra, FTX, Bybit, Bitget", dir: "mix", level: "Trung bình", tf: "Dài hạn",
+          desc: "2022: Terra/UST sụp đổ (5/2022, ~40 tỷ USD bốc hơi) kéo theo 3AC, Celsius, Voyager và FTX phá sản 11/11/2022 (thiếu hụt ~8 tỷ USD tiền khách hàng); án tù đã tuyên: SBF 25 năm, Do Kwon 15 năm, Mashinsky 12 năm. 21/2/2025: Bybit bị hack ~1,5 tỷ USD (FBI quy cho Lazarus/Triều Tiên) — Bybit bù đắp trong 72 giờ, người dùng không thiệt hại. 9/2026: Bitget bị hack ~387,5 triệu USD, quỹ bảo vệ của sàn chi trả. Khác biệt căn bản so với FTX: các sàn giai đoạn 2025–2026 bồi hoàn đầy đủ mà không sụp đổ; nhưng niềm tin vào sàn tập trung vẫn bị tổn thương sau mỗi vụ, và chuẩn mực proof-of-reserves / tự lưu ký hiện nay đều sinh ra từ 2022.",
+          src: "Báo cáo tổng hợp mục Nhóm 8; Binance / FBI qua các nguồn được trích." },
+
+        /* ---- Chưa xác định (hiện trên bản đồ) ---- */
+        { id: "u-fed", g: "unknown", short: "Fed 9/12: tăng 25 hay 50đcb? Dot plot?", name: "Ẩn số 1 — Fed ngày 9/12/2026 sẽ làm gì?", dir: "unk", level: "Chưa xác định", tf: "Quyết định 9/12/2026",
+          desc: "Thị trường đang định giá ~90%+ khả năng Fed tăng 25đcb ngày 9/12/2026, nhưng đó là định giá — không phải quyết định. Biên bản họp 10/2026 cho thấy quyết định giữ nguyên là “sít sao” và gần như mọi thành viên đồng ý cần tăng thêm. Chưa biết: mức tăng thực tế (25 hay 50đcb), dot plot / SEP mới có báo hiệu tăng tiếp đầu 2027 hay không, và giọng điệu họp báo 14:30 ET. Đây là ẩn số có sức nặng lớn nhất trên toàn bản đồ.",
+          src: "Báo cáo mục E & G: họp FOMC 8–9/12/2026, quyết định 14:00 ET ngày 9/12 + SEP/dot plot + họp báo 14:30 ET (đã xác minh qua lịch Fed); biên bản công bố 30/12." },
+        { id: "u-data", g: "unknown", short: "PCE 25/11 · NFP 4/12 · CPI 10/12 chưa ra", name: "Ẩn số 2 — Ba số liệu kinh tế sắp công bố", dir: "unk", level: "Chưa xác định", tf: "25/11 – 10/12/2026",
+          desc: "PCE tháng 10 (25/11), báo cáo việc làm tháng 11 (4/12) và CPI tháng 11 (10/12) chưa công bố — cả ba đều có thể đổi kỳ vọng lãi suất trước và sau cuộc họp Fed. Điểm đặc biệt: CPI 10/12 ra sau quyết định Fed một ngày, và BLS vẫn thiếu số CPI theo năm cho tháng 10/2026 do khoảng trống dữ liệu thời kỳ đóng cửa chính phủ 2025.",
+          src: "Báo cáo mục E: ngày công bố đã xác minh qua lịch BLS/BEA (nhiều nguồn); kết quả chưa biết." },
+        { id: "u-hacker", g: "unknown", short: "Ví trộm Binance: xả bao nhiêu, khi nào?", name: "Ẩn số 3 — Ví trộm Binance sẽ xả hàng thế nào?", dir: "unk", level: "Chưa xác định", tf: "Đang diễn ra",
+          desc: "Khoảng 2,4–3,5 tỷ USD trong vụ hack 6,34 tỷ USD chưa đóng băng được; các ví trộm vẫn di chuyển tài sản trong tháng 11 (63 triệu USD ETH ngày 17/11). Không có cách biết trước thời điểm và quy mô xả — kịch bản tiêu cực của báo cáo gắn một điều kiện kích hoạt vào việc “ví trộm xả hàng quy mô lớn được xác nhận”.",
+          src: "Báo cáo mục Nhóm 8 & F; Binance 3/11/2026; DOJ 12/11/2026; CoinDesk 17/11/2026." },
+        { id: "u-reserve", g: "unknown", short: "Số dư dự trữ chiến lược: 198k hay 328k BTC?", name: "Ẩn số 4 — Số dư thật của Dự trữ Bitcoin chiến lược Mỹ", dir: "unk", level: "Chưa xác minh được", tf: "Chưa có kiểm toán chính thức",
+          desc: "Hai con số đang lưu hành với định nghĩa khác nhau: ~198.000 BTC (phần đã tịch thu chung thẩm, đủ điều kiện vào quỹ) so với ~307.000–328.372 BTC trong các ví liên quan chính phủ Mỹ theo Arkham — trong đó ~127.271 BTC vụ Prince Group (Chen Zhi, DOJ công bố 10/2025) vẫn đang tranh tụng tịch thu. Chưa có số liệu kiểm toán chính thức. Cũng chưa biết Bộ Tài chính có bao giờ mua thêm trên thị trường mở hay không (đến 16/11/2026: $0).",
+          src: "Báo cáo mục “Could not verify”: số dư chính thức đã kiểm toán — chưa xác minh được." },
+        { id: "u-law", g: "unknown", short: "CLARITY hồi sinh? GENIUS kịp hạn 18/1/2027?", name: "Ẩn số 5 — Hai tiến trình pháp lý còn bỏ ngỏ", dir: "unk", level: "Chưa xác định", tf: "Hạn chót 3/1/2027 & 18/1/2027",
+          desc: "CLARITY Act còn motion to reconsider tại Thượng viện — nếu không thông qua trước khi Quốc hội khóa 119 kết thúc (3/1/2027), dự luật phải giới thiệu lại từ đầu năm 2027. GENIUS Act có hiệu lực chậm nhất 18/1/2027: OCC đã xong quy tắc của mình (21/10/2026), nhưng phần của Fed/FDIC và gói BSA/AML/OFAC chưa xong — chưa biết toàn bộ gói có kịp hạn hay không.",
+          src: "Báo cáo mục Nhóm 2 & E; OCC News Release 2026-92 (xác minh lại 20/11/2026)." },
+        { id: "u-etf", g: "unknown", short: "Hạn quyết định ETF tháng 12: danh sách nào?", name: "Ẩn số 6 — Hạn quyết định ETF nào đang chờ trong tháng 12/2026?", dir: "unk", level: "Chưa xác minh được", tf: "Tháng 12/2026",
+          desc: "Báo cáo chưa xác minh được danh sách đáng tin cậy các hạn quyết định ETF cụ thể đang chờ trong tháng 12/2026. Sau khi áp tiêu chuẩn niêm yết chung từ tháng 9/2025, phần lớn ETF spot đơn tài sản đủ điều kiện không còn “hạn quyết định” kiểu cũ — nên chưa rõ còn quyết định ETF nào trong tháng 12 đủ sức tạo biến động cho BTC, và theo hướng nào.",
+          src: "Báo cáo mục Nhóm 3 & “Could not verify”: hạn quyết định ETF cụ thể đang chờ trong tháng 12/2026 — chưa xác minh được danh sách đáng tin cậy trong đợt tra cứu này." },
+        { id: "u-hype", g: "unknown", short: "Mở khóa HYPE: ngày 6 hay 29/12?", name: "Ẩn số 7 — Ngày mở khóa Hyperliquid (HYPE) chính xác là ngày nào?", dir: "unk", level: "Chưa xác minh được", tf: "6 hoặc 29/12/2026",
+          desc: "Các tracker ghi ngày mở khóa HYPE khác nhau — 6/12 so với 29/12/2026 — và báo cáo chưa xác minh được ngày đúng. Quy mô đợt mở khóa khoảng 9,9 triệu token; ngày rơi vào đầu hay cuối tháng 12 sẽ quyết định thời điểm áp lực cung altcoin xuất hiện, trong bối cảnh thanh khoản toàn thị trường đang mỏng.",
+          src: "Báo cáo mục E & “Could not verify”: mở khóa HYPE ~9,9 triệu token, các tracker ghi ngày khác nhau (6/12 vs 29/12) — chưa xác minh được ngày đúng." },
+        { id: "u-l2tvl", g: "unknown", short: "TVL Layer 2 tổng hợp: con số thật là bao nhiêu?", name: "Ẩn số 8 — TVL tổng hợp mới nhất của các Layer 2 là bao nhiêu?", dir: "unk", level: "Chưa xác minh được", tf: "Chưa có số liệu thống nhất",
+          desc: "Số liệu TVL Layer 2 tổng hợp mới nhất chưa xác minh được trong đợt tra cứu của báo cáo. Các Layer 2 của Ethereum (Arbitrum, Base…) vẫn là hạ tầng mở rộng chính của hệ sinh thái, nhưng thiếu một con số TVL thống nhất thì chưa đánh giá được vốn đang ở lại hay đang rút khỏi lớp hạ tầng này — một chỉ báo phụ cho sức khỏe của toàn hệ quanh BTC.",
+          src: "Báo cáo mục Nhóm 7: “Số liệu TVL L2 tổng hợp mới nhất chưa xác minh được trong đợt tra cứu này.”" },
+        { id: "u-ath", g: "unknown", short: "Đỉnh 10/2025 chính xác: 124,8k hay 126,2k?", name: "Ẩn số 9 — Đỉnh tháng 10/2025 chính xác là bao nhiêu?", dir: "unk", level: "Chưa xác minh được", tf: "Chưa thống nhất giữa các nguồn",
+          desc: "Các nguồn ghi đỉnh tháng 10/2025 ở các mức khác nhau: 124.773 / 126.080 / ~126.200 USD, tùy sàn và chỉ số được dùng. Chênh lệch này không đổi bức tranh “BTC đã giảm khoảng một nửa từ đỉnh”, nhưng quyết định con số tham chiếu chính xác cho mọi phép tính mức giảm từ đỉnh và các mốc hồi phục phía trên.",
+          src: "Báo cáo mục “Could not verify”: ATH chính xác tháng 10/2025 — các nguồn ghi 124.773 / 126.080 / ~126.200 USD (khác sàn/chỉ số)." }
+      ];
+
+      var TIMELINE = [
+        { d: "24/11/2026", e: "<b>Mở khóa cliff 1 năm của Monad (MON)</b> — ~16,6 tỷ MON (~440 triệu USD theo giá 9/2026; các tracker chênh nhau về chi tiết, giá trị USD đã cũ)", st: "Lịch dự án", cls: "" },
+        { d: "25/11/2026", e: "<b>PCE tháng 10/2026</b> — chỉ số lạm phát ưa thích của Fed + GDP Q3 sửa đổi; Beige Book của Fed", st: "Đã xác minh lịch", cls: "hot" },
+        { d: "~25–27/11", e: "Điều chỉnh độ khó đào BTC — ước tính +7% theo một nguồn; ngày chính xác phụ thuộc tốc độ khối", st: "Ước tính", cls: "" },
+        { d: "30/11/2026", e: "<b>Hiệu lực loại trừ MSCI</b> — Strategy/Metaplanet/Upexi rời chỉ số sau đóng cửa phiên; quỹ chỉ số phải bán xong trước mốc này", st: "Đã xảy ra quyết định", cls: "hot" },
+        { d: "1/12/2026", e: "JOLTS tháng 10 · Mở khóa SUI hàng tháng (~82 triệu SUI theo DefiLlama — nguồn chính thức Sui cho con số thấp hơn nhiều, hai nguồn chênh lệch lớn)", st: "Một phần xác minh", cls: "" },
+        { d: "2/12/2026", e: "ADP việc làm tư nhân tháng 11", st: "Lịch", cls: "" },
+        { d: "4/12/2026", e: "<b>Báo cáo việc làm tháng 11/2026 (NFP, thất nghiệp)</b> — số liệu cuối cùng trước họp Fed", st: "Đã xác minh lịch BLS", cls: "hot" },
+        { d: "6 hoặc 29/12", e: "Mở khóa Hyperliquid (HYPE) ~9,9 triệu token — <b>các tracker ghi ngày khác nhau, chưa xác minh được ngày đúng</b>", st: "Chưa xác minh", cls: "open" },
+        { d: "8–9/12/2026", e: "<b>Họp FOMC cuối năm</b> — quyết định 14:00 ET ngày 9/12 + SEP/dot plot mới + họp báo 14:30 ET; biên bản công bố 30/12", st: "Đã xác minh lịch Fed", cls: "hot" },
+        { d: "10/12/2026", e: "<b>CPI tháng 11/2026</b> — công bố sau quyết định Fed đúng một ngày", st: "Đã xác minh lịch BLS", cls: "hot" },
+        { d: "16/12/2026", e: "Mở khóa Arbitrum (ARB) hàng tháng ~92,7 triệu ARB", st: "Tracker", cls: "" },
+        { d: "3/1/2027", e: "Hạn chót Quốc hội khóa 119 — dự luật chưa thông qua (BITCOIN Act/CLARITY) phải giới thiệu lại", st: "Theo phân tích pháp lý", cls: "" },
+        { d: "18/1/2027", e: "<b>GENIUS Act có hiệu lực chậm nhất</b> vào ngày này", st: "Đã xác minh (luật)", cls: "" },
+        { d: "4/2028", e: "Halving tiếp theo (khối 1.050.000, phần thưởng 1,5625 BTC)", st: "Dự kiến theo giao thức", cls: "" }
+      ];
+
+      /* ================= Build the map ================= */
+      var CX = 622, CY = 505, CR = 104;
+      var CARD_W = 252, PILL_H = 34, PILL_GAP = 5, HEAD_H = 46, PAD_B = 10;
+
+      var svg = document.getElementById("mapSvg");
+      var defs = el("defs", {}, svg);
+      Object.keys(CSSVAR).forEach(function (k) {
+        var marker = el("marker", { id: "arrow-" + k, viewBox: "0 0 10 10", refX: 8, refY: 5, markerWidth: 7, markerHeight: 7, orient: "auto-start-reverse" }, defs);
+        el("path", { d: "M0,0 L10,5 L0,10 z", fill: CSSVAR[k] }, marker);
+      });
+
+      var byGroup = {};
+      FACTORS.forEach(function (f) { (byGroup[f.g] = byGroup[f.g] || []).push(f); });
+
+      var clusterEls = {};
+      Object.keys(GROUPS).forEach(function (key) {
+        var g = GROUPS[key];
+        var items = byGroup[key] || [];
+        var h = HEAD_H + items.length * (PILL_H + PILL_GAP) + PAD_B;
+        g.w = CARD_W; g.h = h; g.cx = g.x + CARD_W / 2; g.cy = g.y + h / 2;
+
+        /* flow line card -> center */
+        var dx = CX - g.cx, dy = CY - g.cy, len = Math.sqrt(dx * dx + dy * dy);
+        var ux = dx / len, uy = dy / len;
+        var sx = g.cx + ux * (Math.min(CARD_W, h) / 2 + 6), sy = g.cy + uy * (Math.min(CARD_W, h) / 2 + 6);
+        var ex = CX - ux * (CR + 10), ey = CY - uy * (CR + 10);
+        var line = el("path", {
+          d: "M" + sx.toFixed(1) + "," + sy.toFixed(1) + " L" + ex.toFixed(1) + "," + ey.toFixed(1),
+          "class": "flow", stroke: CSSVAR[g.net], "marker-end": "url(#arrow-" + g.net + ")"
+        }, svg);
+        if (g.net === "unk" || g.net === "mix") line.setAttribute("stroke-dasharray", g.net === "unk" ? "7 6" : "1 0");
+        if (g.net === "mix") line.setAttribute("stroke-dasharray", "10 5");
+
+        var cg = el("g", { "class": "cluster", "data-group": key }, svg);
+        clusterEls[key] = cg;
+        el("rect", { x: g.x, y: g.y, width: CARD_W, height: h, rx: 12, "class": "cluster-card" + (g.unknown ? " unknown" : "") }, cg);
+        txt(cg, g.x + 14, g.y + 21, g.name, "g-title");
+        var net = txt(cg, g.x + 14, g.y + 38, "", "g-net");
+        net.setAttribute("fill", CSSVAR[g.net]);
+        net.textContent = (g.net === "unk" ? "? " : g.net === "neg" ? "▼ " : g.net === "pos" ? "▲ " : "◆ ") + "Lực ròng: " + g.netLabel;
+
+        items.forEach(function (f, i) {
+          var py = g.y + HEAD_H + i * (PILL_H + PILL_GAP);
+          var pg = el("g", { "class": "pill", "data-id": f.id, "data-dir": f.dir, tabindex: "0", role: "button",
+            "aria-label": f.name + " — " + DIR[f.dir].label }, cg);
+          el("rect", { x: g.x + 10, y: py, width: CARD_W - 20, height: PILL_H, rx: PILL_H / 2 }, pg);
+          var dot = el("circle", { cx: g.x + 26, cy: py + PILL_H / 2, r: 8, fill: CSSVAR[f.dir] }, pg);
+          var gt = txt(pg, g.x + 26, py + PILL_H / 2 + 4, DIR[f.dir].glyph, "", "middle");
+          gt.setAttribute("fill", "#fff"); gt.setAttribute("style", "font:800 10px 'Be Vietnam Pro',sans-serif");
+          var label = f.short.length > 33 ? f.short.slice(0, 32) + "…" : f.short;
+          txt(pg, g.x + 42, py + PILL_H / 2 + 4.5, label, "");
+          pg.addEventListener("click", function () { selectFactor(f.id, false); });
+          pg.addEventListener("keydown", function (ev) { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); selectFactor(f.id, false); } });
+          f._el = pg;
+        });
+      });
+
+      /* center node */
+      var center = el("g", {}, svg);
+      el("circle", { cx: CX, cy: CY, r: CR + 14, fill: "none", stroke: CSSVAR.unk, "stroke-width": 1, "stroke-dasharray": "3 6", opacity: .6 }, center);
+      el("circle", { cx: CX, cy: CY, r: CR, fill: "#f7931a" }, center);
+      el("circle", { cx: CX, cy: CY, r: CR, fill: "none", stroke: "#b96a06", "stroke-width": 3 }, center);
+      txt(center, CX, CY - 34, "₿", "btc-glyph", "middle");
+      txt(center, CX, CY + 16, "62.144", "center-price", "middle");
+      txt(center, CX, CY + 36, "USD · 19/11/2026", "center-sub", "middle").setAttribute("fill", "#5b3a08");
+      txt(center, CX, CY + 56, "≈ −50% từ đỉnh 10/2025", "center-sub", "middle").setAttribute("fill", "#5b3a08");
+      txt(center, CX, CY - CR - 26, "BITCOIN", "", "middle").setAttribute("style", "font:800 15px 'Be Vietnam Pro',sans-serif;letter-spacing:.22em;fill:var(--ink)");
+
+      /* ================= Detail panel + selection ================= */
+      var dName = document.getElementById("dName"), dBadges = document.getElementById("dBadges"),
+          dDesc = document.getElementById("dDesc"), dSrc = document.getElementById("dSrc"),
+          panel = document.getElementById("detailPanel");
+      var byId = {};
+      FACTORS.forEach(function (f) { byId[f.id] = f; });
+      var current = null;
+
+      function badge(cls, text) { return '<span class="badge ' + cls + '">' + text + "</span>"; }
+      function selectFactor(id, scroll) {
+        var f = byId[id]; if (!f) return;
+        current = id;
+        FACTORS.forEach(function (x) { if (x._el) x._el.classList.toggle("sel", x.id === id); });
+        document.querySelectorAll(".irow").forEach(function (r) { r.classList.toggle("sel", r.getAttribute("data-id") === id); });
+        dName.textContent = f.name;
+        dBadges.innerHTML =
+          badge(f.dir, DIR[f.dir].glyph + " " + DIR[f.dir].label) +
+          badge("plain", "Nhóm: " + GROUPS[f.g].name.replace(/^[?0-9] · /, "")) +
+          badge("plain", "Mức độ tác động: " + f.level) +
+          badge("plain", "Khung: " + f.tf);
+        dDesc.textContent = f.desc;
+        dSrc.innerHTML = "<b>Nguồn:</b> ";
+        dSrc.appendChild(document.createTextNode(f.src));
+        panel.style.borderLeftColor = CSSVAR[f.dir];
+        if (scroll) panel.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+
+      /* ================= Filters ================= */
+      document.querySelectorAll(".fbtn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          document.querySelectorAll(".fbtn").forEach(function (b) { b.setAttribute("aria-pressed", "false"); });
+          btn.setAttribute("aria-pressed", "true");
+          var mode = btn.getAttribute("data-filter");
+          FACTORS.forEach(function (f) {
+            if (!f._el) return;
+            f._el.classList.toggle("dimmed", mode !== "all" && f.dir !== mode);
+          });
+          Object.keys(GROUPS).forEach(function (key) {
+            var items = byGroup[key] || [];
+            var anyVisible = items.some(function (f) { return mode === "all" || f.dir === mode; });
+            clusterEls[key].classList.toggle("dimmed", mode !== "all" && !anyVisible);
+          });
+        });
+      });
+
+      /* ================= Factor index ================= */
+      var grid = document.getElementById("indexGrid");
+      Object.keys(GROUPS).forEach(function (key) {
+        var g = GROUPS[key];
+        var box = document.createElement("div");
+        box.className = "card igroup" + (g.unknown ? " unknown" : "");
+        var head = document.createElement("h3");
+        head.innerHTML = "";
+        var nm = document.createElement("span"); nm.textContent = g.name; head.appendChild(nm);
+        var net = document.createElement("span"); net.className = "net";
+        net.style.color = CSSVAR[g.net];
+        net.textContent = (g.net === "unk" ? "? " : g.net === "neg" ? "▼ " : g.net === "pos" ? "▲ " : "◆ ") + g.netLabel;
+        head.appendChild(net);
+        box.appendChild(head);
+        (byGroup[key] || []).forEach(function (f) {
+          var b = document.createElement("button");
+          b.className = "irow"; b.setAttribute("data-id", f.id);
+          b.setAttribute("aria-label", f.name);
+          var gl = document.createElement("span"); gl.className = "glyph " + f.dir; gl.textContent = DIR[f.dir].glyph;
+          var tx = document.createElement("span");
+          var t = document.createElement("span"); t.className = "t"; t.textContent = f.name;
+          var m = document.createElement("span"); m.className = "m"; m.textContent = "Tác động " + f.level + " · " + f.tf;
+          tx.appendChild(t); tx.appendChild(document.createElement("br")); tx.appendChild(m);
+          b.appendChild(gl); b.appendChild(tx);
+          b.addEventListener("click", function () { selectFactor(f.id, true); });
+          box.appendChild(b);
+        });
+        grid.appendChild(box);
+      });
+
+      /* ================= Unknown cards ================= */
+      var ug = document.getElementById("unkGrid");
+      FACTORS.filter(function (f) { return f.g === "unknown"; }).forEach(function (f) {
+        var c = document.createElement("article"); c.className = "ucard";
+        c.innerHTML = '<p class="q">?</p>';
+        var h = document.createElement("h3"); h.textContent = f.name.replace(/^Ẩn số \d+ — /, ""); c.appendChild(h);
+        var p = document.createElement("p"); p.textContent = f.desc; c.appendChild(p);
+        var w = document.createElement("p"); w.className = "when";
+        w.innerHTML = "<b>Mốc sẽ rõ:</b> "; w.appendChild(document.createTextNode(f.tf + " · " + f.src)); c.appendChild(w);
+        ug.appendChild(c);
+      });
+
+      /* ================= Timeline ================= */
+      var tl = document.getElementById("timeline");
+      TIMELINE.forEach(function (t) {
+        var row = document.createElement("div"); row.className = "trow";
+        var d = document.createElement("span"); d.className = "d"; d.textContent = t.d;
+        var e = document.createElement("span"); e.className = "e"; e.innerHTML = t.e;
+        var s = document.createElement("span"); s.className = "st " + t.cls; s.textContent = t.st;
+        row.appendChild(d); row.appendChild(e); row.appendChild(s);
+        tl.appendChild(row);
+      });
+
+      /* ================= Price chart ================= */
+      (function buildChart() {
+        var DATA = [["2021-01",33092.98],["2021-02",45135.66],["2021-03",58740.55],["2021-04",57694.27],["2021-05",37253.81],["2021-06",35045],["2021-07",41461.83],["2021-08",47100.89],["2021-09",43824.1],["2021-10",61299.8],["2021-11",56950.56],["2021-12",46216.93],["2022-01",38466.9],["2022-02",43160],["2022-03",45510.34],["2022-04",37630.8],["2022-05",31801.04],["2022-06",19942.21],["2022-07",23293.32],["2022-08",20050.02],["2022-09",19422.61],["2022-10",20490.74],["2022-11",17163.64],["2022-12",16542.4],["2023-01",23125.13],["2023-02",23141.57],["2023-03",28465.36],["2023-04",29233.21],["2023-05",27210.35],["2023-06",30472],["2023-07",29232.25],["2023-08",25940.78],["2023-09",26962.56],["2023-10",34639.77],["2023-11",37723.96],["2023-12",42283.58],["2024-01",42580],["2024-02",61130.98],["2024-03",71280.01],["2024-04",60672],["2024-05",67540.01],["2024-06",62772.01],["2024-07",64628],["2024-08",58973.99],["2024-09",63327.59],["2024-10",70292.01],["2024-11",96407.99],["2024-12",93576],["2025-01",102429.56],["2025-02",84349.94],["2025-03",82550.01],["2025-04",94172],["2025-05",104591.88],["2025-06",107146.5],["2025-07",115764.08],["2025-08",108246.35],["2025-09",114048.93],["2025-10",109608.01],["2025-11",90360],["2025-12",87648.22],["2026-01",78741.09],["2026-02",66973.26],["2026-03",68284.48],["2026-04",76346.57],["2026-05",73674.39],["2026-06",58624.71],["2026-07",62887.88],["2026-08",78581.29],["2026-09",83078],["2026-10",77582.02],["2026-11",62833.53]];
+        var W = 760, H = 300, PL = 52, PR = 14, PT = 26, PB = 30;
+        var iw = W - PL - PR, ih = H - PT - PB, MAX = 135000;
+        var cs = document.getElementById("chartSvg");
+        function X(i) { return PL + (i / (DATA.length - 1)) * iw; }
+        function Y(v) { return PT + ih - (v / MAX) * ih; }
+        [0, 30000, 60000, 90000, 120000].forEach(function (v) {
+          el("line", { x1: PL, y1: Y(v), x2: W - PR, y2: Y(v), "class": "grid-line" }, cs);
+          txt(cs, PL - 8, Y(v) + 4, v === 0 ? "0" : (v / 1000) + "k", "axis-lab", "end");
+        });
+        for (var yr = 2021; yr <= 2026; yr++) {
+          var idx = (yr - 2021) * 12;
+          txt(cs, X(idx), H - 8, String(yr), "axis-lab", "middle");
+          el("line", { x1: X(idx), y1: PT, x2: X(idx), y2: PT + ih, "class": "grid-line", opacity: .5 }, cs);
+        }
+        var pts = DATA.map(function (d, i) { return X(i).toFixed(1) + "," + Y(d[1]).toFixed(1); }).join(" ");
+        el("polygon", { points: PL + "," + (PT + ih) + " " + pts + " " + X(DATA.length - 1) + "," + (PT + ih), "class": "price-area" }, cs);
+        el("polyline", { points: pts, "class": "price-line" }, cs);
+        /* halving annotation (2024-04 -> idx 39) */
+        var hi = 39;
+        el("line", { x1: X(hi), y1: Y(DATA[hi][1]) - 6, x2: X(hi), y2: PT + 4, "class": "anno-line" }, cs);
+        txt(cs, X(hi), PT - 6, "Halving 20/4/2024", "anno", "middle");
+        /* ATH annotation (2025-10 -> idx 57) */
+        var ai = 57;
+        el("circle", { cx: X(ai), cy: Y(DATA[ai][1]), r: 4, fill: "#f7931a", stroke: "var(--surface)", "stroke-width": 1.5 }, cs);
+        txt(cs, X(ai) - 6, Y(DATA[ai][1]) - 12, "Đỉnh 10/2025: 124,8–126,2k (tùy nguồn)", "anno", "end");
+        /* now annotation */
+        var li = DATA.length - 1;
+        el("circle", { cx: X(li), cy: Y(DATA[li][1]), r: 4.5, fill: "#c23333", stroke: "var(--surface)", "stroke-width": 1.5 }, cs);
+        txt(cs, X(li) - 4, Y(DATA[li][1]) + 22, "11/2026: ~62,1k", "anno", "end");
+        /* -70% scenario level (37.824k from the 126.080k peak) */
+        var crashY = Y(37824);
+        var crashLine = el("line", { x1: PL, y1: crashY, x2: W - PR, y2: crashY, stroke: CSSVAR.neg, "stroke-width": 1.4, "stroke-dasharray": "6 4" }, cs);
+        txt(cs, PL + 6, crashY - 7, "Kịch bản −70%: 37,8k (lưới 37.961)", "anno", "start").setAttribute("fill", CSSVAR.neg);
+      })();
+
+      selectFactor("fed", false);
+    </script>
+  </body>
+</html>
