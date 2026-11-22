@@ -165,6 +165,10 @@
       .detail p.desc { margin: 6px 0 10px; color: var(--ink-2); max-width: 95ch; }
       .detail .src { font-size: 13px; color: var(--muted); margin: 0; }
       .detail .src b { color: var(--ink-2); font-weight: 600; }
+      .pred-box { background: var(--amber-soft); border: 1px solid var(--amber); border-radius: 10px; padding: 12px 14px; margin: 0 0 12px; max-width: 95ch; }
+      .pred-box .pred-lab { font-size: 11.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--amber); margin: 0 0 4px; }
+      .pred-box .pred-title { font-size: 15.5px; font-weight: 800; margin: 0 0 5px; line-height: 1.35; }
+      .pred-box .pred-text { font-size: 14.5px; color: var(--ink-2); margin: 0; }
 
       /* ---------- Chart ---------- */
       .chart-frame { padding: 18px 18px 10px; }
@@ -209,6 +213,10 @@
       .ucard p { margin: 0 0 8px; font-size: 14px; color: var(--ink-2); }
       .ucard .when { font-size: 12.5px; color: var(--muted); margin: 0; }
       .ucard .when b { color: var(--amber); font-weight: 700; }
+      .ucard .pred { background: var(--amber-soft); border: 1px solid var(--amber); border-radius: 8px; padding: 10px 12px; margin: 0 0 10px; }
+      .ucard .pred .pred-lab { font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--amber); margin: 0 0 3px; }
+      .ucard .pred .pred-title { font-size: 14.5px; font-weight: 800; margin: 0 0 4px; line-height: 1.35; }
+      .ucard .pred .pred-text { font-size: 13.5px; color: var(--ink-2); margin: 0; }
 
       /* ---------- Timeline ---------- */
       .timeline { padding: 6px 20px; }
@@ -318,7 +326,7 @@
         html { scroll-behavior: auto; }
         * { transition: none !important; }
       }
-    
+
       .site-nav{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 18px}
       .site-nav a{padding:7px 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink-2);text-decoration:none;font-weight:600;font-size:14px;line-height:1.2}
       .site-nav a:hover{border-color:var(--line-strong);color:var(--ink)}
@@ -344,20 +352,22 @@
         </p>
         <p class="snapshot-note">
           Ảnh chụp dữ liệu tại <strong>19–20/11/2026</strong>, tổng hợp từ báo cáo phân tích thị trường crypto tháng 11/2026.
+          <strong>Giá BTC đã cập nhật ngày 21/11/2026</strong> (xem ô số liệu đầu tiên và tâm bản đồ); các số liệu còn lại giữ nguyên ảnh chụp của báo cáo.
+          <strong>Dự đoán của Jimmy cho cả 9 ẩn số đã được ghi lên bản đồ ngày 21/11/2026</strong> — xem mục “Ẩn số” và khung chi tiết của từng ẩn số để đối chiếu khi sự kiện xảy ra.
           Đây là bản đồ phân tích, <strong>không phải khuyến nghị mua/bán</strong>.
         </p>
       </header>
 
-      <div class="stats" role="list" aria-label="Số liệu chính tại 19/11/2026">
+      <div class="stats" role="list" aria-label="Số liệu chính — giá BTC cập nhật 21/11/2026, các số liệu khác tại 19/11/2026">
         <div class="stat" role="listitem">
-          <p class="lab">Giá BTC · 19/11/2026</p>
-          <p class="val mono">62.144 <span style="font-size:13px">USD</span></p>
-          <p class="sub">−0,75% ngày · −23,14% tháng · −31,35% năm (Binance/Finnhub)</p>
+          <p class="lab">Giá BTC · 21/11/2026</p>
+          <p class="val mono">59.128 <span style="font-size:13px">USD</span></p>
+          <p class="sub">Spot 21:10 giờ LA (Binance/Finnhub) · −4,9% so với 62.144 ngày 19/11 · Trong ngày 21/11 từng chạm 55.130 — thấp nhất kể từ 9/2024 — rồi hồi lại trên 59.000</p>
         </div>
         <div class="stat" role="listitem">
           <p class="lab">Từ đỉnh 10/2025</p>
-          <p class="val down mono">≈ −50%</p>
-          <p class="sub">Đỉnh: 124.773–126.200 USD tùy nguồn — chưa thống nhất</p>
+          <p class="val down mono">≈ −53%</p>
+          <p class="sub">Đỉnh: 124.773–126.200 USD tùy nguồn — Jimmy dự đoán: <b>126.200 USD</b></p>
         </div>
         <div class="stat" role="listitem">
           <p class="lab">Fear &amp; Greed</p>
@@ -415,6 +425,7 @@
           </div>
           <div class="d-head" id="dBadges"></div>
           <p class="desc" id="dDesc"></p>
+          <div id="dPred"></div>
           <p class="src" id="dSrc"></p>
         </div>
       </section>
@@ -429,6 +440,7 @@
             stablecoin co lại và vụ hack Binance. Ngược lại, cả 2 yếu tố tích cực mức “Cao” (hạ tầng ETF, khung pháp lý rõ ràng hơn)
             đều là <strong>cấu trúc dài hạn</strong>: chúng giữ nền cho BTC nhưng chưa tạo lực mua ngay lúc này.
             Riêng cụm “chưa xác định” là phần có thể lật cán cân theo cả hai phía — Fed 9/12 và ví trộm Binance là hai ẩn số lớn nhất.
+            <strong>Dự đoán của Jimmy (21/11/2026) cho cụm này nghiêng hẳn về phía đè nặng kéo dài:</strong> Fed tăng tiếp kèm dot plot diều hâu hơn, bộ ba dữ liệu không đổi hướng Fed, ví Binance thành “nắp đậy” mọi đợt hồi, dự trữ Mỹ không mua thêm, CLARITY kẹt, ETF mới được duyệt mà không có dòng tiền, TVL Layer 2 giảm — chỉ HYPE được đánh giá là không đáng kể với BTC.
           </p>
           <div class="bar" role="img" aria-label="Cán cân 24 yếu tố đã xác định trên bản đồ: 12 tiêu cực, 7 hai chiều, 5 tích cực; ngoài ra có 9 ẩn số chưa xác định">
             <i class="b-neg" style="width:50%"></i><i class="b-mix" style="width:29%"></i><i class="b-pos" style="width:21%"></i>
@@ -448,7 +460,7 @@
         </p>
         <div class="card chart-frame">
           <svg id="chartSvg" viewBox="0 0 760 300" role="img" aria-label="Biểu đồ giá đóng cửa hàng tháng của Bitcoin từ tháng 1/2021 đến tháng 11/2026, đỉnh khoảng tháng 10/2025 rồi giảm về khoảng 62 nghìn đô"></svg>
-          <p class="chart-note">Giá đóng cửa theo tháng, dữ liệu finance đi kèm báo cáo (lấy 19/11/2026 20:43 UTC). Điểm tháng 11/2026 là dữ liệu tính đến 19/11; giá spot cùng thời điểm: 62.144 USD.</p>
+          <p class="chart-note">Giá đóng cửa theo tháng, dữ liệu finance đi kèm báo cáo (lấy 19/11/2026 20:43 UTC). Điểm tháng 11/2026 là dữ liệu tính đến 19/11; giá spot đã cập nhật ngày 21/11/2026 (21:10 giờ LA, Binance/Finnhub): 59.128 USD.</p>
         </div>
       </section>
 
@@ -461,10 +473,11 @@
 
       <!-- ================= UNKNOWN ================= -->
       <section class="block" aria-labelledby="unk-h">
-        <h2 class="sec" id="unk-h"><span class="tag">Ẩn số</span> 9 ẩn số: biết chắc sẽ tác động — chưa biết sẽ xảy ra thế nào</h2>
+        <h2 class="sec" id="unk-h"><span class="tag">Ẩn số</span> 9 ẩn số — và dự đoán của Jimmy (ghi 21/11/2026)</h2>
         <p class="sec-sub">
-          Bản đồ có đúng 9 ẩn số, tất cả đều là nút trong cụm “Chưa xác định” trên bản đồ. Đây là phần cố tình để mở: các biến số mà báo cáo ghi nhận là <strong>chưa xác minh được</strong> hoặc
-          <strong>chưa xảy ra</strong>. Mỗi thẻ ghi rõ vì sao chưa biết và mốc nào sẽ cho câu trả lời — phần việc dự đoán thuộc về người đọc bản đồ.
+          Bản đồ có đúng 9 ẩn số, tất cả đều là nút trong cụm “Chưa xác định” trên bản đồ: các biến số mà báo cáo ghi nhận là <strong>chưa xác minh được</strong> hoặc
+          <strong>chưa xảy ra</strong>. Mỗi thẻ dưới đây giữ nguyên phần “vì sao chưa biết” và mốc sẽ cho câu trả lời, kèm <strong>dự đoán của Jimmy điền ngày 21/11/2026</strong> cùng luận điểm đi kèm —
+          để đối chiếu trực tiếp với kết quả thật ở từng mốc kiểm tra. Nhìn tổng thể, bộ dự đoán nghiêng về phía thắt chặt kéo dài: Fed chưa xong việc, dòng tiền chưa quay lại, các lực đỡ (dự trữ quốc gia, pháp lý, ETF mới) đều chưa thành tiền thật.
         </p>
         <div class="unk-grid" id="unkGrid"></div>
       </section>
@@ -515,7 +528,7 @@
         <div class="card crash">
           <div class="crash-head">
             <h3>Kịch bản <span class="pct">−70%</span> từ đỉnh 10/2025 → quanh 37.800 USD</h3>
-            <p>Tính từ đỉnh 126.080 USD (mức hay được dùng nhất trong khoảng đỉnh chưa thống nhất 124.773–126.200): 126.080 × 30% = <strong>37.824 USD</strong>. Con số này gần như trùng với phép ngoại suy lịch sử trong báo cáo — mẫu hình giảm &gt;70% của các chu kỳ trước tương đương ~37.400 USD (ngoại suy, không phải dự báo của tổ chức nào).</p>
+            <p>Tính từ đỉnh 126.080 USD (mức hay được dùng nhất trong khoảng đỉnh chưa thống nhất 124.773–126.200): 126.080 × 30% = <strong>37.824 USD</strong>. Con số này gần như trùng với phép ngoại suy lịch sử trong báo cáo — mẫu hình giảm &gt;70% của các chu kỳ trước tương đương ~37.400 USD (ngoại suy, không phải dự báo của tổ chức nào). <strong>Theo dự đoán của Jimmy (đỉnh 126.200 USD, ghi 21/11/2026): mốc −70% = 37.860 USD và mốc −60% = 50.480 USD</strong> — mức lưới gần nhất không đổi (37.961 và 50.452,08).</p>
           </div>
 
           <div class="crash-stats" role="list" aria-label="Các mốc của kịch bản trừ 70 phần trăm">
@@ -535,16 +548,16 @@
               <p class="sub">Dưới: 37.500 (cách −324) · trên kế tiếp: 38.465,7</p>
             </div>
             <div class="crash-stat" role="listitem">
-              <p class="lab">Từ giá hiện tại 62.144</p>
-              <p class="val mono">−39,1% nữa</p>
-              <p class="sub">62.144 → 37.824 · tức mất thêm ~24.320 USD</p>
+              <p class="lab">Từ giá hiện tại 59.128</p>
+              <p class="val mono">−36,0% nữa</p>
+              <p class="sub">59.128 → 37.824 · tức mất thêm ~21.304 USD</p>
             </div>
           </div>
 
           <div class="crash-body">
             <h4>Thang giá phải đi qua — không nhảy thẳng xuống −70%</h4>
             <div class="ladder" role="list" aria-label="Thang giá từ hiện tại xuống mốc trừ 70 phần trăm">
-              <div class="rung now" role="listitem"><p class="p">62.144</p><p class="t">Giá hiện tại · 19/11/2026 · đã ≈ −50% từ đỉnh</p></div>
+              <div class="rung now" role="listitem"><p class="p">59.128</p><p class="t">Giá hiện tại · 21/11/2026 · đã ≈ −53% từ đỉnh · trong ngày từng chạm 55.130</p></div>
               <div class="rung warn" role="listitem"><p class="p">60.000</p><p class="t">Đóng cửa tuần dưới mốc này = mở kịch bản tiêu cực; dưới đó là vùng thanh lý dây chuyền</p></div>
               <div class="rung warn" role="listitem"><p class="p">58.566</p><p class="t">Đáy đóng cửa năm 2026 (30/6)</p></div>
               <div class="rung bad" role="listitem"><p class="p">50.452,08</p><p class="t">Mốc −60%: tính toán 50.432 · mức lưới số 93/148, chênh chỉ +20 USD</p></div>
@@ -571,7 +584,7 @@
               </article>
               <article class="role">
                 <div class="r-head"><h5>3 · Dòng tiền tổ chức</h5><span class="tagrole">Động cơ chính</span></div>
-                <p>ETF BTC đã rút <b>−2,9 tỷ USD</b> từ đầu tháng 11; giá vốn trung bình của người giữ ETF là 82.300 — ở 62.144 họ đã lỗ ~−24%, ở 37.824 là <b>−54%</b>, nên áp lực rút vốn sẽ tăng, không giảm. Cộng thêm <b>MSCI loại Strategy/Metaplanet/Upexi</b> khỏi chỉ số (hiệu lực sau đóng cửa 30/11) buộc quỹ thụ động bán MSTR. Strategy có giá vốn 75.452 — ở 37.824 là <b>−50%</b>, STRC đã thủng mệnh giá, kênh huy động vốn để mua BTC coi như đóng.</p>
+                <p>ETF BTC đã rút <b>−2,9 tỷ USD</b> từ đầu tháng 11; giá vốn trung bình của người giữ ETF là 82.300 — ở 59.128 (giá 21/11) họ đã lỗ ~−28%, ở 37.824 là <b>−54%</b>, nên áp lực rút vốn sẽ tăng, không giảm. Cộng thêm <b>MSCI loại Strategy/Metaplanet/Upexi</b> khỏi chỉ số (hiệu lực sau đóng cửa 30/11) buộc quỹ thụ động bán MSTR. Strategy có giá vốn 75.452 — ở 37.824 là <b>−50%</b>, STRC đã thủng mệnh giá, kênh huy động vốn để mua BTC coi như đóng.</p>
               </article>
               <article class="role">
                 <div class="r-head"><h5>5 · Phái sinh &amp; tâm lý</h5><span class="tagrole">Bộ khuếch đại</span></div>
@@ -641,7 +654,7 @@
           <li>Binance — báo cáo sơ bộ vụ hack 6,34 tỷ USD, 3/11/2026: <a href="https://www.binance.com/en/square/post/11-03-2026-binance-initial-report-fbi-attributes-6-34-billion-attack-to-north-korea-which-used-fake-job-interviews-and-an-ai-tool-to-reach-hot-wallets-users-fully-covered-384321660235967" target="_blank" rel="noopener">Binance initial report</a></li>
           <li>On-chain: <a href="https://bgeometrics.com/signals/" target="_blank" rel="noopener">BGeometrics signals</a> · <a href="https://cryptoquant.com/insights/quicktake/6afc7bc4d38bc874c0606bd3-Exchange-BTC-Reserves-Reach-the-98th-Percentile-of-the-Past-Year-at-285M-as-BTC-" target="_blank" rel="noopener">CryptoQuant Quicktake — dự trữ sàn 2,85 triệu BTC</a> · Stablecoin: <a href="https://defillama.com/stablecoins" target="_blank" rel="noopener">DefiLlama Stablecoins</a></li>
         </ul>
-        <p>Bản đồ là ảnh chụp tại thời điểm báo cáo (19–20/11/2026) và không tự cập nhật. Các mốc trong mục “Sắp tới” sẽ thay đổi bức tranh khi chúng xảy ra.</p>
+        <p>Bản đồ là ảnh chụp tại thời điểm báo cáo (19–20/11/2026) và không tự cập nhật; riêng giá BTC đã được cập nhật thủ công ngày 21/11/2026 (59.128 USD, spot 21:10 giờ LA, Binance/Finnhub). Các mốc trong mục “Sắp tới” sẽ thay đổi bức tranh khi chúng xảy ra.</p>
       </footer>
     </div>
 
@@ -774,30 +787,48 @@
         /* ---- Chưa xác định (hiện trên bản đồ) ---- */
         { id: "u-fed", g: "unknown", short: "Fed 9/12: tăng 25 hay 50đcb? Dot plot?", name: "Ẩn số 1 — Fed ngày 9/12/2026 sẽ làm gì?", dir: "unk", level: "Chưa xác định", tf: "Quyết định 9/12/2026",
           desc: "Thị trường đang định giá ~90%+ khả năng Fed tăng 25đcb ngày 9/12/2026, nhưng đó là định giá — không phải quyết định. Biên bản họp 10/2026 cho thấy quyết định giữ nguyên là “sít sao” và gần như mọi thành viên đồng ý cần tăng thêm. Chưa biết: mức tăng thực tế (25 hay 50đcb), dot plot / SEP mới có báo hiệu tăng tiếp đầu 2027 hay không, và giọng điệu họp báo 14:30 ET. Đây là ẩn số có sức nặng lớn nhất trên toàn bản đồ.",
+          predTitle: "Tăng 25 điểm · dot plot diều hâu hơn tháng 9",
+          pred: "Lạm phát lõi kẹt 3,4–3,7% thì Fed chưa xong việc, còn +1–2 lần tăng nữa. Nhưng cái đáng xem không phải lần tăng này — thị trường đã định giá rồi — mà là dot plot 2027 và giọng của Powell: chỉ cần dot plot dịch lên là tài sản rủi ro chịu áp lực tiếp.",
           src: "Báo cáo mục E & G: họp FOMC 8–9/12/2026, quyết định 14:00 ET ngày 9/12 + SEP/dot plot + họp báo 14:30 ET (đã xác minh qua lịch Fed); biên bản công bố 30/12." },
         { id: "u-data", g: "unknown", short: "PCE 25/11 · NFP 4/12 · CPI 10/12 chưa ra", name: "Ẩn số 2 — Ba số liệu kinh tế sắp công bố", dir: "unk", level: "Chưa xác định", tf: "25/11 – 10/12/2026",
           desc: "PCE tháng 10 (25/11), báo cáo việc làm tháng 11 (4/12) và CPI tháng 11 (10/12) chưa công bố — cả ba đều có thể đổi kỳ vọng lãi suất trước và sau cuộc họp Fed. Điểm đặc biệt: CPI 10/12 ra sau quyết định Fed một ngày, và BLS vẫn thiếu số CPI theo năm cho tháng 10/2026 do khoảng trống dữ liệu thời kỳ đóng cửa chính phủ 2025.",
+          predTitle: "PCE nghiêng nóng · NFP nguội chưa gãy · CPI nóng — bộ ba không đổi hướng Fed",
+          pred: "PCE đúng dự kiến nghiêng nóng, NFP nguội nhưng chưa gãy, CPI nóng. Kết luận theo khung này: bộ ba không đổi được hướng Fed. Lạm phát kẹt vì phía cung (dầu, thuế quan, PPI ~7%) chứ không phải cầu nóng; việc làm nguội dần nhưng thất nghiệp chưa tới 4,5–5%.",
           src: "Báo cáo mục E: ngày công bố đã xác minh qua lịch BLS/BEA (nhiều nguồn); kết quả chưa biết." },
         { id: "u-hacker", g: "unknown", short: "Ví trộm Binance: xả bao nhiêu, khi nào?", name: "Ẩn số 3 — Ví trộm Binance sẽ xả hàng thế nào?", dir: "unk", level: "Chưa xác định", tf: "Đang diễn ra",
           desc: "Khoảng 2,4–3,5 tỷ USD trong vụ hack 6,34 tỷ USD chưa đóng băng được; các ví trộm vẫn di chuyển tài sản trong tháng 11 (63 triệu USD ETH ngày 17/11). Không có cách biết trước thời điểm và quy mô xả — kịch bản tiêu cực của báo cáo gắn một điều kiện kích hoạt vào việc “ví trộm xả hàng quy mô lớn được xác nhận”.",
+          predTitle: "Xả nhỏ giọt / cầm tiếp — không xả ồ ạt",
+          pred: "Người cầm 6,34 tỷ USD mà xả ồ ạt là tự đạp giá tài sản của chính mình; theo thói thường của các vụ rửa tiền, họ xả nhỏ giọt qua nhiều năm. Ý quan trọng hơn: trong giai đoạn tiền đắt, một “kho hàng chờ xả” lơ lửng như vậy là cái nắp đậy mọi đợt hồi — và nó cho thấy rủi ro hạ tầng của crypto vẫn là lý do giới tổ chức chưa coi đây là tài sản dự trữ thực thụ.",
           src: "Báo cáo mục Nhóm 8 & F; Binance 3/11/2026; DOJ 12/11/2026; CoinDesk 17/11/2026." },
         { id: "u-reserve", g: "unknown", short: "Số dư dự trữ chiến lược: 198k hay 328k BTC?", name: "Ẩn số 4 — Số dư thật của Dự trữ Bitcoin chiến lược Mỹ", dir: "unk", level: "Chưa xác minh được", tf: "Chưa có kiểm toán chính thức",
           desc: "Hai con số đang lưu hành với định nghĩa khác nhau: ~198.000 BTC (phần đã tịch thu chung thẩm, đủ điều kiện vào quỹ) so với ~307.000–328.372 BTC trong các ví liên quan chính phủ Mỹ theo Arkham — trong đó ~127.271 BTC vụ Prince Group (Chen Zhi, DOJ công bố 10/2025) vẫn đang tranh tụng tịch thu. Chưa có số liệu kiểm toán chính thức. Cũng chưa biết Bộ Tài chính có bao giờ mua thêm trên thị trường mở hay không (đến 16/11/2026: $0).",
+          predTitle: "~198k BTC · Không mua thêm",
+          pred: "Khung là nhìn hành động, không nhìn tuyên bố: số ~328k thường gồm cả coin đang chờ xử lý/trả nạn nhân (như vụ Bitfinex), số thật thuộc về chính phủ gần 198k hơn. Còn mua trên thị trường mở bằng tiền ngân sách, trong lúc thâm hụt và phát hành trái phiếu lãi 5% — không chính phủ nào làm thế chỉ để đỡ giá một tài sản đầu cơ. Tới 16/11 vẫn $0 là đúng bản chất: dự trữ từ tịch thu thì miễn phí, mua mới thì không.",
           src: "Báo cáo mục “Could not verify”: số dư chính thức đã kiểm toán — chưa xác minh được." },
         { id: "u-law", g: "unknown", short: "CLARITY hồi sinh? GENIUS kịp hạn 18/1/2027?", name: "Ẩn số 5 — Hai tiến trình pháp lý còn bỏ ngỏ", dir: "unk", level: "Chưa xác định", tf: "Hạn chót 3/1/2027 & 18/1/2027",
           desc: "CLARITY Act còn motion to reconsider tại Thượng viện — nếu không thông qua trước khi Quốc hội khóa 119 kết thúc (3/1/2027), dự luật phải giới thiệu lại từ đầu năm 2027. GENIUS Act có hiệu lực chậm nhất 18/1/2027: OCC đã xong quy tắc của mình (21/10/2026), nhưng phần của Fed/FDIC và gói BSA/AML/OFAC chưa xong — chưa biết toàn bộ gói có kịp hạn hay không.",
+          predTitle: "CLARITY kẹt tiếp · Phần còn lại của GENIUS kéo dài sang 2027",
+          pred: "Tách hai lớp: thủ tục thì chậm (Quốc hội khóa mới sau bầu cử giữa kỳ càng khó thông qua), còn hướng thì rõ — đưa stablecoin vào hệ thống USD là phục vụ đồng đô: nhà phát hành stablecoin phải mua T-Bill, tức thêm một người mua nợ Mỹ.",
           src: "Báo cáo mục Nhóm 2 & E; OCC News Release 2026-92 (xác minh lại 20/11/2026)." },
         { id: "u-etf", g: "unknown", short: "Hạn quyết định ETF tháng 12: danh sách nào?", name: "Ẩn số 6 — Hạn quyết định ETF nào đang chờ trong tháng 12/2026?", dir: "unk", level: "Chưa xác minh được", tf: "Tháng 12/2026",
           desc: "Báo cáo chưa xác minh được danh sách đáng tin cậy các hạn quyết định ETF cụ thể đang chờ trong tháng 12/2026. Sau khi áp tiêu chuẩn niêm yết chung từ tháng 9/2025, phần lớn ETF spot đơn tài sản đủ điều kiện không còn “hạn quyết định” kiểu cũ — nên chưa rõ còn quyết định ETF nào trong tháng 12 đủ sức tạo biến động cho BTC, và theo hướng nào.",
+          predTitle: "Phê duyệt — nhưng đừng kỳ vọng vào giá",
+          pred: "Phê duyệt là thủ tục hành chính; dòng tiền mới là thật. Trong pha thắt chặt, ETF được duyệt mà tiền vẫn rút (ETF ETH ngày 18/11 chốt −39,8 triệu USD là ví dụ ngay trong map này). Hỏi ngược: “Duyệt rồi, ai bỏ tiền vào, khi T-Bill đang trả 4–5% không rủi ro?”",
           src: "Báo cáo mục Nhóm 3 & “Could not verify”: hạn quyết định ETF cụ thể đang chờ trong tháng 12/2026 — chưa xác minh được danh sách đáng tin cậy trong đợt tra cứu này." },
         { id: "u-hype", g: "unknown", short: "Mở khóa HYPE: ngày 6 hay 29/12?", name: "Ẩn số 7 — Ngày mở khóa Hyperliquid (HYPE) chính xác là ngày nào?", dir: "unk", level: "Chưa xác minh được", tf: "6 hoặc 29/12/2026",
           desc: "Các tracker ghi ngày mở khóa HYPE khác nhau — 6/12 so với 29/12/2026 — và báo cáo chưa xác minh được ngày đúng. Quy mô đợt mở khóa khoảng 9,9 triệu token; ngày rơi vào đầu hay cuối tháng 12 sẽ quyết định thời điểm áp lực cung altcoin xuất hiện, trong bối cảnh thanh khoản toàn thị trường đang mỏng.",
+          predTitle: "Không đáng kể với BTC",
+          pred: "Đây là chuyện cung nội bộ của một token: người trong cuộc được bán cho người ngoài cuộc. Nó làm đau người cầm HYPE, nhất là khi thanh khoản mỏng thì cung tăng gặp cầu yếu. Còn BTC không chạy theo lịch mở khóa của token khác — BTC chạy theo lãi suất USD.",
           src: "Báo cáo mục E & “Could not verify”: mở khóa HYPE ~9,9 triệu token, các tracker ghi ngày khác nhau (6/12 vs 29/12) — chưa xác minh được ngày đúng." },
         { id: "u-l2tvl", g: "unknown", short: "TVL Layer 2 tổng hợp: con số thật là bao nhiêu?", name: "Ẩn số 8 — TVL tổng hợp mới nhất của các Layer 2 là bao nhiêu?", dir: "unk", level: "Chưa xác minh được", tf: "Chưa có số liệu thống nhất",
           desc: "Số liệu TVL Layer 2 tổng hợp mới nhất chưa xác minh được trong đợt tra cứu của báo cáo. Các Layer 2 của Ethereum (Arbitrum, Base…) vẫn là hạ tầng mở rộng chính của hệ sinh thái, nhưng thiếu một con số TVL thống nhất thì chưa đánh giá được vốn đang ở lại hay đang rút khỏi lớp hạ tầng này — một chỉ báo phụ cho sức khỏe của toàn hệ quanh BTC.",
+          predTitle: "Giảm",
+          pred: "TVL phần lớn định giá bằng chính tài sản crypto và đo cường độ đầu cơ. Theo cơ chế “hút máu”: Fed thắt chặt thì hoạt động đầu cơ ở vùng ngoại vi co lại trước tiên — giá giảm kéo TVL giảm, hoạt động giảm kéo thêm một vòng nữa.",
           src: "Báo cáo mục Nhóm 7: “Số liệu TVL L2 tổng hợp mới nhất chưa xác minh được trong đợt tra cứu này.”" },
         { id: "u-ath", g: "unknown", short: "Đỉnh 10/2025 chính xác: 124,8k hay 126,2k?", name: "Ẩn số 9 — Đỉnh tháng 10/2025 chính xác là bao nhiêu?", dir: "unk", level: "Chưa xác minh được", tf: "Chưa thống nhất giữa các nguồn",
           desc: "Các nguồn ghi đỉnh tháng 10/2025 ở các mức khác nhau: 124.773 / 126.080 / ~126.200 USD, tùy sàn và chỉ số được dùng. Chênh lệch này không đổi bức tranh “BTC đã giảm khoảng một nửa từ đỉnh”, nhưng quyết định con số tham chiếu chính xác cho mọi phép tính mức giảm từ đỉnh và các mốc hồi phục phía trên.",
+          predTitle: "126.200 USD",
+          pred: "Jimmy chốt đỉnh tháng 10/2025 ở 126.200 USD — mức cao nhất trong khoảng các nguồn ghi nhận. Theo mốc này: giảm −60% = 50.480 USD (mức lưới 15M gần nhất vẫn là 50.452,08) và giảm −70% = 37.860 USD (mức lưới gần nhất vẫn là 37.961).",
           src: "Báo cáo mục “Could not verify”: ATH chính xác tháng 10/2025 — các nguồn ghi 124.773 / 126.080 / ~126.200 USD (khác sàn/chỉ số)." }
       ];
 
@@ -881,14 +912,15 @@
       el("circle", { cx: CX, cy: CY, r: CR, fill: "#f7931a" }, center);
       el("circle", { cx: CX, cy: CY, r: CR, fill: "none", stroke: "#b96a06", "stroke-width": 3 }, center);
       txt(center, CX, CY - 34, "₿", "btc-glyph", "middle");
-      txt(center, CX, CY + 16, "62.144", "center-price", "middle");
-      txt(center, CX, CY + 36, "USD · 19/11/2026", "center-sub", "middle").setAttribute("fill", "#5b3a08");
-      txt(center, CX, CY + 56, "≈ −50% từ đỉnh 10/2025", "center-sub", "middle").setAttribute("fill", "#5b3a08");
+      txt(center, CX, CY + 16, "59.128", "center-price", "middle");
+      txt(center, CX, CY + 36, "USD · 21/11/2026", "center-sub", "middle").setAttribute("fill", "#5b3a08");
+      txt(center, CX, CY + 56, "≈ −53% từ đỉnh 10/2025", "center-sub", "middle").setAttribute("fill", "#5b3a08");
       txt(center, CX, CY - CR - 26, "BITCOIN", "", "middle").setAttribute("style", "font:800 15px 'Be Vietnam Pro',sans-serif;letter-spacing:.22em;fill:var(--ink)");
 
       /* ================= Detail panel + selection ================= */
       var dName = document.getElementById("dName"), dBadges = document.getElementById("dBadges"),
           dDesc = document.getElementById("dDesc"), dSrc = document.getElementById("dSrc"),
+          dPred = document.getElementById("dPred"),
           panel = document.getElementById("detailPanel");
       var byId = {};
       FACTORS.forEach(function (f) { byId[f.id] = f; });
@@ -907,6 +939,18 @@
           badge("plain", "Mức độ tác động: " + f.level) +
           badge("plain", "Khung: " + f.tf);
         dDesc.textContent = f.desc;
+        if (f.pred) {
+          dPred.innerHTML = "";
+          var pb = document.createElement("div"); pb.className = "pred-box";
+          var pl = document.createElement("p"); pl.className = "pred-lab"; pl.textContent = "Dự đoán của Jimmy · 21/11/2026";
+          var pt = document.createElement("p"); pt.className = "pred-title"; pt.textContent = f.predTitle || "";
+          var px = document.createElement("p"); px.className = "pred-text"; px.textContent = f.pred;
+          pb.appendChild(pl); if (f.predTitle) pb.appendChild(pt); pb.appendChild(px);
+          dPred.appendChild(pb);
+          dBadges.innerHTML += badge("mix", "✓ Đã có dự đoán của Jimmy");
+        } else {
+          dPred.innerHTML = "";
+        }
         dSrc.innerHTML = "<b>Nguồn:</b> ";
         dSrc.appendChild(document.createTextNode(f.src));
         panel.style.borderLeftColor = CSSVAR[f.dir];
@@ -967,6 +1011,14 @@
         var c = document.createElement("article"); c.className = "ucard";
         c.innerHTML = '<p class="q">?</p>';
         var h = document.createElement("h3"); h.textContent = f.name.replace(/^Ẩn số \d+ — /, ""); c.appendChild(h);
+        if (f.pred) {
+          var pb = document.createElement("div"); pb.className = "pred";
+          var pl = document.createElement("p"); pl.className = "pred-lab"; pl.textContent = "Dự đoán của Jimmy · 21/11/2026";
+          var pt = document.createElement("p"); pt.className = "pred-title"; pt.textContent = f.predTitle || "";
+          var px = document.createElement("p"); px.className = "pred-text"; px.textContent = f.pred;
+          pb.appendChild(pl); if (f.predTitle) pb.appendChild(pt); pb.appendChild(px);
+          c.appendChild(pb);
+        }
         var p = document.createElement("p"); p.textContent = f.desc; c.appendChild(p);
         var w = document.createElement("p"); w.className = "when";
         w.innerHTML = "<b>Mốc sẽ rõ:</b> "; w.appendChild(document.createTextNode(f.tf + " · " + f.src)); c.appendChild(w);
